@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Test Page</title>
+</head>
+<body>
+<!--/*@thymesVar id="test" type="java.lang.String"*/-->
+<div th:text="${test}">Этот текст заменится на "Hello World!"</div>
+
+<!-- Еще примеры -->
+<div th:text="${test.toUpperCase()}">HELLO WORLD!</div>
+<div th:if="${test != null}">Переменная существует</div>
+</body>
+</html>

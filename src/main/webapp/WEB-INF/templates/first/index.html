@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Домашняя страница пользователя</title>
+</head>
+<body>
+
+
+<div th:if="${user != null}">
+   Вы вошли в аккаунт под именем:  <p th:text="${user.name}">Имя пользователя</p>
+</div>
+
+<br>
+<br>
+
+<form th:action="@{/sign-in}" th:method="POST">
+
+    <label for="login">Name</label>
+    <input type="text" th:field="*{login}" id="login"/>
+
+    <br/>
+    <label for="password">Password</label>
+    <input type="password" th:field="*{password}" id="password"/>
+
+    <input type="submit" value="Войти в аккаунт"/>
+</form>
+
+
+</body>
+</html>
