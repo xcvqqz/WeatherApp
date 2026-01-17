@@ -16,16 +16,13 @@
 <br>
 <br>
 
-<form th:action="@{/sign-in}" th:method="POST">
 
-    <label for="login">Name</label>
-    <input type="text" th:field="*{login}" id="login"/>
-
-    <br/>
-    <label for="password">Password</label>
-    <input type="password" th:field="*{password}" id="password"/>
-
-    <input type="submit" value="Войти в аккаунт"/>
+<form th:action="@{/locations/search-results}" method="GET">
+    <input type="text"
+           name="locationName"
+           th:placeholder="'Введите название локации'"
+           required>
+    <button type="submit">Найти</button>
 </form>
 
 

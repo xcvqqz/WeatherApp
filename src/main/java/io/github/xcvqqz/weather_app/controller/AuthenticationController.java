@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthenticationController {
 
     @GetMapping()
-    public String signIn(Model model) {
+    public String signIn(@ModelAttribute("user") User user) {
         return "first/sign-in";
     }
 
