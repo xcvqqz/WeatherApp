@@ -1,22 +1,27 @@
 package io.github.xcvqqz.weather_app.repository;
 
 
-import java.util.List;
+import io.github.xcvqqz.weather_app.entity.Location;
 
-public interface JpaRepository <T> {
+import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
+
+public interface JpaRepository <T, K extends Serializable> extends Serializable {
+
 
     public void save(T t);
 
 
 
     public List<T> findAll();
-    public T findById(Long id);
-    public T findByName(String name);
+    public Optional<T> findById(K id);
+    public Optional<T> findByName(String name);
 
 
 
-    public void deleteById(T id);
+    public void deleteById(K id);
     public void deleteAll();
-    public void deleteByName(T name);
+    public void deleteByName(String name);
 
 }

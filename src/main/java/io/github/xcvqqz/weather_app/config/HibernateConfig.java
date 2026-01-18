@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:application-dev.properties")
@@ -31,6 +30,9 @@ public class HibernateConfig {
 
     @Value("${hibernate.hbm2ddl.auto}")
     private String hbm2ddl;
+
+    @Value("${hibernate.current_session_context_class}")
+    private String currentSessionContextClass;
 
     private String scanPackges = "io.github.xcvqqz.weather_app.entity";
 
@@ -58,6 +60,8 @@ public class HibernateConfig {
         props.setProperty("hibernate.show_sql", showSql);
         props.setProperty("hibernate.format_sql", formatSql);
         props.setProperty("hibernate.hbm2ddl.auto", hbm2ddl);
+        props.setProperty("hibernate.current_session_context_class", currentSessionContextClass);
+
         return props;
     }
 }
