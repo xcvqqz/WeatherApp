@@ -23,44 +23,45 @@ public class SessionRepositoryImpl implements SessionRepository {
         this.sessionFactory = sessionFactory;
     }
 
-//    private Session getCurrentSession() {
-//        return sessionFactory.getCurrentSession();
-//    }
+    private org.hibernate.Session getCurrentSession() {
+        return sessionFactory.getCurrentSession();
+    }
 
 
     @Override
     public void save(Session session) {
-        sessionFactory.getCurrentSession().persist(session);
+        getCurrentSession().persist(session);
     }
 
     @Override
     public List<Session> findAll() {
-        return sessionFactory.getCurrentSession().createQuery("from Session").list();
+        return getCurrentSession()
+                .createQuery("FROM Session", Session.class)
+                .getResultList();
     }
 
     @Override
     public Optional<Session> findById(UUID sessionId) {
-        return Optional.ofNullable(sessionFactory.getCurrentSession().get(Session.class, sessionId));
+        return Optional.ofNullable(
+                getCurrentSession()
+                        .get(Session.class, sessionId));
     }
 
+
     @Override
-    public Optional<Session> findByName(String name) {
-        return Optional.ofNullable(sessionFactory.getCurrentSession().get(Session.class, name));
+    public Optional<Session> findByLogin(String login) {
+        return Optional.ofNullable(getCurrentSession().get(Session.class, login));
     }
 
     @Override
     public void deleteById(UUID sessionId) {
-        sessionFactory.getCurrentSession().delete(sessionFactory.getCurrentSession().get(Session.class, sessionId));
+        getCurrentSession().remove(getCurrentSession().get(Session.class, sessionId));
     }
 
     @Override
     public void deleteAll() {
-        sessionFactory.getCurrentSession().createQuery("delete from Session").executeUpdate();
+        getCurrentSession().createQuery("delete from Session").executeUpdate();
     }
 
-    @Override
-    public void deleteByName(String name) {
-        sessionFactory.getCurrentSession().delete(sessionFactory.getCurrentSession().get(Session.class, name));
-    }
 
 }

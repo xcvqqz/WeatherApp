@@ -25,7 +25,6 @@ public class LocationRepositoryImpl implements LocationRepository {
         return sessionFactory.getCurrentSession();
     }
 
-
     @Override
     public void save(Location location) {
         getCurrentSession().save(location);
@@ -41,14 +40,10 @@ public class LocationRepositoryImpl implements LocationRepository {
         return Optional.ofNullable(getCurrentSession().get(Location.class, id));
     }
 
-    @Override
-    public Optional<Location> findByName(String name) {
-        return Optional.ofNullable(getCurrentSession().get(Location.class, name));
-    }
 
     @Override
     public void deleteById(Long id) {
-        getCurrentSession().delete(getCurrentSession().get(Location.class, id));
+        getCurrentSession().remove(getCurrentSession().get(Location.class, id));
     }
 
     @Override
@@ -56,8 +51,4 @@ public class LocationRepositoryImpl implements LocationRepository {
         getCurrentSession().createQuery("delete from Location").executeUpdate();
     }
 
-    @Override
-    public void deleteByName(String name) {
-        getCurrentSession().delete(getCurrentSession().get(Location.class, name));
-    }
 }

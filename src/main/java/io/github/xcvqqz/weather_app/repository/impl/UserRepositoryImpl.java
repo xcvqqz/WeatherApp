@@ -41,14 +41,10 @@ public class UserRepositoryImpl implements UserRepository {
         return Optional.ofNullable(getCurrentSession().get(User.class, id));
     }
 
-    @Override
-    public Optional<User> findByName(String name) {
-        return Optional.ofNullable(getCurrentSession().get(User.class, name));
-    }
 
     @Override
     public void deleteById(Long id) {
-        getCurrentSession().delete(getCurrentSession().get(User.class, id));
+        getCurrentSession().remove(getCurrentSession().get(User.class, id));
     }
 
     @Override
@@ -56,10 +52,6 @@ public class UserRepositoryImpl implements UserRepository {
         getCurrentSession().createQuery("delete from User").executeUpdate();
     }
 
-    @Override
-    public void deleteByName(String name) {
-        getCurrentSession().delete(getCurrentSession().get(User.class, name));
-    }
 
 
 }
