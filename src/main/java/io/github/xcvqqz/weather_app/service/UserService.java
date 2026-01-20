@@ -2,6 +2,7 @@ package io.github.xcvqqz.weather_app.service;
 
 
 import io.github.xcvqqz.weather_app.entity.User;
+import io.github.xcvqqz.weather_app.repository.UserRepository;
 import io.github.xcvqqz.weather_app.repository.impl.UserRepositoryImpl;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,10 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private UserRepositoryImpl userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepositoryImpl userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
