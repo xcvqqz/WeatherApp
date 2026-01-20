@@ -27,17 +27,21 @@ public class LocationRepositoryImpl implements LocationRepository {
 
     @Override
     public void save(Location location) {
-        getCurrentSession().save(location);
+        getCurrentSession().persist(location);
     }
 
     @Override
     public List<Location> findAll() {
-        return getCurrentSession().createQuery("from Location").list();
+        return getCurrentSession()
+                .createQuery("FROM Location ", Location.class)
+                .getResultList();
     }
 
     @Override
     public Optional<Location> findById(Long id) {
-        return Optional.ofNullable(getCurrentSession().get(Location.class, id));
+        return Optional.ofNullable(
+                getCurrentSession()
+                        .get(Location.class, id));
     }
 
 

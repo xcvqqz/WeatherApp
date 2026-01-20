@@ -15,7 +15,6 @@ import java.util.UUID;
 @Repository
 public class SessionRepositoryImpl implements SessionRepository {
 
-
     private final SessionFactory sessionFactory;
 
     @Autowired
@@ -26,7 +25,6 @@ public class SessionRepositoryImpl implements SessionRepository {
     private org.hibernate.Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
-
 
     @Override
     public void save(Session session) {
@@ -50,7 +48,8 @@ public class SessionRepositoryImpl implements SessionRepository {
 
     @Override
     public Optional<Session> findByLogin(String login) {
-        return Optional.ofNullable(getCurrentSession().get(Session.class, login));
+        return Optional.ofNullable(getCurrentSession()
+                .get(Session.class, login));
     }
 
     @Override
