@@ -20,4 +20,6 @@ public interface JpaRepository <T, K extends Serializable> extends Serializable 
 
 
 
+   // нужны Exist методы
+
 }

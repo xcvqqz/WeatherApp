@@ -47,7 +47,10 @@ public class LocationRepositoryImpl implements LocationRepository {
 
     @Override
     public void deleteById(Long id) {
-        getCurrentSession().remove(getCurrentSession().get(Location.class, id));
+        Location location = getCurrentSession().get(Location.class, id);
+        if (location != null) {
+            getCurrentSession().remove(location);
+        }
     }
 
     @Override

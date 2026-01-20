@@ -27,8 +27,8 @@ public class SessionRepositoryImpl implements SessionRepository {
     }
 
     @Override
-    public void save(Session session) {
-        getCurrentSession().persist(session);
+    public void save(Session entity) {
+        getCurrentSession().persist(entity);
     }
 
     @Override
@@ -46,11 +46,6 @@ public class SessionRepositoryImpl implements SessionRepository {
     }
 
 
-    @Override
-    public Optional<Session> findByLogin(String login) {
-        return Optional.ofNullable(getCurrentSession()
-                .get(Session.class, login));
-    }
 
     @Override
     public void deleteById(UUID sessionId) {

@@ -1,7 +1,5 @@
 package io.github.xcvqqz.weather_app.repository.impl;
 
-
-import io.github.xcvqqz.weather_app.entity.Location;
 import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.repository.UserRepository;
 import org.hibernate.Session;
@@ -33,25 +31,40 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> findAll() {
-        return getCurrentSession().createQuery("from User").list();
+        return getCurrentSession()
+                .createQuery("FROM User", User.class)
+                .getResultList();
     }
 
     @Override
     public Optional<User> findById(Long id) {
-        return Optional.ofNullable(getCurrentSession().get(User.class, id));
+        return Optional.ofNullable(
+                getCurrentSession()
+                        .get(User.class, id));
     }
 
 
     @Override
     public void deleteById(Long id) {
-        getCurrentSession().remove(getCurrentSession().get(User.class, id));
+        User user = getCurrentSession().get(User.class, id);
+        if (user != null) {
+            getCurrentSession().remove(user);
+        }
+
+        //или ввыбрасываем своё исключение
+    }
+
+    @Override
+    public Optional<User> findByLogin(String login) {
+        return getCurrentSession()
+                .createQuery("FROM User u WHERE u.login = :login", User.class)
+                .setParameter("login", login)
+                .uniqueResultOptional();
     }
 
     @Override
     public void deleteAll() {
         getCurrentSession().createQuery("delete from User").executeUpdate();
     }
-
-
 
 }
