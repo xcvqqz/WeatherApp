@@ -37,22 +37,19 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public void delete(User user) {
+        if(user!=null){
+            getCurrentSession().remove(user);
+        }
+    }
+
+    @Override
     public Optional<User> findById(Long id) {
         return Optional.ofNullable(
                 getCurrentSession()
                         .get(User.class, id));
     }
 
-
-    @Override
-    public void deleteById(Long id) {
-        User user = getCurrentSession().get(User.class, id);
-        if (user != null) {
-            getCurrentSession().remove(user);
-        }
-
-        //или ввыбрасываем своё исключение
-    }
 
     @Override
     public Optional<User> findByLogin(String login) {
@@ -62,9 +59,6 @@ public class UserRepositoryImpl implements UserRepository {
                 .uniqueResultOptional();
     }
 
-    @Override
-    public void deleteAll() {
-        getCurrentSession().createQuery("delete from User").executeUpdate();
-    }
+
 
 }

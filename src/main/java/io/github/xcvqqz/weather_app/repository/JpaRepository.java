@@ -14,8 +14,7 @@ public interface JpaRepository <T, K extends Serializable> extends Serializable 
 
     public void save(T t);
     public List<T> findAll();
-    public void deleteById(K id);
-    public void deleteAll();
+    public void delete(T t);
     public Optional<T> findById(K id);
 
 

@@ -39,6 +39,13 @@ public class SessionRepositoryImpl implements SessionRepository {
     }
 
     @Override
+    public void delete(Session session) {
+        if (session != null) {
+            getCurrentSession().remove(session);
+        }
+    }
+
+    @Override
     public Optional<Session> findById(UUID sessionId) {
         return Optional.ofNullable(
                 getCurrentSession()
@@ -47,15 +54,6 @@ public class SessionRepositoryImpl implements SessionRepository {
 
 
 
-    @Override
-    public void deleteById(UUID sessionId) {
-        getCurrentSession().remove(getCurrentSession().get(Session.class, sessionId));
-    }
-
-    @Override
-    public void deleteAll() {
-        getCurrentSession().createQuery("delete from Session").executeUpdate();
-    }
 
 
 }

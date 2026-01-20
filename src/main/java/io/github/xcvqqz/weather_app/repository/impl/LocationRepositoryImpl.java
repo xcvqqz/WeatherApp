@@ -38,6 +38,13 @@ public class LocationRepositoryImpl implements LocationRepository {
     }
 
     @Override
+    public void delete(Location location) {
+        if(location!=null){
+            getCurrentSession().remove(location);
+        }
+    }
+
+    @Override
     public Optional<Location> findById(Long id) {
         return Optional.ofNullable(
                 getCurrentSession()
@@ -45,17 +52,7 @@ public class LocationRepositoryImpl implements LocationRepository {
     }
 
 
-    @Override
-    public void deleteById(Long id) {
-        Location location = getCurrentSession().get(Location.class, id);
-        if (location != null) {
-            getCurrentSession().remove(location);
-        }
-    }
 
-    @Override
-    public void deleteAll() {
-        getCurrentSession().createQuery("delete from Location").executeUpdate();
-    }
+
 
 }
