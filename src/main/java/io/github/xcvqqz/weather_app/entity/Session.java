@@ -21,10 +21,10 @@ public class Session {
     @Column(name = "session_id", nullable = false, unique = true, updatable = false)
     private UUID sessionId;
 
-    @Column
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column
+    @Column(name = "expires_at")
     private LocalDateTime expiresAt;
 
     @ManyToOne(fetch = FetchType.LAZY)

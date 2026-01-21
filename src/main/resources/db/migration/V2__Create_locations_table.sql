@@ -1,8 +1,8 @@
 CREATE TABLE Locations (
-    location_id INT PRIMARY KEY,
+    location_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name VARCHAR(30) NOT NULL ,
-    user_id INT NOT NULL,
+    user_id BIGINT NOT NULL,
     latitude DECIMAL NOT NULL,
     longitude DECIMAL NOT NULL,
-    FOREIGN KEY (location_id) REFERENCES users(user_id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(users_id) ON DELETE CASCADE
 );

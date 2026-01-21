@@ -1,2 +1,2 @@
-INSERT INTO users (id, login, password)
-VALUES (1, 'Maxim', '111')
+INSERT INTO users (login, password)
+VALUES ('Maxim', '111')

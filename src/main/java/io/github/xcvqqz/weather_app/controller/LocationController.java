@@ -17,7 +17,7 @@ public class LocationController {
     public String find(@RequestParam String name, Model model) {
 
         // Location location = dao.get(name) -> получение локации
-        model.addAttribute("location", location);
+        model.addAttribute("location", name);
 
         return "locations/search-results";
     }

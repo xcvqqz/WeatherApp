@@ -26,7 +26,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void save(User user) {
+    public void register(User user) {
         getCurrentSession().persist(user);
     }
 

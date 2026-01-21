@@ -20,9 +20,9 @@ public class AuthenticationController {
 
 
     @PostMapping()
-    public String signIn(@ModelAttribute("user") User user){
+    public String home(@ModelAttribute("user") User user){
 
-        //получение из базы пользоватетеля -> dao.find(user.getId())
+        //получение из базы пользоватетеля -> service.find(user.getId())
         //перенаправление на его страницу
 
         return "redirect:/index";

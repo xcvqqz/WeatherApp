@@ -8,6 +8,6 @@ public interface LocationRepository extends JpaRepository<Location, Long>{
 
 
     public Optional<Location> findById(Long id);
-
+    public void save(Location location);
 
 }

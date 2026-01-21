@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface JpaRepository <T, K extends Serializable> extends Serializable {
 
 
-    public void save(T t);
+
     public List<T> findAll();
     public void delete(T t);
     public Optional<T> findById(K id);

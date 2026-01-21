@@ -20,8 +20,8 @@ public class UserService {
     }
 
     @Transactional
-    public void save(User user) {
-        userRepository.save(user);
+    public void register(User user) {
+        userRepository.register(user);
     }
 
     @Transactional

@@ -10,6 +10,6 @@ public interface SessionRepository extends JpaRepository<Session, UUID> {
 
 
     public Optional<Session> findById(UUID sessionId);
-
+    public void save(Session session);
 
 }
