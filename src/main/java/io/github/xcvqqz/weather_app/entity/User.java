@@ -26,7 +26,7 @@ public class User {
     private String login;
 
     @NotBlank
-    @Size(min = 7, max = 100)                       //Эти проверки поставим НА ДТО классы
+    @Size(min = 3, max = 100)                       //Эти проверки поставим НА ДТО классы
     @Column(length = 100, nullable = false)
     private String password;
 

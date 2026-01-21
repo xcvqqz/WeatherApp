@@ -1,2 +1,2 @@
 INSERT INTO users (login, password)
-VALUES ('Maxim', '111')
+VALUES ('Maxim', '123456789')
