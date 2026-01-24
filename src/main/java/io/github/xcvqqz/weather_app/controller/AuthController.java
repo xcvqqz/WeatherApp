@@ -2,16 +2,24 @@ package io.github.xcvqqz.weather_app.controller;
 
 
 import io.github.xcvqqz.weather_app.entity.User;
+import io.github.xcvqqz.weather_app.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/sign-in")
-public class AuthenticationController {
+@RequestMapping("/login")
+public class AuthController {
+
+    private final UserService userService;
+
+    @Autowired
+    public AuthController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping()
     public String signIn(@ModelAttribute("user") User user) {
@@ -21,10 +29,10 @@ public class AuthenticationController {
 
     @PostMapping()
     public String home(@ModelAttribute("user") User user){
-
         //получение из базы пользоватетеля -> service.find(user.getId())
         //перенаправление на его страницу
 
+        userService.findByLogin(user.getLogin());
         return "redirect:/index";
     }
 
