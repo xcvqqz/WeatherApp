@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/index")
+@RequestMapping("/home")
 public class HomeController {
 
     @GetMapping
-    public String index(@ModelAttribute("user") User user) {
+    public String home(@ModelAttribute("user") User user) {
 
 //        @RequestParam UUID uuid, Model model
 //            model.addAttribute("uuid", uuid);
-            return "first/index";
+            return "first/home";
     }
 
 

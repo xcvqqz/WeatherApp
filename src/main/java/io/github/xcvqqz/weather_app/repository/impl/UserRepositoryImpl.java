@@ -60,6 +60,11 @@ public class UserRepositoryImpl implements UserRepository {
                 .uniqueResultOptional();
     }
 
+    @Override
+    public boolean existsByLogin(String login) {
+
+
+    }
 
 
 }

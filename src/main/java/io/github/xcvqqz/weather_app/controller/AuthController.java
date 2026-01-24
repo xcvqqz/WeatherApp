@@ -33,7 +33,7 @@ public class AuthController {
         //перенаправление на его страницу
 
         userService.findByLogin(user.getLogin());
-        return "redirect:/index";
+        return "redirect:/home";
     }
 
 }

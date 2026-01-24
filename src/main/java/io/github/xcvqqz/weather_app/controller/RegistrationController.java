@@ -1,6 +1,7 @@
 package io.github.xcvqqz.weather_app.controller;
 
 
+import io.github.xcvqqz.weather_app.dto.UserRegistrationDTO;
 import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.repository.UserRepository;
 import io.github.xcvqqz.weather_app.repository.impl.UserRepositoryImpl;
@@ -26,7 +27,7 @@ public class RegistrationController {
 
 
     @GetMapping()
-    public String signUp(@ModelAttribute("user") User user) {
+    public String signUp(@ModelAttribute("user") UserRegistrationDTO userRegistrationDTO) {
         //переход на форму для создания юзера
         return "first/sign-up";
     }
@@ -35,16 +36,20 @@ public class RegistrationController {
 
 
     @PostMapping()
-    public String create(@ModelAttribute("user") User user) {
+    public String create(@ModelAttribute("user") UserRegistrationDTO userRegistrationDTO) {
+
+        UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO()
 
         //создание сессии + куки
         //userRepository.save(user)
-        //создание юзера и редирект на index контроллер (на его страницу)
+        //создание юзера и редирект на home контроллер (на его страницу)
+
+
 
         userService.register(user);
 
 
-        return "redirect:/index";
+        return "redirect:/home";
     }
 
 
