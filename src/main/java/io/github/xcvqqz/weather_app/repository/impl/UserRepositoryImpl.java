@@ -24,14 +24,14 @@ public class UserRepositoryImpl implements UserRepository {
 
 
 
-
-    @Override
-    public Optional<User> find(String login) {
-        return sessionFactory.getCurrentSession()
-                .createQuery("FROM User u WHERE u.login = :login", User.class)
-                .setParameter("login", login)
-                .uniqueResultOptional();
-    }
+//
+//    @Override
+//    public Optional<User> find(String login) {
+//        return sessionFactory.getCurrentSession()
+//                .createQuery("FROM User u WHERE u.login = :login", User.class)
+//                .setParameter("login", login)
+//                .uniqueResultOptional();
+//    }
 
 
 }

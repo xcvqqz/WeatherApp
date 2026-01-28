@@ -13,17 +13,17 @@ import java.util.UUID;
 //Т - тип сущности, К - тип ключа
 public interface JpaRepository <T, K> {
 
-    T save(T entity); +
+    public T save(T entity);
 
-    public void delete(T t); +
+    public void delete(T t);
 
     public List<T> findAll();
 
     public Optional<T> findById(K id);
 
 
-    void deleteById(K id);
+    public void deleteById(K id);
 
-    int deleteAll();
+   public void deleteAll();
 
 }

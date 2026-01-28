@@ -24,7 +24,6 @@ public abstract class AbstractRepositoryImpl <T, K> implements JpaRepository <T,
     }
 
 
-
     @Override
     public T save(T entity) {
         sessionFactory.getCurrentSession().persist(entity);
@@ -34,10 +33,8 @@ public abstract class AbstractRepositoryImpl <T, K> implements JpaRepository <T,
 
 
     @Override
-    public void delete(T t) {
-        if(t!=null){
-            sessionFactory.getCurrentSession().remove(t);
-        }
+    public void deleteById(K id) {
+        sessionFactory.getCurrentSession().remove(id);
     }
 
     @Override
@@ -47,10 +44,22 @@ public abstract class AbstractRepositoryImpl <T, K> implements JpaRepository <T,
                 .createQuery(String.format("FROM %s", entityName)).list();
     }
 
-
+    @Override
     public Optional<T> findById(K id){
         return Optional.ofNullable(sessionFactory.getCurrentSession().find(entity, id));
     }
+
+    @Override
+    public void deleteAll(){
+        sessionFactory.getCurrentSession().createQuery(String.format("DELETE FROM %s", entityName)).executeUpdate();
+    }
+
+    @Override
+    public void delete(T entity){
+        sessionFactory.getCurrentSession().remove(entity);
+    }
+
+
 
 
 
