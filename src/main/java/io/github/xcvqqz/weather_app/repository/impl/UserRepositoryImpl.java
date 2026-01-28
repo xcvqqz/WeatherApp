@@ -21,49 +21,16 @@ public class UserRepositoryImpl implements UserRepository {
         this.sessionFactory = sessionFactory;
     }
 
-    private Session getCurrentSession() {
-        return sessionFactory.getCurrentSession();
-    }
 
-    @Override
-    public void register(User user) {
-        getCurrentSession().persist(user);
-    }
 
-    @Override
-    public List<User> findAll() {
-        return getCurrentSession()
-                .createQuery("FROM User", User.class)
-                .getResultList();
-    }
-
-    @Override
-    public void delete(User user) {
-        if(user!=null){
-            getCurrentSession().remove(user);
-        }
-    }
-
-    @Override
-    public Optional<User> findById(Long id) {
-        return Optional.ofNullable(
-                getCurrentSession()
-                        .get(User.class, id));
-    }
 
 
     @Override
-    public Optional<User> findByLogin(String login) {
-        return getCurrentSession()
+    public Optional<User> find(String login) {
+        return sessionFactory.getCurrentSession()
                 .createQuery("FROM User u WHERE u.login = :login", User.class)
                 .setParameter("login", login)
                 .uniqueResultOptional();
-    }
-
-    @Override
-    public boolean existsByLogin(String login) {
-
-
     }
 
 

@@ -9,16 +9,21 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface JpaRepository <T, K extends Serializable> extends Serializable {
 
+//Т - тип сущности, К - тип ключа
+public interface JpaRepository <T, K> {
 
+    T save(T entity); +
+
+    public void delete(T t); +
 
     public List<T> findAll();
-    public void delete(T t);
+
     public Optional<T> findById(K id);
 
 
+    void deleteById(K id);
 
-   // нужны Exist методы
+    int deleteAll();
 
 }

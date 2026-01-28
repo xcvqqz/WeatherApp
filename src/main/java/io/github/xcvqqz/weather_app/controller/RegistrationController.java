@@ -32,21 +32,16 @@ public class RegistrationController {
         return "first/sign-up";
     }
 
-
-
+    
 
     @PostMapping()
-    public String create(@ModelAttribute("user") UserRegistrationDTO userRegistrationDTO) {
-
-        UserRegistrationDTO userRegistrationDTO = new UserRegistrationDTO()
+    public String create(@ModelAttribute("user") UserRegistrationDTO user  {
 
         //создание сессии + куки
         //userRepository.save(user)
         //создание юзера и редирект на home контроллер (на его страницу)
 
-
-
-        userService.register(user);
+        userService.save(user);
 
 
         return "redirect:/home";
