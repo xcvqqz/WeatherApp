@@ -1,8 +1,11 @@
 package io.github.xcvqqz.weather_app.service;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.xcvqqz.weather_app.dto.UserRegistrationDTO;
 import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.exception.UserAlreadyExistsException;
+import io.github.xcvqqz.weather_app.mapper.UserMapper;
 import io.github.xcvqqz.weather_app.repository.UserRepository;
 import io.github.xcvqqz.weather_app.repository.impl.UserRepositoryImpl;
 import lombok.AllArgsConstructor;
@@ -16,23 +19,29 @@ import java.util.List;
 @AllArgsConstructor
 public class UserService {
 
+    @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private UserMapper userMapper = UserMapper.INSTANCE;
+
     @Transactional
-    public User save(User user) {
+    public User save(UserRegistrationDTO user) {
+
+        User userEntity = userMapper.toEntity(user);
 
         try {
-            userRepository.save(user);
+            userRepository.save(userEntity);
         } catch (DataIntegrityViolationException e) {
             throw new UserAlreadyExistsException(e.getMessage());
         }
-        return user;
+        return userEntity;
     }
 
 
     @Transactional(readOnly = true)
-    public User find(String login) {
-        return userRepository.find(login).orElseThrow(() -> new RuntimeException("Отсутствует имя пользователя"));
+    public User findById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("Отсутствует имя пользователя"));
     }
 
 

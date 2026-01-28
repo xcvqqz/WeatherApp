@@ -1,16 +1,14 @@
 package io.github.xcvqqz.weather_app.repository;
 
 
-import io.github.xcvqqz.weather_app.entity.User;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
 
 
 //Т - тип сущности, К - тип ключа
-public abstract class AbstractRepositoryImpl <T, K> implements JpaRepository <T, K> {
+public abstract class AbstractRepositoryImpl <T, K> implements AbstractRepository<T, K> {
 
 
     protected final SessionFactory sessionFactory;

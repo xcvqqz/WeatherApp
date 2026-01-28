@@ -35,7 +35,7 @@ public class RegistrationController {
     
 
     @PostMapping()
-    public String create(@ModelAttribute("user") UserRegistrationDTO user  {
+    public String create(@ModelAttribute("user") UserRegistrationDTO user)  {
 
         //создание сессии + куки
         //userRepository.save(user)

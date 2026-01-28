@@ -32,7 +32,7 @@ public class AuthController {
         //получение из базы пользоватетеля -> service.find(user.getId())
         //перенаправление на его страницу
 
-        userService.findByLogin(user.getLogin());
+        userService.findById(user.getId());
         return "redirect:/home";
     }
 
