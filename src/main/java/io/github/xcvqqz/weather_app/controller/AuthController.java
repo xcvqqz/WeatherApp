@@ -1,10 +1,12 @@
 package io.github.xcvqqz.weather_app.controller;
 
 
+import io.github.xcvqqz.weather_app.dto.UserAuthDTO;
 import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,17 +24,20 @@ public class AuthController {
     }
 
     @GetMapping()
-    public String signIn(@ModelAttribute("user") User user) {
+    public String signIn(UserAuthDTO userAuth,
+                         Model model) {
+
+        model.addAttribute("user", userAuth);
         return "first/sign-in";
     }
 
 
     @PostMapping()
-    public String home(@ModelAttribute("user") User user){
+    public String home(@ModelAttribute("user") UserAuthDTO userAuth){
         //получение из базы пользоватетеля -> service.find(user.getId())
         //перенаправление на его страницу
 
-        userService.findById(user.getId());
+        userService.findById(userAuth.login());
         return "redirect:/home";
     }
 

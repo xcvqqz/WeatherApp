@@ -24,4 +24,5 @@ public class UserRepositoryImpl extends AbstractRepositoryImpl<User, Long> imple
 
 
 
+
 }

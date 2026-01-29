@@ -27,16 +27,16 @@ public class RegistrationController {
 
 
     @GetMapping()
-    public String show(UserRegistrationDTO userRegistrationDTO, Model model) {
+    public String show(UserRegistrationDTO userRegistration, Model model) {
         //переход на форму для создания юзера
-        model.addAttribute("user", userRegistrationDTO);
+        model.addAttribute("user", userRegistration);
         return "first/sign-up";
     }
 
     
 
     @PostMapping()
-    public String create(@Valid @ModelAttribute("user") UserRegistrationDTO user,
+    public String create(@Valid @ModelAttribute("user") UserRegistrationDTO userRegistration,
                          BindingResult result)  {
 
         if (result.hasErrors()) {
@@ -45,14 +45,14 @@ public class RegistrationController {
 
         //создание сессии + куки
 
-        String password = user.password();
-        String confirmPassword = user.confirmPassword();
+        String password = userRegistration.password();
+        String confirmPassword = userRegistration.confirmPassword();
 //        if(!password.equals(confirmPassword)) {
 //            model.addAttribute("message", "Passwords do not match");
 //            throw new PasswordMismatchException();
 //        }
 
-        userService.save(user);
+        userService.save(userRegistration);
 
 
         return "redirect:/home";
