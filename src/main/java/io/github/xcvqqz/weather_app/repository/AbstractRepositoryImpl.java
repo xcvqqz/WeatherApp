@@ -2,6 +2,7 @@ package io.github.xcvqqz.weather_app.repository;
 
 
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,15 +11,14 @@ import java.util.Optional;
 //Т - тип сущности, К - тип ключа
 public abstract class AbstractRepositoryImpl <T, K> implements AbstractRepository<T, K> {
 
-
     protected final SessionFactory sessionFactory;
-    private final Class<T> entity;
-    private final String entityName;
+    protected final Class<T> entity;
+    protected final String entityName;
 
     public AbstractRepositoryImpl(SessionFactory sessionFactory, Class<T> entity) {
         this.entity = entity;
-        this.entityName = entity.getSimpleName();
         this.sessionFactory = sessionFactory;
+        this.entityName = entity.getSimpleName();
     }
 
 

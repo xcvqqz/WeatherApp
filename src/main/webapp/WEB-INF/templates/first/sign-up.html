@@ -12,16 +12,24 @@
 
 <form th:action="@{/sign-up}" th:method="POST" th:object=${user}>
 
-        <label for="login">Name</label>
+
+
+        <label for="login">Login</label>
         <input type="text" th:field="*{login}" id="login"/>
+        <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
+              style="color: red;"></span>
 
         <br/>
         <label for="password">Password</label>
         <input type="password" th:field="*{password}" id="password"/>
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+              style="color: #ef0a0a;"></span>
 
         <br/>
-        <label for="repeat_password">Repeat Password</label>
-        <input type="password" name="confirmPassword" id="repeat_password"/>
+        <label for="confirmPassword">Repeat Password</label>
+        <input type="password" name="confirmPassword" id="confirmPassword"/>
+        <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"
+              style="color: red;"></span>
 
         <br/>
 

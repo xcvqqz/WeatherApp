@@ -5,11 +5,11 @@ import jakarta.validation.constraints.Size;
 
 public record UserAuthDTO(
 
-        @NotBlank
+        @NotBlank(message = "Логин не может быть пустым")
         @Size(min = 3, max = 30, message = "От 3 до 30 символов")
         String login,
 
-        @NotBlank
+        @NotBlank(message = "Логин не может быть пустым")
         @Size(min = 3, max = 30, message = "От 3 до 30 символов")
         String password
 

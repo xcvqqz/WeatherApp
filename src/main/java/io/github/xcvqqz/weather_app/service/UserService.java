@@ -19,11 +19,9 @@ import java.util.List;
 @AllArgsConstructor
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private UserRepository userRepository;          //не нужно создавать конструктор потому что есть аннотация @AllArgsConstructor
+    private UserMapper userMapper;                  //Spring автоматически поставит аннотацию @Autowired на конструктор
 
-    @Autowired
-    private UserMapper userMapper = UserMapper.INSTANCE;
 
     @Transactional
     public User save(UserRegistrationDTO user) {

@@ -15,9 +15,10 @@ import java.util.Optional;
 public class UserRepositoryImpl extends AbstractRepositoryImpl<User, Long> implements UserRepository {
 
 
+
     @Autowired
-    public UserRepositoryImpl(SessionFactory sessionFactory, Class<User> entity) {
-        super(sessionFactory, entity);
+    public UserRepositoryImpl(SessionFactory sessionFactory) {
+        super(sessionFactory,  User.class);
     }
 
 

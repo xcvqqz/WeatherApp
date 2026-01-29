@@ -6,14 +6,10 @@ import io.github.xcvqqz.weather_app.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface  UserMapper {
 
-    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
-
     User toEntity(UserRegistrationDTO userRegistrationDTO);
-
     UserRegistrationDTO toDTO(User user);
-
 
 }
