@@ -12,10 +12,14 @@
 
     <label for="login">Name</label>
     <input type="text" th:field="*{login}" id="login"/>
+    <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
+          style="color: red;"></span>
 
     <br/>
     <label for="password">Password</label>
     <input type="password" th:field="*{password}" id="password"/>
+    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+          style="color: red;"></span>
 
     <input type="submit" value="Войти в аккаунт"/>
 </form>

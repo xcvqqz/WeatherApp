@@ -10,9 +10,9 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    User toEntity(UserRegistrationDTO userRegistrationDTO);
+    User registrationToEntity(UserRegistrationDTO userRegistrationDTO);
 
-    User toEntity(UserAuthDTO userAuthDTO);
+    User AuthtToEntity(UserAuthDTO userAuthDTO);
 
     UserRegistrationDTO toDTO(User user);
 

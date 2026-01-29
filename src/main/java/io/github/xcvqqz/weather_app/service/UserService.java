@@ -24,16 +24,16 @@ public class UserService {
 
 
     @Transactional
-    public User save(UserRegistrationDTO user) {
+    public User save(UserRegistrationDTO userRegistration) {
 
-        User userEntity = userMapper.toEntity(user);
+        User entity = userMapper.registrationToEntity(userRegistration);
 
         try {
-            userRepository.save(userEntity);
+            userRepository.save(entity);
         } catch (DataIntegrityViolationException e) {
             throw new UserAlreadyExistsException(e.getMessage());
         }
-        return userEntity;
+        return entity;
     }
 
 
@@ -46,6 +46,11 @@ public class UserService {
     @Transactional
     public void delete(User user) {
         userRepository.delete(user);
+    }
+
+    @Transactional(readOnly = true)
+    public User findByLogin(String login) {
+        return userRepository.findByLogin(login).orElseThrow(() -> new RuntimeException("Отсутствует имя пользователя"));
     }
 
 

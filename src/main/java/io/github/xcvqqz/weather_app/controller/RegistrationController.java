@@ -27,7 +27,7 @@ public class RegistrationController {
 
 
     @GetMapping()
-    public String show(UserRegistrationDTO userRegistration, Model model) {
+    public String showSignUp(UserRegistrationDTO userRegistration, Model model) {
         //переход на форму для создания юзера
         model.addAttribute("user", userRegistration);
         return "first/sign-up";
@@ -36,7 +36,7 @@ public class RegistrationController {
     
 
     @PostMapping()
-    public String create(@Valid @ModelAttribute("user") UserRegistrationDTO userRegistration,
+    public String processSignUp(@Valid @ModelAttribute("user") UserRegistrationDTO userRegistration,
                          BindingResult result)  {
 
         if (result.hasErrors()) {

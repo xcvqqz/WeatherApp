@@ -4,16 +4,18 @@ package io.github.xcvqqz.weather_app.controller;
 import io.github.xcvqqz.weather_app.dto.UserAuthDTO;
 import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/sign-in")
 public class AuthController {
 
     private final UserService userService;
@@ -33,11 +35,14 @@ public class AuthController {
 
 
     @PostMapping()
-    public String home(@ModelAttribute("user") UserAuthDTO userAuth){
-        //получение из базы пользоватетеля -> service.find(user.getId())
-        //перенаправление на его страницу
+    public String home(@Valid @ModelAttribute("user") UserAuthDTO userAuth,
+                       BindingResult result){
 
-        userService.findById(userAuth.login());
+        if(result.hasErrors()){
+            return "first/sign-in";
+        }
+        userService.findByLogin(userAuth.login());
+
         return "redirect:/home";
     }
 
