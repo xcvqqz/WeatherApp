@@ -20,4 +20,5 @@ public interface AbstractRepository<T, K> {
 
    public void deleteAll();
 
+
 }

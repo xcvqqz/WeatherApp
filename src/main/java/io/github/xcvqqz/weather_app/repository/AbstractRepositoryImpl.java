@@ -45,7 +45,9 @@ public abstract class AbstractRepositoryImpl <T, K> implements AbstractRepositor
     @Override
     public Optional<T> findById(K id){
         return Optional.ofNullable(sessionFactory.getCurrentSession().find(entity, id));
+
     }
+
 
     @Override
     public void deleteAll(){
