@@ -38,18 +38,15 @@ public class RegistrationController {
     public String processSignUp(@Valid @ModelAttribute("user") UserRegistrationDTO userRegistration,
                          BindingResult result)  {
 
+        if(!(userRegistration.password().equals(userRegistration.confirmPassword()))) {
+            result.rejectValue("confirmPassword", "passwordMismatch", "Passwords don't match");
+        }
+
         if (result.hasErrors()) {
             return "first/sign-up";
         }
 
         //создание сессии + куки
-
-        String password = userRegistration.password();
-        String confirmPassword = userRegistration.confirmPassword();
-//        if(!password.equals(confirmPassword)) {
-//            model.addAttribute("message", "Passwords do not match");
-//            throw new PasswordMismatchException();
-//        }
 
         userService.save(userRegistration);
 

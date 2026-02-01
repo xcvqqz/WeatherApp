@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.xcvqqz.weather_app.dto.UserAuthDTO;
 import io.github.xcvqqz.weather_app.dto.UserRegistrationDTO;
 import io.github.xcvqqz.weather_app.entity.User;
+import io.github.xcvqqz.weather_app.exception.PasswordMismatchException;
 import io.github.xcvqqz.weather_app.exception.UserAlreadyExistsException;
 import io.github.xcvqqz.weather_app.mapper.UserMapper;
 import io.github.xcvqqz.weather_app.repository.UserRepository;
@@ -58,9 +59,22 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public User findByLogin(UserAuthDTO userAuthDTO) {
-        String login  = userAuthDTO.login();
-        return userRepository.findByLogin(login).orElseThrow(() -> new RuntimeException("Отсутствует имя пользователя"));
+
+        String login = userAuthDTO.login();
+        String rawPassword = userAuthDTO.password();
+
+        User user =  userRepository.findByLogin(login)
+                .orElseThrow(() -> new RuntimeException("Отсутствует имя пользователя"));
+
+        if(passwordEncoder.matches(rawPassword, user.getPassword())){
+            return user;
+        } else {
+            throw new PasswordMismatchException("пароль введён неверно");
+        }
+
     }
+
+
 
 
 }
