@@ -24,7 +24,6 @@ public class RegistrationController {
 
     private UserService userService;
 
-
     @GetMapping()
     public String showSignUp(UserRegistrationDTO userRegistration, Model model) {
         //переход на форму для создания юзера
@@ -32,7 +31,6 @@ public class RegistrationController {
         return "first/sign-up";
     }
 
-    
 
     @PostMapping()
     public String processSignUp(@Valid @ModelAttribute("user") UserRegistrationDTO userRegistration,

@@ -16,7 +16,8 @@
 
         <label for="login">Login</label>
         <input type="text" th:field="*{login}" id="login"/>
-        <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"
+        <span th:if="${#fields.hasErrors('login')}"
+              th:errors="*{login}"
               style="color: red;"></span>
 
         <br/>
@@ -28,13 +29,17 @@
         <br/>
         <label for="confirmPassword">Repeat Password</label>
         <input type="password" name="confirmPassword" id="confirmPassword"/>
-        <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"
+        <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{passwordMismatch}"
               style="color: red;"></span>
 
         <br/>
 
         <input type="submit" value="Add new User"/>
 </form>
+
+<br><br>
+
+Already have an account? <a th:href="@{/sign-in}">Sign in here</a>
 
 
 </body>
