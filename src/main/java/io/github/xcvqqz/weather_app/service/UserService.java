@@ -19,13 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
-@Service
 @AllArgsConstructor
+@Service
 public class UserService {
 
-    private UserRepository userRepository;          //не нужно создавать конструктор потому что есть аннотация @AllArgsConstructor
-    private UserMapper userMapper;                  //Spring автоматически поставит аннотацию @Autowired на конструктор
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;          //не нужно создавать конструктор потому что есть аннотация @AllArgsConstructor
+    private final UserMapper userMapper;                  //Spring автоматически поставит аннотацию @Autowired на конструктор
+    private final PasswordEncoder passwordEncoder;
 
 
     @Transactional

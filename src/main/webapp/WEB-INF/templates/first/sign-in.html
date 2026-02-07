@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Зайти на аккаунт</title>
+    <meta charset="UTF-8">
+    <title>Авторизация пользователя</title>
 </head>
 <body>
 
@@ -20,7 +20,7 @@
     <input type="password" th:field="*{password}" id="password"/>
     <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
           style="color: red;"></span>
-
+<br>
     <input type="submit" value="Войти в аккаунт"/>
 </form>
 

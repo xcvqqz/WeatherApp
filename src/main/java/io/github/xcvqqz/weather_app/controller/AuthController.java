@@ -28,20 +28,21 @@ public class AuthController {
 
 
     @GetMapping()
-    public String signIn(UserAuthDTO userAuth, Model model) {
+    public String showSignIn(UserAuthDTO userAuth, Model model) {
         model.addAttribute("user", userAuth);
         return "first/sign-in";
     }
 
 
     @PostMapping()
-    public String home(@Valid @ModelAttribute("user") UserAuthDTO userAuth,
-                       BindingResult result){
+    public String processSignIn(@Valid @ModelAttribute("user") UserAuthDTO userAuth,
+                       BindingResult result, Model model) {
 
         if(result.hasErrors()){
             return "first/sign-in";
         }
-        userService.findByLogin(userAuth);
+
+        model.addAttribute("authUser", userService.findByLogin(userAuth));  ???
 
         return "redirect:/home";
     }

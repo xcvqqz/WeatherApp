@@ -23,7 +23,4 @@ public class User {
     @Column(length = 100, nullable = false)
     private String password;
 
-    /*Хранить пароль в открытом виде небезопасно,
-    лучше использовать шифрование, например BCrypt*/
-
 }

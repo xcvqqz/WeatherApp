@@ -4,6 +4,11 @@ package io.github.xcvqqz.weather_app.controller;
 import io.github.xcvqqz.weather_app.dto.UserRegistrationDTO;
 import io.github.xcvqqz.weather_app.exception.PasswordMismatchException;
 import io.github.xcvqqz.weather_app.service.UserService;
+import io.github.xcvqqz.weather_app.util.CookieUtil;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +20,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.UUID;
 
 
 @AllArgsConstructor
@@ -23,6 +31,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RegistrationController {
 
     private UserService userService;
+
+    private CookieUtil cookieUtil;
 
     @GetMapping()
     public String showSignUp(UserRegistrationDTO userRegistration, Model model) {
@@ -34,7 +44,7 @@ public class RegistrationController {
 
     @PostMapping()
     public String processSignUp(@Valid @ModelAttribute("user") UserRegistrationDTO userRegistration,
-                         BindingResult result)  {
+                                BindingResult result, HttpServletResponse response)  {
 
         if(!(userRegistration.password().equals(userRegistration.confirmPassword()))) {
             result.rejectValue("confirmPassword", "passwordMismatch", "Passwords don't match");
@@ -44,7 +54,11 @@ public class RegistrationController {
             return "first/sign-up";
         }
 
-        //создание сессии + куки
+        Cookie cookie = CookieUtil.create();
+
+
+        response.addCookie(cookie);
+
 
         userService.save(userRegistration);
 
