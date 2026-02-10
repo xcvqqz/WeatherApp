@@ -2,6 +2,7 @@ package io.github.xcvqqz.weather_app.controller;
 
 
 import io.github.xcvqqz.weather_app.dto.UserRegistrationDTO;
+import io.github.xcvqqz.weather_app.entity.Session;
 import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.service.SessionService;
 import io.github.xcvqqz.weather_app.service.UserService;
@@ -47,13 +48,13 @@ public class RegistrationController {
             return "first/sign-up";
         }
 
-        Cookie cookie = CookieUtil.createCookie();
 
-        response.addCookie(cookie);
 
-        User user = userService.save(userRegistration);
+        User user = userService.save(userRegistration);   //СОЗДАНИЕ НОВОГО ЮЗЕРА
 
-        sessionService.create(user);
+        Session session = sessionService.create(user);
+
+        CookieUtil.setSessionCookie(response, session.getSessionId());
 
 
         return "redirect:/home";

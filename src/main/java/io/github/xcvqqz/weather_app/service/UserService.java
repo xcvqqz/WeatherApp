@@ -31,12 +31,8 @@ public class UserService {
     @Transactional
     public User save(UserRegistrationDTO userRegistration) {
 
-        String encodedPassword = passwordEncoder.encode(userRegistration.password());
-
-        User entity = User.builder()
-                .login(userRegistration.login())
-                .password(encodedPassword)
-                .build();
+        User entity = userMapper.registrationToEntity(userRegistration);
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
 
         try {
             userRepository.save(entity);
@@ -47,10 +43,15 @@ public class UserService {
     }
 
 
+
+
     @Transactional(readOnly = true)
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("Отсутствует имя пользователя"));
     }
+
+
+
     
     @Transactional
     public void delete(User user) {
@@ -73,8 +74,5 @@ public class UserService {
         }
 
     }
-
-
-
 
 }

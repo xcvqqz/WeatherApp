@@ -21,11 +21,11 @@ public class Session {
     @Column(name = "session_id", nullable = false, unique = true, updatable = false)
     private UUID sessionId;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;            //Когда токен выпуще
 
     @Column(name = "expires_at")
-    private LocalDateTime expiresAt;            //когда перестанет работать
+    @Builder.Default
+    private LocalDateTime expiresAt = LocalDateTime.now().plusMinutes(30);
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

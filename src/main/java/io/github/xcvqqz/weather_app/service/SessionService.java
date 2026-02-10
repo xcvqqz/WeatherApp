@@ -23,9 +23,7 @@ public class SessionService {
 
         Session session = Session
                 .builder()
-                .sessionId(UUID.fromString(CookieUtil.createCookie().getValue()))
-                .createdAt(LocalDateTime.now())
-                .expiresAt(LocalDateTime.now().plusMinutes(30))
+                .sessionId(UUID.randomUUID())
                 .user(user)
                 .build();
 
@@ -34,8 +32,18 @@ public class SessionService {
         return session;
     }
 
-    public Session get(UUID sessionId){
-        sessionRepository.findById(sessionId);
+
+    public User getUserBySessionId(UUID sessionId){
+        return sessionRepository
+                .findUserById(getBySessionId(sessionId)
+                .getSessionId())
+                .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
+    }
+
+    private Session getBySessionId(UUID sessionId){
+        return  sessionRepository
+                .findById(sessionId)
+                .orElseThrow(() -> new RuntimeException("Сессия отсутствует"));
     }
 
 

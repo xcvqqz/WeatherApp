@@ -2,8 +2,12 @@ package io.github.xcvqqz.weather_app.controller;
 
 
 import io.github.xcvqqz.weather_app.dto.UserAuthDTO;
+import io.github.xcvqqz.weather_app.entity.Session;
 import io.github.xcvqqz.weather_app.entity.User;
+import io.github.xcvqqz.weather_app.service.SessionService;
 import io.github.xcvqqz.weather_app.service.UserService;
+import io.github.xcvqqz.weather_app.util.CookieUtil;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthController {
 
     private UserService userService;
+    private SessionService sessionService;
 
 
     @GetMapping()
@@ -36,13 +41,19 @@ public class AuthController {
 
     @PostMapping()
     public String processSignIn(@Valid @ModelAttribute("user") UserAuthDTO userAuth,
-                       BindingResult result, Model model) {
+                                BindingResult result, HttpServletResponse response, Model model) {
 
         if(result.hasErrors()){
             return "first/sign-in";
         }
 
-        model.addAttribute("authUser", userService.findByLogin(userAuth));  ???
+
+
+        Session session = sessionService.create()
+        CookieUtil.setSessionCookie(response);
+
+
+        model.addAttribute("authUser", userService.findByLogin(userAuth));
 
         return "redirect:/home";
     }
