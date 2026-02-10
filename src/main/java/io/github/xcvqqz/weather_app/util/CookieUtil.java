@@ -3,9 +3,10 @@ package io.github.xcvqqz.weather_app.util;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -13,27 +14,36 @@ import java.util.UUID;
 public class CookieUtil {
 
     private static final int COOKIE_MAX_AGE = 30 * 60;  //30 минут
+    private static final String SESSION_COOKIE = "sessionId";
 
-    public static Cookie createCookie() {
-        Cookie cookie = new Cookie("session_id", UUID.randomUUID().toString());
+    public static void setSessionCookie(HttpServletResponse response, UUID sessionId) {
+        Cookie cookie = new Cookie(SESSION_COOKIE, sessionId.toString());
         cookie.setHttpOnly(true);   // Защита от XSS
         cookie.setSecure(false);    // true для HTTPS
         cookie.setPath("/");        // Доступна на всём сайте
         cookie.setMaxAge(COOKIE_MAX_AGE);
-        return cookie;
+        response.addCookie(cookie);
     }
 
-    public static Optional<String> getCookie(HttpServletRequest request, String name) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals(name)) {
-                    return Optional.ofNullable(cookie.getValue());
-                }
-            }
+    public static Optional<UUID> getSessionId(HttpServletRequest request) {
+        if (request.getCookies() == null) {
+            return Optional.empty();
         }
-        return Optional.empty();
+        return Arrays.stream(request.getCookies())
+                .filter(c -> SESSION_COOKIE.equals(c.getName()))
+                .map(Cookie::getValue)
+                .map(UUID::fromString)
+                .findFirst();
+
     }
+
+public void clearSessionCookie(HttpServletResponse response){
+        Cookie cookie = new Cookie(SESSION_COOKIE, "");
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+}
 
 
 }
