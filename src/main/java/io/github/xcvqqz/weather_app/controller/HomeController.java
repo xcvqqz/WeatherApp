@@ -26,18 +26,15 @@ public class HomeController {
 
 
     @GetMapping
-    public String home(Model model, HttpServletRequest request, HttpServletResponse response) {
+    public String home(Model model, HttpServletRequest request) {
 
-
-        UUID userSessionId = CookieUtil    //ПОЛУЧАЕМ СЕССИЮ ИЗ КУК
-                .getSessionId(request)
-                .orElseThrow(() -> new RuntimeException("сессия для данного пользователя отсутствует"));
+        UUID userSessionId = (UUID) request.getAttribute("userSessionId");
 
         User user = sessionService.getUserBySessionId(userSessionId);   //ПОЛУЧАЕМ ПОЛЬЗОВАТЕЛЯ ПО СЕССИИ
 
         model.addAttribute("user", user);   //ОТОБРАЖАЕМ ДОМАШНЮЮ СТРАНИЦУ
 
-            return "first/home";
+        return "first/home";
     }
 
 

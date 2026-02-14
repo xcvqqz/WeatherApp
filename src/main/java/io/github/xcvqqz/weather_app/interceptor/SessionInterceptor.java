@@ -25,9 +25,10 @@ public class SessionInterceptor implements HandlerInterceptor {
             return false;
         }
 
+        request.setAttribute("userSessionId", sessionId);
+
         return true;
     }
-
 
 
 

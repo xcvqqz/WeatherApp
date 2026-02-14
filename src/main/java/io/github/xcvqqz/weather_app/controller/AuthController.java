@@ -48,7 +48,9 @@ public class AuthController {
 
         User user = userService.findByLogin(userAuth);
 
-        model.addAttribute("user", user);
+        Session session = sessionService.create(user);   //СОЗДАНИЕ СЕССИИ ДЛЯ ЮЗЕРА
+
+        CookieUtil.setSessionCookie(response, session.getSessionId());   //СОЗДАНИЕ КУКИ И ОТПРАВЛЕНИЕ КУКИ
 
         return "redirect:/home";
     }

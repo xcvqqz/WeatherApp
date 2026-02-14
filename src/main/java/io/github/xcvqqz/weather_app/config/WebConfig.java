@@ -34,18 +34,32 @@ public class WebConfig implements WebMvcConfigurer {
     @Value("${thymeleaf.suffix}")
     private String suffix;
 
-    private SessionInterceptor sessionInterceptor;
 
     @Autowired
-    public WebConfig(ApplicationContext applicationContext,SessionInterceptor sessionInterceptor) {
+    public WebConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
-        this.sessionInterceptor = sessionInterceptor;
     }
 
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor()
+
+        registry
+                .addInterceptor(new SessionInterceptor())
+                .addPathPatterns(
+                        "/home/**")
+
+                .excludePathPatterns(
+                        "sign-in/**",
+                        "/sign-up/**",
+                        "/locations/**",
+                        "/home/**",
+                        "/",
+                        "/css/**",
+                        "/js/**",
+                        "/images/**",
+                        "/error");
+
    }
 
     @Bean
