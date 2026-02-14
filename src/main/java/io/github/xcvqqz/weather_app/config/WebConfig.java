@@ -1,5 +1,6 @@
 package io.github.xcvqqz.weather_app.config;
 
+import io.github.xcvqqz.weather_app.interceptor.SessionInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -9,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring6.SpringTemplateEngine;
@@ -32,10 +34,19 @@ public class WebConfig implements WebMvcConfigurer {
     @Value("${thymeleaf.suffix}")
     private String suffix;
 
+    private SessionInterceptor sessionInterceptor;
+
     @Autowired
-    public WebConfig(ApplicationContext applicationContext) {
+    public WebConfig(ApplicationContext applicationContext,SessionInterceptor sessionInterceptor) {
         this.applicationContext = applicationContext;
+        this.sessionInterceptor = sessionInterceptor;
     }
+
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor()
+   }
 
     @Bean
     public SpringResourceTemplateResolver templateResolver() {

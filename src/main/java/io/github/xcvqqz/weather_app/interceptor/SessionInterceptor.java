@@ -17,9 +17,8 @@ public class SessionInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
 
-
         //получим Cookie
-        String sessionId = CookieUtil.getSessionId(request);
+        String sessionId = String.valueOf(CookieUtil.getSessionId(request));
 
         if(sessionId == null && sessionId.isEmpty()){
             response.sendRedirect("/sign-in");

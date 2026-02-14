@@ -29,9 +29,7 @@ public class RegistrationController {
     private UserService userService;
 
     @GetMapping()
-    public String showSignUp(UserRegistrationDTO userRegistration, Model model) {
-        //переход на форму для создания юзера
-        model.addAttribute("user", userRegistration);
+    public String showSignUp(@ModelAttribute("user") UserRegistrationDTO userRegistration) {
         return "first/sign-up";
     }
 
@@ -49,12 +47,11 @@ public class RegistrationController {
         }
 
 
-
         User user = userService.save(userRegistration);   //СОЗДАНИЕ НОВОГО ЮЗЕРА
 
-        Session session = sessionService.create(user);
+        Session session = sessionService.create(user);   //СОЗДАНИЕ СЕССИИ ДЛЯ ЮЗЕРА
 
-        CookieUtil.setSessionCookie(response, session.getSessionId());
+        CookieUtil.setSessionCookie(response, session.getSessionId());   //СОЗДАНИЕ КУКИ И ОТПРАВЛЕНИЕ КУКИ
 
 
         return "redirect:/home";
