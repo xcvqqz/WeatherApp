@@ -33,8 +33,7 @@ public class AuthController {
 
 
     @GetMapping()
-    public String showSignIn(UserAuthDTO userAuth, Model model) {
-        model.addAttribute("user", userAuth);
+    public String showSignIn(@ModelAttribute("user") UserAuthDTO userAuth) {
         return "first/sign-in";
     }
 
@@ -47,13 +46,9 @@ public class AuthController {
             return "first/sign-in";
         }
 
+        User user = userService.findByLogin(userAuth);
 
-
-        Session session = sessionService.create()
-        CookieUtil.setSessionCookie(response);
-
-
-        model.addAttribute("authUser", userService.findByLogin(userAuth));
+        model.addAttribute("user", user);
 
         return "redirect:/home";
     }
