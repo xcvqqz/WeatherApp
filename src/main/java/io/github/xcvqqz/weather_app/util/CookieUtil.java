@@ -37,7 +37,7 @@ public class CookieUtil {
 
     }
 
-public void clearSessionCookie(HttpServletResponse response){
+public static void clearSessionCookie(HttpServletResponse response){
         Cookie cookie = new Cookie(SESSION_COOKIE, "");
         cookie.setHttpOnly(true);
         cookie.setPath("/");

@@ -7,6 +7,8 @@ import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.service.SessionService;
 import io.github.xcvqqz.weather_app.service.UserService;
 import io.github.xcvqqz.weather_app.util.CookieUtil;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import java.util.UUID;
 
 
 
@@ -54,6 +57,24 @@ public class AuthController {
 
         return "redirect:/home";
     }
+
+
+
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response){
+
+        UUID userSessionId = CookieUtil
+                .getSessionId(request)
+                .orElseThrow(() -> new RuntimeException("Сессия для пользователя отсутствует"));  //получили sessionId
+
+        sessionService.deleteSessionById(userSessionId);
+
+        CookieUtil.clearSessionCookie(response);
+
+
+        return "first/sign-in";
+    }
+
 
 }
 

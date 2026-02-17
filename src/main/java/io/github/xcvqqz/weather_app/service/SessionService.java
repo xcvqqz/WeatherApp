@@ -40,11 +40,19 @@ public class SessionService {
                 .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
     }
 
+
+    public void deleteSessionById(UUID sessionId){
+        sessionRepository.deleteById(sessionId);
+    }
+
+
     private Session getBySessionId(UUID sessionId){
         return  sessionRepository
                 .findById(sessionId)
                 .orElseThrow(() -> new RuntimeException("Сессия отсутствует"));
     }
+
+
 
 
 
