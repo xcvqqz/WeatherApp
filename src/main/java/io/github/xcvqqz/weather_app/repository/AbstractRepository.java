@@ -8,7 +8,7 @@ import java.util.Optional;
 //Т - тип сущности, К - тип ключа
 public interface AbstractRepository<T, K> {
 
-    public T save(T entity);
+    public Optional<T> save(T entity);
 
     public void delete(T t);
 

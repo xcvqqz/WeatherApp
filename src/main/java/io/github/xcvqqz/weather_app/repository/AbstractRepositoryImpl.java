@@ -2,7 +2,6 @@ package io.github.xcvqqz.weather_app.repository;
 
 
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,10 +22,10 @@ public abstract class AbstractRepositoryImpl <T, K> implements AbstractRepositor
 
 
     @Override
-    public T save(T entity) {
+    public Optional<T> save(T entity) {
         sessionFactory.getCurrentSession().persist(entity);
         sessionFactory.getCurrentSession().flush();
-        return entity;
+        return Optional.ofNullable(entity);
     }
 
 

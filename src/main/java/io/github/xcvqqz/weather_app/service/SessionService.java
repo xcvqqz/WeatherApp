@@ -3,20 +3,27 @@ package io.github.xcvqqz.weather_app.service;
 
 import io.github.xcvqqz.weather_app.entity.Session;
 import io.github.xcvqqz.weather_app.entity.User;
+import io.github.xcvqqz.weather_app.exception.DataBaseException;
+import io.github.xcvqqz.weather_app.exception.UserNotFoundException;
 import io.github.xcvqqz.weather_app.repository.SessionRepository;
-import io.github.xcvqqz.weather_app.util.CookieUtil;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+
+import static io.github.xcvqqz.weather_app.service.UserService.USER_NOT_FOUND_MESSAGE;
 
 @AllArgsConstructor
 @Service
 public class SessionService {
 
+    protected static final String DATABASE_ERROR_MESSAGE = "Database error: %s";
+    private static final String SESSION_NOT_FOUND_MESSAGE = "Session Not Found";
 
     private final SessionRepository sessionRepository;
 
@@ -30,9 +37,10 @@ public class SessionService {
                 .user(user)
                 .build();
 
-        sessionRepository.save(session);
+         return sessionRepository
+                 .save(session)
+                 .orElseThrow(() -> new DataBaseException(DATABASE_ERROR_MESSAGE));
 
-        return session;
     }
 
 
@@ -41,23 +49,32 @@ public class SessionService {
         return sessionRepository
                 .findUserById(getBySessionId(sessionId)
                 .getSessionId())
-                .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
+                .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND_MESSAGE));
     }
 
 
-    @Transactional
+    @Transactional()
     public void deleteSessionById(UUID sessionId){
         if(sessionId != null) {
-            sessionRepository.deleteById(sessionId);
+            try{
+                sessionRepository.deleteById(sessionId);
+            } catch (DataAccessException e){
+                throw new DataBaseException(String.format(DATABASE_ERROR_MESSAGE, e.getMessage()));
+            }
         }
     }
 
-    @Transactional
+
+    @Transactional()
     public void deleteExpiredSessions(){
         List<Session> sessions = sessionRepository.findAll();
         for(Session session : sessions){
             if (isExpired(session)){
-                sessionRepository.delete(session);
+                try {
+                    sessionRepository.delete(session);
+                } catch (DataAccessException e){
+                    throw new DataBaseException(String.format(DATABASE_ERROR_MESSAGE, e.getMessage()));
+                }
             }
         }
     }
@@ -76,7 +93,7 @@ public class SessionService {
     private Session getBySessionId(UUID sessionId){
         return  sessionRepository
                 .findById(sessionId)
-                .orElseThrow(() -> new RuntimeException("Сессия отсутствует"));
+                .orElseThrow(() -> new RuntimeException(SESSION_NOT_FOUND_MESSAGE));
     }
 
 
