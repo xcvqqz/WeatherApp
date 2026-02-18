@@ -1,6 +1,7 @@
 package io.github.xcvqqz.weather_app.interceptor;
 
 
+import io.github.xcvqqz.weather_app.service.SessionService;
 import io.github.xcvqqz.weather_app.util.CookieUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,7 +21,7 @@ public class SessionInterceptor implements HandlerInterceptor {
         //получим Cookie
         String sessionId = String.valueOf(CookieUtil.getSessionId(request));
 
-        if(sessionId == null && sessionId.isEmpty()){
+        if(sessionId == null || sessionId.isEmpty()){
             response.sendRedirect("/sign-in");
             return false;
         }

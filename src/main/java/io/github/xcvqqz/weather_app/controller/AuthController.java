@@ -60,12 +60,10 @@ public class AuthController {
 
 
 
-    @PostMapping("/logout")
+    @PostMapping("/logout")   //ИСПРАВИТЬ МЕТОД!!!!!!!!!!!!!!
     public String logout(HttpServletRequest request, HttpServletResponse response){
 
-        UUID userSessionId = CookieUtil
-                .getSessionId(request)
-                .orElseThrow(() -> new RuntimeException("Сессия для пользователя отсутствует"));  //получили sessionId
+        UUID userSessionId = CookieUtil.getSessionId(request).orElseThrow(() -> new RuntimeException("Сессия для пользователя отсутствует"));  //получили sessionId
 
         sessionService.deleteSessionById(userSessionId);
 

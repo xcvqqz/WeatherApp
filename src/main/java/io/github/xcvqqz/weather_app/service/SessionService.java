@@ -7,6 +7,7 @@ import io.github.xcvqqz.weather_app.repository.SessionRepository;
 import io.github.xcvqqz.weather_app.util.CookieUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,6 +21,7 @@ public class SessionService {
     private final SessionRepository sessionRepository;
 
 
+    @Transactional
     public Session create(User user){
 
         Session session = Session
@@ -34,6 +36,7 @@ public class SessionService {
     }
 
 
+    @Transactional(readOnly = true)
     public User getUserBySessionId(UUID sessionId){
         return sessionRepository
                 .findUserById(getBySessionId(sessionId)
@@ -42,12 +45,14 @@ public class SessionService {
     }
 
 
+    @Transactional
     public void deleteSessionById(UUID sessionId){
         if(sessionId != null) {
             sessionRepository.deleteById(sessionId);
         }
     }
 
+    @Transactional
     public void deleteExpiredSessions(){
         List<Session> sessions = sessionRepository.findAll();
         for(Session session : sessions){
@@ -55,12 +60,9 @@ public class SessionService {
                 sessionRepository.delete(session);
             }
         }
-
-
     }
 
     public boolean isExpired(Session session){
-
         if(session == null || session.getExpiresAt() == null) {
             return true;
         }
@@ -68,6 +70,7 @@ public class SessionService {
                 .now()
                 .isAfter(session.getExpiresAt());
     }
+
 
 
     private Session getBySessionId(UUID sessionId){
