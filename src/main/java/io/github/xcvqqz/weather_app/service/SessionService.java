@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -42,7 +43,30 @@ public class SessionService {
 
 
     public void deleteSessionById(UUID sessionId){
-        sessionRepository.deleteById(sessionId);
+        if(sessionId != null) {
+            sessionRepository.deleteById(sessionId);
+        }
+    }
+
+    public void deleteExpiredSessions(){
+        List<Session> sessions = sessionRepository.findAll();
+        for(Session session : sessions){
+            if (isExpired(session)){
+                sessionRepository.delete(session);
+            }
+        }
+
+
+    }
+
+    public boolean isExpired(Session session){
+
+        if(session == null || session.getExpiresAt() == null) {
+            return true;
+        }
+        return  LocalDateTime
+                .now()
+                .isAfter(session.getExpiresAt());
     }
 
 

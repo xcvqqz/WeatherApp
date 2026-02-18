@@ -51,12 +51,12 @@ public class UserService {
     }
 
 
-
     
     @Transactional
     public void delete(User user) {
         userRepository.delete(user);
     }
+
 
     @Transactional(readOnly = true)
     public User findByLogin(UserAuthDTO userAuthDTO) {

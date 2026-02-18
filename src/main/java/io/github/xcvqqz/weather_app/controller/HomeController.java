@@ -22,7 +22,6 @@ import java.util.UUID;
 public class HomeController {
 
     private final SessionService sessionService;
-    private final UserService userService;
 
 
     @GetMapping
