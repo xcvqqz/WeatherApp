@@ -20,5 +20,4 @@ public class SessionsCleanScheduler {
 
 }
 
-
 //нужно добавить логгирование

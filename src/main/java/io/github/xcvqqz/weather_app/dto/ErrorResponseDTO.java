@@ -1,8 +1,9 @@
 package io.github.xcvqqz.weather_app.dto;
 
 
+import org.springframework.http.HttpStatus;
 
 public record ErrorResponseDTO(
-    int status,
+    HttpStatus status,
     String name
 ){}
