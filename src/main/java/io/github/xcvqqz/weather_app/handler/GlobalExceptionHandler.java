@@ -6,6 +6,7 @@ import io.github.xcvqqz.weather_app.exception.DataBaseException;
 import io.github.xcvqqz.weather_app.exception.PasswordMismatchException;
 import io.github.xcvqqz.weather_app.exception.UserAlreadyExistsException;
 import io.github.xcvqqz.weather_app.exception.UserNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.stream.Collectors;
 
+@Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -23,6 +25,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({UserAlreadyExistsException.class, DataIntegrityViolationException.class})
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponseDTO handleAlreadyExists(UserAlreadyExistsException ex) {
+        log.error(ex.getMessage());
         return new ErrorResponseDTO(HttpStatus.CONFLICT, ex.getMessage());
     }
 

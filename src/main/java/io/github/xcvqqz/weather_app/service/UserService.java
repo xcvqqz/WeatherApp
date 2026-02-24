@@ -14,6 +14,7 @@ import io.github.xcvqqz.weather_app.repository.UserRepository;
 import io.github.xcvqqz.weather_app.repository.impl.UserRepositoryImpl;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +25,7 @@ import java.util.List;
 
 import static io.github.xcvqqz.weather_app.service.SessionService.DATABASE_ERROR_MESSAGE;
 
+@Slf4j
 @AllArgsConstructor
 @Service
 public class UserService {
@@ -47,6 +49,7 @@ public class UserService {
         try {
             userRepository.save(entity);
         } catch (DataIntegrityViolationException e) {
+            log.error(e.getMessage());
             throw new UserAlreadyExistsException(USER_ALREADY_EXIST_MESSAGE);
         }
         return entity;
@@ -56,7 +59,9 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND_MESSAGE));
+        return userRepository
+                .findById(id)
+                .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND_MESSAGE));
     }
 
 
