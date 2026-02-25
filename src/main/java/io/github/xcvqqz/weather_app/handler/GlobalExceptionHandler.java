@@ -22,10 +22,18 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
 
+
+
     @ExceptionHandler({UserAlreadyExistsException.class, DataIntegrityViolationException.class})
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorResponseDTO handleAlreadyExists(UserAlreadyExistsException ex) {
-        log.error(ex.getMessage());
+    public ErrorResponseDTO handleAlreadyExists(Exception ex) {
+
+        String errorType = ex instanceof UserAlreadyExistsException
+                ? "User already exist"
+                : "Data integrity violation";
+
+        log.warn("{} - {}", errorType, ex.getMessage(), ex);
+
         return new ErrorResponseDTO(HttpStatus.CONFLICT, ex.getMessage());
     }
 
@@ -33,6 +41,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponseDTO handleUserNotFound(UserNotFoundException ex) {
+
+        log.info("{}", ex.getMessage(), ex);
+
         return new ErrorResponseDTO(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
@@ -40,12 +51,18 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(PasswordMismatchException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponseDTO handlePassswordMismatch(PasswordMismatchException ex) {
+
+        log.info("{}", ex.getMessage(), ex);
+
         return new ErrorResponseDTO(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 
     @ExceptionHandler(DataBaseException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponseDTO handleDataBaseError(DataBaseException ex) {
+
+        log.error("{}", ex.getMessage(), ex);
+
         return new ErrorResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
@@ -59,6 +76,8 @@ public class GlobalExceptionHandler {
                 .map(FieldError::getDefaultMessage)
                 .collect(Collectors.joining(", "));
 
+        log.warn("{}", errorMessage, ex);
+
         return new ErrorResponseDTO(HttpStatus.BAD_REQUEST, errorMessage);
 
     }
@@ -67,6 +86,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponseDTO handleAll(Exception ex) {                                       //НУЖНО ДОБАВИТЬ ЛОГИ ДЛЯ СЕБЯ, не показываем ЮЗЕРУ
+
+        log.error("{}", ex.getMessage(), ex);
+
         return new ErrorResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 

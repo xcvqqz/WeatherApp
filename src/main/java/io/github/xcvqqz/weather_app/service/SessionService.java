@@ -7,6 +7,7 @@ import io.github.xcvqqz.weather_app.exception.DataBaseException;
 import io.github.xcvqqz.weather_app.exception.UserNotFoundException;
 import io.github.xcvqqz.weather_app.repository.SessionRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ import java.util.UUID;
 
 import static io.github.xcvqqz.weather_app.service.UserService.USER_NOT_FOUND_MESSAGE;
 
+@Slf4j
 @AllArgsConstructor
 @Service
 public class SessionService {
@@ -39,7 +41,9 @@ public class SessionService {
 
          return sessionRepository
                  .save(session)
-                 .orElseThrow(() -> new DataBaseException(DATABASE_ERROR_MESSAGE));
+                 .orElseThrow(() -> {
+                    return new DataBaseException(DATABASE_ERROR_MESSAGE);
+                 });
 
     }
 
