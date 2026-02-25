@@ -47,6 +47,7 @@ public class UserService {
         entity.setPassword(passwordEncoder.encode(entity.getPassword()));
 
         try {
+            log.info();
             userRepository.save(entity);
         } catch (DataIntegrityViolationException e) {
             log.error(e.getMessage());

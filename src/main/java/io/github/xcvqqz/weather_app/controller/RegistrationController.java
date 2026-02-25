@@ -11,6 +11,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
+@Slf4j
 @AllArgsConstructor
 @Controller
 @RequestMapping("/sign-up")
@@ -47,11 +48,14 @@ public class RegistrationController {
 //        }
 
 
-        User user = userService.save(userRegistration);   //СОЗДАНИЕ НОВОГО ЮЗЕРА
+        User user = userService.save(userRegistration);
+        log.info("A new user has been created with login: {}", user.getLogin());
 
-        Session session = sessionService.create(user);   //СОЗДАНИЕ СЕССИИ ДЛЯ ЮЗЕРА
+        Session session = sessionService.create(user);
+        log.info("A new session has been created for user: {}", user.getLogin());
 
-        CookieUtil.setSessionCookie(response, session.getSessionId());   //СОЗДАНИЕ КУКИ И ОТПРАВЛЕНИЕ КУКИ
+        CookieUtil.setSessionCookie(response, session.getSessionId());
+        log.info("A cookie has been created, Cookie: {}", session.getSessionId());
 
 
         return "redirect:/home";

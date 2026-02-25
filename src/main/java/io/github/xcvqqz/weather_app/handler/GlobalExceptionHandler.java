@@ -85,7 +85,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponseDTO handleAll(Exception ex) {                                       //НУЖНО ДОБАВИТЬ ЛОГИ ДЛЯ СЕБЯ, не показываем ЮЗЕРУ
+    public ErrorResponseDTO handleUnexpectedException(Exception ex) {                                       //НУЖНО ДОБАВИТЬ ЛОГИ ДЛЯ СЕБЯ, не показываем ЮЗЕРУ
 
         log.error("{}", ex.getMessage(), ex);
 

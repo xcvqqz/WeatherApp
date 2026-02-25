@@ -42,7 +42,7 @@ public class SessionService {
          return sessionRepository
                  .save(session)
                  .orElseThrow(() -> {
-                    return new DataBaseException(DATABASE_ERROR_MESSAGE);
+                        return  new DataBaseException(DATABASE_ERROR_MESSAGE);
                  });
 
     }
@@ -70,17 +70,20 @@ public class SessionService {
 
 
     @Transactional()
-    public void deleteExpiredSessions(){
+    public int deleteExpiredSessions(){
         List<Session> sessions = sessionRepository.findAll();
+        int expiredSessions = 0;
         for(Session session : sessions){
             if (isExpired(session)){
                 try {
                     sessionRepository.delete(session);
+                    expiredSessions++;
                 } catch (DataAccessException e){
                     throw new DataBaseException(String.format(DATABASE_ERROR_MESSAGE, e.getMessage()));
                 }
             }
         }
+        return expiredSessions;
     }
 
     public boolean isExpired(Session session){
