@@ -34,20 +34,10 @@ public class AuthController {
     private UserService userService;
     private SessionService sessionService;
 
-
-
-//    @GetMapping()
-//    public String showSignIn(Model model) {
-//        model.addAttribute("user", new UserAuthDTO());
-//        return "sign-in";
-//    }
-
-
     @GetMapping("/sign-in")
     public String showSignIn(@ModelAttribute("user") UserAuthDTO userAuth) {
         return "sign-in";
     }
-
 
 
     @PostMapping("/sign-in")
@@ -59,25 +49,20 @@ public class AuthController {
         }
 
         User user = userService.findByLogin(userAuth);
-
-        Session session = sessionService.create(user);   //СОЗДАНИЕ СЕССИИ ДЛЯ ЮЗЕРА
-
-        CookieUtil.setSessionCookie(response, session.getSessionId());   //СОЗДАНИЕ КУКИ И ОТПРАВЛЕНИЕ КУКИ
+        Session session = sessionService.create(user);
+        CookieUtil.setSessionCookie(response, session.getSessionId());
 
         return "redirect:/home";
     }
 
 
 
-    @GetMapping("/logout")   //ИСПРАВИТЬ МЕТОД!!!!!!!!!!!!!!
+    @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response){
 
         UUID userSessionId = CookieUtil.getSessionId(request);
-
         sessionService.deleteSessionById(userSessionId);
-
         CookieUtil.clearSessionCookie(response);
-
 
         return "redirect:/sign-in";
     }

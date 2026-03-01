@@ -18,20 +18,20 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @Controller
-@RequestMapping("/home")
+@RequestMapping()
 public class HomeController {
 
     private final SessionService sessionService;
 
 
-    @GetMapping
+    @GetMapping("/home")
     public String home(Model model, HttpServletRequest request) {
 
         UUID userSessionId = (UUID) request.getAttribute("userSessionId");
 
-        User user = sessionService.getUserBySessionId(userSessionId);   //ПОЛУЧАЕМ ПОЛЬЗОВАТЕЛЯ ПО СЕССИИ
+        User user = sessionService.getUserBySessionId(userSessionId);
 
-        model.addAttribute("user", user);   //ОТОБРАЖАЕМ ДОМАШНЮЮ СТРАНИЦУ
+        model.addAttribute("user", user);
 
         return "home";
     }

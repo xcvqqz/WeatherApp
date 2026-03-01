@@ -23,29 +23,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @AllArgsConstructor
 @Controller
-@RequestMapping("/sign-up")
+@RequestMapping()
 public class RegistrationController {
 
     private final SessionService sessionService;
     private UserService userService;
 
-    @GetMapping()
+    @GetMapping("/sign-up")
     public String showSignUp(@ModelAttribute("user") UserRegistrationDTO userRegistration) {
         return "sign-up";
     }
 
 
-    @PostMapping()
+    @PostMapping("/sign-up")
     public String processSignUp(@Valid @ModelAttribute("user") UserRegistrationDTO userRegistration,
                                 BindingResult result, HttpServletResponse response)  {
 
-//        if(!(userRegistration.password().equals(userRegistration.confirmPassword()))) {
-//            result.rejectValue("confirmPassword", "passwordMismatch", "Passwords don't match");
-//        }
-//
-//        if (result.hasErrors()) {
-//            return "first/sign-up";
-//        }
+        if(!(userRegistration.password().equals(userRegistration.confirmPassword()))) {
+            result.rejectValue("confirmPassword", "passwordMismatch", "Passwords don't match");
+        }
+
+        if (result.hasErrors()) {
+            return "sign-up";
+        }
 
 
         User user = userService.save(userRegistration);
@@ -56,7 +56,6 @@ public class RegistrationController {
 
         CookieUtil.setSessionCookie(response, session.getSessionId());
         log.info("A cookie has been created, Cookie: {}", session.getSessionId());
-
 
         return "redirect:/home";
     }

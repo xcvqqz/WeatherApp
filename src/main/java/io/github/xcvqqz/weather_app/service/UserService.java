@@ -82,6 +82,8 @@ public class UserService {
         String login = userAuthDTO.login();
         String rawPassword = userAuthDTO.password();
 
+        User entity = userMapper.authToEntity(userAuthDTO);
+
         User user =  userRepository.findByLogin(login)
                 .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND_MESSAGE));
 

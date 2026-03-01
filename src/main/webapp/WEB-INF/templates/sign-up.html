@@ -28,7 +28,8 @@
         <br/>
         <label for="confirmPassword">Repeat Password</label>
         <input type="password" name="confirmPassword" id="confirmPassword"/>
-        <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{passwordMismatch}"
+
+        <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"
               style="color: red;"></span>
 
         <br/>
