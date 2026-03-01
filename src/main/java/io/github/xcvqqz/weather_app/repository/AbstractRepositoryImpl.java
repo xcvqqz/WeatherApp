@@ -31,8 +31,13 @@ public abstract class AbstractRepositoryImpl <T, K> implements AbstractRepositor
 
     @Override
     public void deleteById(K id) {
-        sessionFactory.getCurrentSession().remove(id);
+                 sessionFactory
+                .getCurrentSession()
+                .createQuery(String.format("DELETE FROM %s WHERE id = :id", entityName))
+                .setParameter("id", id)
+                .executeUpdate();
     }
+
 
     @Override
     public List<T> findAll(){       //через форматтер

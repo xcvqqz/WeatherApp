@@ -4,8 +4,10 @@ package io.github.xcvqqz.weather_app.service;
 import io.github.xcvqqz.weather_app.entity.Session;
 import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.exception.DataBaseException;
+import io.github.xcvqqz.weather_app.exception.SessionNotFoundException;
 import io.github.xcvqqz.weather_app.exception.UserNotFoundException;
 import io.github.xcvqqz.weather_app.repository.SessionRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
@@ -100,7 +102,7 @@ public class SessionService {
     private Session getBySessionId(UUID sessionId){
         return  sessionRepository
                 .findById(sessionId)
-                .orElseThrow(() -> new RuntimeException(SESSION_NOT_FOUND_MESSAGE));
+                .orElseThrow(() -> new SessionNotFoundException(SESSION_NOT_FOUND_MESSAGE));
     }
 
 

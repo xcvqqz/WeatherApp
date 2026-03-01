@@ -16,7 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class CookieUtil {
 
-    private static final int COOKIE_MAX_AGE = 30 * 60;  //30 минут
+    private static final int COOKIE_MAX_AGE = 30 * 60;
     private static final String SESSION_COOKIE = "sessionId";
 
     public static void setSessionCookie(HttpServletResponse response, UUID sessionId) {

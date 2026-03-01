@@ -18,7 +18,7 @@ import java.util.UUID;
 public class Session {
 
     @Id
-    @Column(name = "session_id", nullable = false, unique = true, updatable = false)
+    @Column(name = "id", nullable = false, unique = true, updatable = false)
     private UUID sessionId;
 
 

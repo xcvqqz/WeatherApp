@@ -28,26 +28,29 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @Controller
-@RequestMapping("/sign-in")
+@RequestMapping()
 public class AuthController {
 
     private UserService userService;
     private SessionService sessionService;
 
 
+
 //    @GetMapping()
-//    public String showSignIn(@ModelAttribute("user") UserAuthDTO userAuth) {
+//    public String showSignIn(Model model) {
+//        model.addAttribute("user", new UserAuthDTO());
 //        return "sign-in";
 //    }
 
-    @GetMapping()
-    public String showSignIn(Model model) {
-        model.addAttribute("user", new UserAuthDTO());
+
+    @GetMapping("/sign-in")
+    public String showSignIn(@ModelAttribute("user") UserAuthDTO userAuth) {
         return "sign-in";
     }
 
 
-    @PostMapping()
+
+    @PostMapping("/sign-in")
     public String processSignIn(@Valid @ModelAttribute("user") UserAuthDTO userAuth,
                                 BindingResult result, HttpServletResponse response, Model model) {
 
@@ -66,17 +69,17 @@ public class AuthController {
 
 
 
-    @PostMapping("/logout")   //ИСПРАВИТЬ МЕТОД!!!!!!!!!!!!!!
+    @GetMapping("/logout")   //ИСПРАВИТЬ МЕТОД!!!!!!!!!!!!!!
     public String logout(HttpServletRequest request, HttpServletResponse response){
 
-        UUID userSessionId = CookieUtil.getSessionId(request); //получили sessionId
+        UUID userSessionId = CookieUtil.getSessionId(request);
 
         sessionService.deleteSessionById(userSessionId);
 
         CookieUtil.clearSessionCookie(response);
 
 
-        return "sign-in";
+        return "redirect:/sign-in";
     }
 
 }
