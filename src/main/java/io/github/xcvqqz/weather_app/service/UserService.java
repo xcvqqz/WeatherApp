@@ -1,7 +1,6 @@
 package io.github.xcvqqz.weather_app.service;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.xcvqqz.weather_app.dto.UserAuthDTO;
 import io.github.xcvqqz.weather_app.dto.UserRegistrationDTO;
 import io.github.xcvqqz.weather_app.entity.User;
@@ -11,17 +10,13 @@ import io.github.xcvqqz.weather_app.exception.UserAlreadyExistsException;
 import io.github.xcvqqz.weather_app.exception.UserNotFoundException;
 import io.github.xcvqqz.weather_app.mapper.UserMapper;
 import io.github.xcvqqz.weather_app.repository.UserRepository;
-import io.github.xcvqqz.weather_app.repository.impl.UserRepositoryImpl;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 import static io.github.xcvqqz.weather_app.service.SessionService.DATABASE_ERROR_MESSAGE;
 
@@ -79,20 +74,16 @@ public class UserService {
     @Transactional(readOnly = true)
     public User findByLogin(UserAuthDTO userAuthDTO) {
 
-        String login = userAuthDTO.login();
-        String rawPassword = userAuthDTO.password();
+        User model = userMapper.authToModel(userAuthDTO);
 
-        User entity = userMapper.authToEntity(userAuthDTO);
-
-        User user =  userRepository.findByLogin(login)
+        User user =  userRepository.findByLogin(model.getLogin())
                 .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND_MESSAGE));
 
-        if(passwordEncoder.matches(rawPassword, user.getPassword())){
+        if(passwordEncoder.matches(model.getPassword(), user.getPassword())){
             return user;
         } else {
             throw new PasswordMismatchException(PASSWORD_MISMATCH_MESSAGE);
         }
-
     }
 
 }

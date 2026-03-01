@@ -11,7 +11,7 @@ public interface UserMapper {
 
     User registrationToEntity(UserRegistrationDTO userRegistrationDTO);
 
-    User authToEntity(UserAuthDTO userAuthDTO);
+    User authToModel(UserAuthDTO userAuthDTO);
 
     UserRegistrationDTO toDTO(User user);
 
