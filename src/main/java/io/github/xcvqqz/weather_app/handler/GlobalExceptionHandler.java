@@ -9,6 +9,7 @@ import io.github.xcvqqz.weather_app.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -26,7 +27,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler({UserAlreadyExistsException.class, DataIntegrityViolationException.class})
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorResponseDTO handleAlreadyExists(Exception ex) {
+    public String handleAlreadyExists(Model model, Exception ex) {
 
         String errorType = ex instanceof UserAlreadyExistsException
                 ? "User already exist"
@@ -34,41 +35,50 @@ public class GlobalExceptionHandler {
 
         log.warn("{} - {}", errorType, ex.getMessage(), ex);
 
-        return new ErrorResponseDTO(HttpStatus.CONFLICT, ex.getMessage());
+        model.addAttribute("error", new ErrorResponseDTO(HttpStatus.CONFLICT, ex.getMessage()));
+
+        return "error";
     }
 
 
     @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponseDTO handleUserNotFound(UserNotFoundException ex) {
+    public String handleUserNotFound(Model model, UserNotFoundException ex) {
 
         log.info("{}", ex.getMessage(), ex);
 
-        return new ErrorResponseDTO(HttpStatus.NOT_FOUND, ex.getMessage());
+        model.addAttribute("error", new ErrorResponseDTO(HttpStatus.NOT_FOUND, ex.getMessage()));
+
+        return "error";
+
     }
 
 
     @ExceptionHandler(PasswordMismatchException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponseDTO handlePassswordMismatch(PasswordMismatchException ex) {
+    public String handlePassswordMismatch(Model model, PasswordMismatchException ex) {
 
         log.info("{}", ex.getMessage(), ex);
 
-        return new ErrorResponseDTO(HttpStatus.BAD_REQUEST, ex.getMessage());
+        model.addAttribute("error", new ErrorResponseDTO(HttpStatus.BAD_REQUEST, ex.getMessage()));
+
+        return "error";
     }
 
     @ExceptionHandler(DataBaseException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponseDTO handleDataBaseError(DataBaseException ex) {
+    public String handleDataBaseError(Model model, DataBaseException ex) {
 
         log.error("{}", ex.getMessage(), ex);
 
-        return new ErrorResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+        model.addAttribute("error", new ErrorResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage()));
+
+        return "error";
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponseDTO handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
+    public String handleMethodArgumentNotValid(Model model, MethodArgumentNotValidException ex) {
 
         String errorMessage = ex.getBindingResult()
                 .getFieldErrors()
@@ -78,18 +88,22 @@ public class GlobalExceptionHandler {
 
         log.warn("{}", errorMessage, ex);
 
-        return new ErrorResponseDTO(HttpStatus.BAD_REQUEST, errorMessage);
+        model.addAttribute("error", new ErrorResponseDTO(HttpStatus.BAD_REQUEST, errorMessage));
+
+        return "error";
 
     }
 
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponseDTO handleUnexpectedException(Exception ex) {                                       //НУЖНО ДОБАВИТЬ ЛОГИ ДЛЯ СЕБЯ, не показываем ЮЗЕРУ
+    public String handleUnexpectedException(Model model, Exception ex) {                                       //НУЖНО ДОБАВИТЬ ЛОГИ ДЛЯ СЕБЯ, не показываем ЮЗЕРУ
 
         log.error("{}", ex.getMessage(), ex);
 
-        return new ErrorResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+        model.addAttribute("error", new ErrorResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage()));
+
+        return "error";
     }
 
 }

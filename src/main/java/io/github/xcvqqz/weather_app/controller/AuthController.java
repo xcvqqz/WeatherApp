@@ -35,9 +35,15 @@ public class AuthController {
     private SessionService sessionService;
 
 
+//    @GetMapping()
+//    public String showSignIn(@ModelAttribute("user") UserAuthDTO userAuth) {
+//        return "sign-in";
+//    }
+
     @GetMapping()
-    public String showSignIn(@ModelAttribute("user") UserAuthDTO userAuth) {
-        return "first/sign-in";
+    public String showSignIn(Model model) {
+        model.addAttribute("user", new UserAuthDTO());
+        return "sign-in";
     }
 
 
@@ -46,7 +52,7 @@ public class AuthController {
                                 BindingResult result, HttpServletResponse response, Model model) {
 
         if(result.hasErrors()){
-            return "first/sign-in";
+            return "sign-in";
         }
 
         User user = userService.findByLogin(userAuth);
@@ -63,16 +69,15 @@ public class AuthController {
     @PostMapping("/logout")   //ИСПРАВИТЬ МЕТОД!!!!!!!!!!!!!!
     public String logout(HttpServletRequest request, HttpServletResponse response){
 
-        UUID userSessionId = CookieUtil.getSessionId(request).orElseThrow(() -> new RuntimeException("Сессия для пользователя отсутствует"));  //получили sessionId
+        UUID userSessionId = CookieUtil.getSessionId(request); //получили sessionId
 
         sessionService.deleteSessionById(userSessionId);
 
         CookieUtil.clearSessionCookie(response);
 
 
-        return "first/sign-in";
+        return "sign-in";
     }
-
 
 }
 

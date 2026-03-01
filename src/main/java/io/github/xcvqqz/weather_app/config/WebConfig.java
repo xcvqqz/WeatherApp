@@ -21,10 +21,9 @@ import org.thymeleaf.templatemode.TemplateMode;
 @Configuration
 @ComponentScan("io.github.xcvqqz.weather_app")
 @EnableWebMvc   //эта аннотация равноценна <mvc:annotation-driven/> из web.xml (включение MVC аннотаций)
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application-dev.properties")
 public class WebConfig implements WebMvcConfigurer {
 
-    //осталось реализовать бины для thymeleaf из прошлого урока
 
     private final ApplicationContext applicationContext;
 
@@ -53,7 +52,6 @@ public class WebConfig implements WebMvcConfigurer {
                         "sign-in/**",
                         "/sign-up/**",
                         "/locations/**",
-                        "/home/**",
                         "/",
                         "/css/**",
                         "/js/**",

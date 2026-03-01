@@ -16,4 +16,7 @@ public record UserRegistrationDTO(
 
         String confirmPassword
 ) {
+        public UserRegistrationDTO() {
+                this("", "", "");
+        }
 }

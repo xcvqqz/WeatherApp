@@ -33,7 +33,7 @@ public class HomeController {
 
         model.addAttribute("user", user);   //ОТОБРАЖАЕМ ДОМАШНЮЮ СТРАНИЦУ
 
-        return "first/home";
+        return "home";
     }
 
 

@@ -1,6 +1,8 @@
 package io.github.xcvqqz.weather_app.util;
 
 
+import io.github.xcvqqz.weather_app.exception.SessionNotFoundException;
+import io.github.xcvqqz.weather_app.exception.UserNotFoundException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,6 +11,7 @@ import lombok.NoArgsConstructor;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
+
 
 @NoArgsConstructor
 public class CookieUtil {
@@ -25,15 +28,14 @@ public class CookieUtil {
         response.addCookie(cookie);
     }
 
-    public static Optional<UUID> getSessionId(HttpServletRequest request) {
-        if (request.getCookies() == null) {
-            return Optional.empty();
-        }
+    public static UUID getSessionId(HttpServletRequest request) {
+
         return Arrays.stream(request.getCookies())
                 .filter(c -> SESSION_COOKIE.equals(c.getName()))
                 .map(Cookie::getValue)
                 .map(UUID::fromString)
-                .findFirst();
+                .findFirst()
+                .orElseThrow(() -> new SessionNotFoundException("Session Not Found"));
 
     }
 

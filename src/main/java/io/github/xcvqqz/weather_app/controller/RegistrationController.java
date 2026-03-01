@@ -31,7 +31,7 @@ public class RegistrationController {
 
     @GetMapping()
     public String showSignUp(@ModelAttribute("user") UserRegistrationDTO userRegistration) {
-        return "first/sign-up";
+        return "sign-up";
     }
 
 

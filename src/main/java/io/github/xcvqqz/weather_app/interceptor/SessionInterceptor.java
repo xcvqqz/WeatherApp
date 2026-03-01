@@ -1,14 +1,14 @@
 package io.github.xcvqqz.weather_app.interceptor;
 
 
-import io.github.xcvqqz.weather_app.service.SessionService;
 import io.github.xcvqqz.weather_app.util.CookieUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
+import java.util.UUID;
 
 
 @Component
@@ -19,12 +19,12 @@ public class SessionInterceptor implements HandlerInterceptor {
             throws Exception {
 
         //получим Cookie
-        String sessionId = String.valueOf(CookieUtil.getSessionId(request));
+        UUID sessionId = CookieUtil.getSessionId(request);
 
-        if(sessionId == null || sessionId.isEmpty()){
-            response.sendRedirect("/sign-in");
-            return false;
-        }
+//        if(sessionId.isEmpty() || sessionId.isEmpty()){
+//            response.sendRedirect("/sign-in");
+//            return false;
+//        }
 
         request.setAttribute("userSessionId", sessionId);
 

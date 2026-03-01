@@ -14,4 +14,7 @@ public record UserAuthDTO(
         String password
 
 ) {
+        public UserAuthDTO() {
+        this("", "");
+}
 }

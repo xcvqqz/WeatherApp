@@ -9,10 +9,11 @@
 <body>
 
 
+Welcome
 <div th:if="${user != null}">
-   Welcome <p th:text="${user.login}">Имя пользователя</p> !
-
+    Welcome <span th:text="${user.login}">Имя пользователя</span>
 </div>
+!
 
 <br>
 <br>
