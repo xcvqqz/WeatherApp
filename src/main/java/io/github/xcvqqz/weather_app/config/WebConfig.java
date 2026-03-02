@@ -87,4 +87,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.viewResolver(resolver);
     }
 
+
+
 }

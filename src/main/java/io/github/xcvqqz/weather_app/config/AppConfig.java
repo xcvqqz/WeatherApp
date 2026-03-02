@@ -19,12 +19,7 @@ public class AppConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
-
-
 }
-
 
 
 //здесь будем прописывать все бины

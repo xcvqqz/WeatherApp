@@ -15,5 +15,4 @@ public interface UserMapper {
 
     UserRegistrationDTO toDTO(User user);
 
-
 }
