@@ -67,7 +67,6 @@ public class UserService {
         } catch (DataAccessException e){
             throw new DataBaseException(String.format(DATABASE_ERROR_MESSAGE, e.getMessage()));
         }
-
     }
 
 

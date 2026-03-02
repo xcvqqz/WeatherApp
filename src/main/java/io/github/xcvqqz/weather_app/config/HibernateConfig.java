@@ -34,7 +34,8 @@ public class HibernateConfig {
     @Value("${hibernate.current_session_context_class}")
     private String currentSessionContextClass;
 
-    private String scanPackges = "io.github.xcvqqz.weather_app.entity";
+    @Value("${hibernate.scan_packages}")
+    private String scanPackages;
 
 
     @Bean
@@ -42,7 +43,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
-        sessionFactory.setPackagesToScan(scanPackges);
+        sessionFactory.setPackagesToScan(scanPackages);
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
@@ -65,3 +66,5 @@ public class HibernateConfig {
         return props;
     }
 }
+
+

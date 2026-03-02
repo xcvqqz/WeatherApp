@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.UUID;
 
@@ -25,16 +26,22 @@ public class HomeController {
 
 
     @GetMapping("/home")
-    public String home(Model model, HttpServletRequest request) {
+    public String home(@PathVariable String login,  Model model, HttpServletRequest request) {
 
         UUID userSessionId = (UUID) request.getAttribute("userSessionId");
 
         User user = sessionService.getUserBySessionId(userSessionId);
 
+        if(!(user.getLogin().equals(login))){
+            return "redirect:/sign-in";
+        }
+
         model.addAttribute("user", user);
 
         return "home";
     }
+
+
 
 
 

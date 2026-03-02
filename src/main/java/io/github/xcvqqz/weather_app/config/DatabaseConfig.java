@@ -33,6 +33,14 @@ public class DatabaseConfig {
     @Value("${flyway.locations}")
     private String location;
 
+    @Value("${hikari.minimumIdle}")
+    private int minimumIdle;
+
+    @Value("${hikari.idleTimeout}")
+    private long idleTimeout;
+
+
+
     @Bean
     public DataSource dataSource() {
         HikariConfig config = new HikariConfig();
@@ -41,9 +49,12 @@ public class DatabaseConfig {
         config.setPassword(password);
         config.setDriverClassName(driverClassName);
         config.setMaximumPoolSize(maximumPoolSize);
+        config.setMinimumIdle(minimumIdle);
+        config.setIdleTimeout(idleTimeout);
 
         return new HikariDataSource(config);
     }
+
 
     @Bean(initMethod = "migrate")
     public Flyway flyway(DataSource dataSource) {
@@ -53,9 +64,5 @@ public class DatabaseConfig {
                 .baselineOnMigrate(true)
                 .load();
 
-        
     }
-
-
-
 }

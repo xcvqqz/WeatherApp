@@ -43,9 +43,7 @@ public class SessionService {
 
          return sessionRepository
                  .save(session)
-                 .orElseThrow(() -> {
-                        return  new DataBaseException(DATABASE_ERROR_MESSAGE);
-                 });
+                 .orElseThrow(() -> new DataBaseException(DATABASE_ERROR_MESSAGE));
 
     }
 

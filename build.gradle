@@ -83,3 +83,7 @@ test {
 war {
     archiveFileName = 'weather-app.war'
 }
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
