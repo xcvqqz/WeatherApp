@@ -26,15 +26,11 @@ public class HomeController {
 
 
     @GetMapping("/home")
-    public String home(@PathVariable String login,  Model model, HttpServletRequest request) {
+    public String home(Model model, HttpServletRequest request) {
 
         UUID userSessionId = (UUID) request.getAttribute("userSessionId");
 
         User user = sessionService.getUserBySessionId(userSessionId);
-
-        if(!(user.getLogin().equals(login))){
-            return "redirect:/sign-in";
-        }
 
         model.addAttribute("user", user);
 
