@@ -1,7 +1,5 @@
 package io.github.xcvqqz.weather_app.config;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +11,8 @@ import javax.sql.DataSource;
 
 @Configuration
 @PropertySource("classpath:application-test.properties")
-public class TestDataBaseConfig {
+public class DataBaseConfigTest {
+
 
         @Value("${db.url}")
         private String url;

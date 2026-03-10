@@ -15,8 +15,8 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:application-test.properties")
-@Import({TestDataBaseConfig.class, TestAppConfig.class})
-public class TestHibernateConfig {
+@Import({DataBaseConfigTest.class, AppConfigTest.class})
+public class HibernateConfigTest {
 
     @Value("${hibernate.dialect}")
     private String dialect;

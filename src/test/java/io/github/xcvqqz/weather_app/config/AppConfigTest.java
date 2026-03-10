@@ -13,7 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @ComponentScan(basePackages = {"io.github.xcvqqz.weather_app.service",
                                "io.github.xcvqqz.weather_app.repository",
                                "io.github.xcvqqz.weather_app.mapper"})
-public class TestAppConfig {
+public class AppConfigTest {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
