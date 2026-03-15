@@ -38,7 +38,7 @@ public class HibernateConfigTest {
 
 
     @Bean
-    @DependsOn("flyway")                                                    // Hibernate запускается ПОСЛЕ миграций
+    @DependsOn("flyway")
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);

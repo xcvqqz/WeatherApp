@@ -28,7 +28,6 @@ public abstract class AbstractRepositoryImpl <T, K> implements AbstractRepositor
         return Optional.ofNullable(entity);
     }
 
-
     @Override
     public void deleteById(K id) {
                  sessionFactory

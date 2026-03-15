@@ -18,8 +18,8 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.*;
 
 
-@ExtendWith(SpringExtension.class)  //Подключаем Spring к JUnit 5
-@ContextConfiguration(classes = HibernateConfigTest.class)  //указали тестовый конфиг
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = HibernateConfigTest.class)
 @Transactional
 public class SessionServiceTest {
 
@@ -51,6 +51,7 @@ public class SessionServiceTest {
 
                     assertThat(expiresAt).isNotNull();
 
+
                     assertThat(expiresAt)
                             .isBetween(
                                     LocalDateTime.now().plusMinutes(30).minusSeconds(5),
@@ -66,4 +67,7 @@ public class SessionServiceTest {
                 });
 
     }
+
+
+
 }
