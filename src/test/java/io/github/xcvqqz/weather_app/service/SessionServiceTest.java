@@ -21,10 +21,10 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
-@ExtendWith({SpringExtension.class, MockitoExtension.class})
+@ExtendWith(MockitoExtension.class)
 @ContextConfiguration(classes = HibernateConfigTest.class)
 @Transactional
 public class SessionServiceTest {
@@ -86,6 +86,9 @@ public class SessionServiceTest {
                             .isNotNull()
                             .isEqualTo(actualUser);
                 });
+
+        verify(userService, times(1)).save(any());
+        verify(sessionRepository, times(1)).save(any(Session.class));
 
     }
 

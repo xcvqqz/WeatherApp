@@ -24,7 +24,7 @@ import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 
-@ExtendWith({SpringExtension.class, MockitoExtension.class})  //Подключаем Spring к JUnit 5
+@ExtendWith(MockitoExtension.class)  //Подключаем Spring к JUnit 5
 @ContextConfiguration(classes = HibernateConfigTest.class)  //указали тестовый конфиг
 @Transactional
 public class UserServiceTest {
