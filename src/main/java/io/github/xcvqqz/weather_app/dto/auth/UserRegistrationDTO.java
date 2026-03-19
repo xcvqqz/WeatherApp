@@ -1,4 +1,4 @@
-package io.github.xcvqqz.weather_app.dto;
+package io.github.xcvqqz.weather_app.dto.auth;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

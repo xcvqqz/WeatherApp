@@ -1,8 +1,8 @@
 package io.github.xcvqqz.weather_app.service;
 
 
-import io.github.xcvqqz.weather_app.dto.UserAuthDTO;
-import io.github.xcvqqz.weather_app.dto.UserRegistrationDTO;
+import io.github.xcvqqz.weather_app.dto.auth.UserAuthDTO;
+import io.github.xcvqqz.weather_app.dto.auth.UserRegistrationDTO;
 import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.exception.DataBaseException;
 import io.github.xcvqqz.weather_app.exception.PasswordMismatchException;

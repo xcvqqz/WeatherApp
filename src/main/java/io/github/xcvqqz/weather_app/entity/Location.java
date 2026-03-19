@@ -16,8 +16,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "locations")
-public class
-Location {
+public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,10 +30,10 @@ Location {
     private String name;
 
     @Column()
-    private BigDecimal latitude; //широта
+    private BigDecimal longitude; //долгота
 
     @Column()
-    private BigDecimal longitude; //долгота
+    private BigDecimal latitude; //широта
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

@@ -2,7 +2,7 @@ package io.github.xcvqqz.weather_app.service;
 
 
 import io.github.xcvqqz.weather_app.config.HibernateConfigTest;
-import io.github.xcvqqz.weather_app.dto.UserRegistrationDTO;
+import io.github.xcvqqz.weather_app.dto.auth.UserRegistrationDTO;
 import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.mapper.UserMapper;
 import io.github.xcvqqz.weather_app.repository.UserRepository;
@@ -13,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;

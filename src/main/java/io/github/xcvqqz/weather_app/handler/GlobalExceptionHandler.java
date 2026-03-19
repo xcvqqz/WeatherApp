@@ -1,7 +1,7 @@
 package io.github.xcvqqz.weather_app.handler;
 
 
-import io.github.xcvqqz.weather_app.dto.ErrorResponseDTO;
+import io.github.xcvqqz.weather_app.dto.auth.ErrorResponseDTO;
 import io.github.xcvqqz.weather_app.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
