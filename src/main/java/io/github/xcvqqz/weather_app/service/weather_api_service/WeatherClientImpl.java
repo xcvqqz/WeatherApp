@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 @PropertySource("classpath:application-dev.properties")
@@ -23,20 +24,25 @@ public class WeatherClientImpl{
 
     @Value("${base.url}")
     private String baseURL;
+//    https://api.openweathermap.org/data/2.5/weather
 
 
     @Autowired
     private RestTemplate restTemplate;
 
 
-    public LocationResponseDTO findWeather() {
+    public LocationResponseDTO getCurrentWeather() {
 
         LocationRequestDTO locationRequestDTO = new LocationRequestDTO("Moscow");
 
-        LocationResponseDTO locationResponseDTO = restTemplate.getForObject(WEATHER_MAP_URL,)
+        String url = UriComponentsBuilder
+                .fromPath(baseURL)
+                .queryParam("q", locationRequestDTO.locationName())
+                .queryParam("appid", appKey)
+                .toUriString();
 
+        return restTemplate.getForObject(url, LocationResponseDTO.class);
 
-        UriComponentsBuilder.fromHttpUrl
     }
 
 
