@@ -1,8 +1,7 @@
 package io.github.xcvqqz.weather_app.scheduler;
 
 
-import io.github.xcvqqz.weather_app.config.HibernateConfigTest;
-
+import io.github.xcvqqz.weather_app.config.AppConfigTest;
 import io.github.xcvqqz.weather_app.service.SessionService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +17,7 @@ import static org.mockito.Mockito.verify;
 
 
 @ExtendWith(MockitoExtension.class)
-@ContextConfiguration(classes = HibernateConfigTest.class)
+@ContextConfiguration(classes = AppConfigTest.class)
 @Transactional
 public class SessionsCleanSchedulerTest {
 

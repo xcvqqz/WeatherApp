@@ -11,6 +11,7 @@ import io.github.xcvqqz.weather_app.exception.UserNotFoundException;
 import io.github.xcvqqz.weather_app.mapper.UserMapper;
 import io.github.xcvqqz.weather_app.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -22,6 +23,7 @@ import static io.github.xcvqqz.weather_app.service.SessionService.DATABASE_ERROR
 
 @Slf4j
 @AllArgsConstructor
+@NoArgsConstructor(force = true)
 @Service
 public class UserService {
 
@@ -32,7 +34,6 @@ public class UserService {
     private static final String USER_ALREADY_EXIST_MESSAGE = "User Already Exist";
     private static final String PASSWORD_MISMATCH_MESSAGE = "The password confirmation does not match";
     protected static final String USER_NOT_FOUND_MESSAGE = "User Not Found";
-
 
 
     @Transactional
