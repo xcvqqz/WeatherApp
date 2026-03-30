@@ -36,7 +36,7 @@ public class SessionServiceTest {
     private UserService userService;
 
     @Test
-    void create_shouldReturnCreatedSession() {
+    void shouldReturnCreatedSession() {
 
         UserRegistrationDTO userRegistrationTest = new UserRegistrationDTO(TEST_NAME,TEST_PASSWORD,TEST_PASSWORD);
 

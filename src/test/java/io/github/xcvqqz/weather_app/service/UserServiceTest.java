@@ -38,7 +38,7 @@ public class UserServiceTest {
     private UserService userService;
 
     @Test
-    void save_shouldSaveUser() {
+    void shouldSaveNewUser() {
 
         UserRegistrationDTO userRegistrationTest = new UserRegistrationDTO(TEST_NAME,TEST_PASSWORD,TEST_PASSWORD);
 

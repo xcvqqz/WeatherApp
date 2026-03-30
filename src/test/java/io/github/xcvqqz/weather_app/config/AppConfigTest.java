@@ -27,7 +27,8 @@ import java.util.Properties;
         basePackages = {
                 "io.github.xcvqqz.weather_app.service",
                 "io.github.xcvqqz.weather_app.repository",
-                "io.github.xcvqqz.weather_app.mapper"
+                "io.github.xcvqqz.weather_app.mapper",
+                "io.github.xcvqqz.weather_app.scheduler"
         })
 
 public class AppConfigTest {

@@ -29,12 +29,24 @@ public class SessionService {
     protected static final String DATABASE_ERROR_MESSAGE = "Database error: %s";
     private static final String SESSION_NOT_FOUND_MESSAGE = "Session Not Found";
 
-    private SessionRepository sessionRepository;
+    private final SessionRepository sessionRepository;
 
     @Autowired
     public SessionService(SessionRepository sessionRepository) {
         this.sessionRepository = sessionRepository;
     }
+
+
+    public List<Session> findAll(){
+        return sessionRepository.findAll();
+    }
+
+
+    @Transactional
+    public void deleteAll() {
+        sessionRepository.deleteAll();
+    }
+
 
     @Transactional
     public Session create(User user){
@@ -106,19 +118,5 @@ public class SessionService {
                 .findById(sessionId)
                 .orElseThrow(() -> new SessionNotFoundException(SESSION_NOT_FOUND_MESSAGE));
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
