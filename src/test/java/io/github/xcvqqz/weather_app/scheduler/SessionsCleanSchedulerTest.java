@@ -51,14 +51,11 @@ public class SessionsCleanSchedulerTest {
     @Test
     void shouldDeleteExpiredSessions() {
 
-        UserRegistrationDTO userRegistrationTest = new UserRegistrationDTO(TEST_NAME,TEST_PASSWORD,TEST_PASSWORD);
-
-        User testUser = userService.save(userRegistrationTest);
-        Session testSession = sessionService.create(testUser);
+        Session session = createTestSession();
 
         List<Session> beforeCleanUpSessions = sessionService.findAll();
 
-        testSession.setExpiresAt(SESSION_EXPIRY_TIME);
+        session.setExpiresAt(SESSION_EXPIRY_TIME);
         sessionsCleanScheduler.cleanExpiredSessions();
 
         List<Session> afterCleanUpSessions = sessionService.findAll();
@@ -67,5 +64,30 @@ public class SessionsCleanSchedulerTest {
         assertThat(afterCleanUpSessions).isEmpty();
 
     }
+
+
+    @Test
+    void shouldNotDeleteValidSessions(){
+
+        Session session = createTestSession();
+
+        List<Session> beforeCleanUpSessions = sessionService.findAll();
+        sessionsCleanScheduler.cleanExpiredSessions();
+        List<Session> afterCleanUpSessions = sessionService.findAll();
+
+        assertThat(beforeCleanUpSessions).hasSize(1);
+        assertThat(afterCleanUpSessions).hasSize(1);
+
+    }
+
+
+    private Session createTestSession(){
+        UserRegistrationDTO userRegistrationTest = new UserRegistrationDTO(TEST_NAME,TEST_PASSWORD,TEST_PASSWORD);
+        User testUser = userService.save(userRegistrationTest);
+        return sessionService.create(testUser);
+    }
+
+
+
 }
 
