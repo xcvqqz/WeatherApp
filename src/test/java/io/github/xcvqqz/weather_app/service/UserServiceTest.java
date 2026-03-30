@@ -34,98 +34,23 @@ public class UserServiceTest {
     private static final String TEST_NAME = "testName";
     private static final String TEST_PASSWORD = "testPassword";
 
-    @MockitoBean
-    private UserMapper userMapper;
-
-    @MockitoBean
-    private  PasswordEncoder passwordEncoder;
-
     @Autowired
     private UserService userService;
-
-    @MockitoBean
-    private UserRepository userRepository;
-
 
     @Test
     void save_shouldSaveUser() {
 
-        User expectedUser =  User.builder()
-                .id(1L)
-                .login(TEST_NAME)
-                .password(TEST_PASSWORD)
-                .build();
+        UserRegistrationDTO userRegistrationTest = new UserRegistrationDTO(TEST_NAME,TEST_PASSWORD,TEST_PASSWORD);
 
-        when(passwordEncoder.encode(anyString())).thenReturn(expectedUser.getPassword());
-        when(userMapper.registrationToEntity(any(UserRegistrationDTO.class))).thenReturn(expectedUser);
-        when(userRepository.save(expectedUser)).thenReturn(Optional.of(expectedUser));
-
-        User actualUser = userService.save(new UserRegistrationDTO(TEST_NAME,TEST_PASSWORD,TEST_PASSWORD));
+        User actualUser = userService.save(userRegistrationTest);
 
         assertThat(actualUser.getLogin())
                 .isNotNull()
-                .isEqualTo(TEST_NAME);
+                .isEqualTo(userRegistrationTest.login());
 
         assertThat(actualUser.getId())
                 .isNotNull()
                 .isPositive();
 
-        verify(passwordEncoder, times(1)).encode(TEST_PASSWORD);
-        verify(userMapper, times(1)).registrationToEntity(any());
-        verify(userRepository, times(1)).save(expectedUser);
-
     }
-
 }
-
-
-
-//@ExtendWith(MockitoExtension.class)
-//public class UserServiceTest {
-//
-//    private static final String TEST_NAME = "testName";
-//    private static final String TEST_PASSWORD = "testPassword";
-//
-//    @Mock
-//    private UserRepository userRepository;
-//
-//    @Mock
-//    private UserMapper userMapper;
-//
-//    @Mock
-//    private  PasswordEncoder passwordEncoder;
-//
-//    @InjectMocks
-//    private  UserService userService;
-//
-//
-//    @Test
-//    void save_shouldSaveUser() {
-//
-//        User expectedUser =  User.builder()
-//                .id(1L)
-//                .login(TEST_NAME)
-//                .password(TEST_PASSWORD)
-//                .build();
-//
-//        when(passwordEncoder.encode(anyString())).thenReturn(expectedUser.getPassword());
-//        when(userMapper.registrationToEntity(any(UserRegistrationDTO.class))).thenReturn(expectedUser);
-//        when(userRepository.save(expectedUser)).thenReturn(Optional.of(expectedUser));
-//
-//        User actualUser = userService.save(new UserRegistrationDTO(TEST_NAME,TEST_PASSWORD,TEST_PASSWORD));
-//
-//        assertThat(actualUser.getLogin())
-//                .isNotNull()
-//                .isEqualTo(TEST_NAME);
-//
-//        assertThat(actualUser.getId())
-//                .isNotNull()
-//                .isPositive();
-//
-//        verify(passwordEncoder, times(1)).encode(TEST_PASSWORD);
-//        verify(userMapper, times(1)).registrationToEntity(any());
-//        verify(userRepository, times(1)).save(expectedUser);
-//
-//    }
-//
-//}

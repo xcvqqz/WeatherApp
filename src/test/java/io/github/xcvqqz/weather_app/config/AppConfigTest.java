@@ -26,7 +26,8 @@ import java.util.Properties;
 @ComponentScan(
         basePackages = {
                 "io.github.xcvqqz.weather_app.service",
-                "io.github.xcvqqz.weather_app.repository"
+                "io.github.xcvqqz.weather_app.repository",
+                "io.github.xcvqqz.weather_app.mapper"
         })
 
 public class AppConfigTest {
@@ -65,10 +66,8 @@ public class AppConfigTest {
     }
 
 
-
     @Bean
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
-
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
         sessionFactory.setPackagesToScan(scanPackages);
@@ -82,7 +81,6 @@ public class AppConfigTest {
         transactionManager.setSessionFactory(sessionFactory);
         return transactionManager;
     }
-
 
     private Properties hibernateProperties() {
         Properties props = new Properties();
@@ -103,5 +101,4 @@ public class AppConfigTest {
     public RestTemplate restTemplate(){
         return new RestTemplate();
     }
-
 }

@@ -1,5 +1,6 @@
 package io.github.xcvqqz.weather_app.service;
 
+import io.github.xcvqqz.weather_app.config.AppConfigTest;
 import io.github.xcvqqz.weather_app.dto.auth.UserRegistrationDTO;
 import io.github.xcvqqz.weather_app.entity.Session;
 import io.github.xcvqqz.weather_app.entity.User;
@@ -9,52 +10,37 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 
-@ExtendWith(MockitoExtension.class)
+@SpringJUnitConfig(classes = AppConfigTest.class)
+@Transactional
+@ActiveProfiles("test")
 public class SessionServiceTest {
 
     private static final String TEST_NAME = "testName";
     private static final String TEST_PASSWORD = "testPassword";
 
-    @Mock
+    @Autowired
+    private SessionService sessionService;
+
+    @Autowired
     private UserService userService;
-
-    @Mock
-    private SessionRepository sessionRepository;
-
-    @InjectMocks
-    private  SessionService sessionService;
-
 
     @Test
     void create_shouldReturnCreatedSession() {
 
-        User expectedUser =  User.builder()
-                .id(1L)
-                .login(TEST_NAME)
-                .password(TEST_PASSWORD)
-                .build();
+        UserRegistrationDTO userRegistrationTest = new UserRegistrationDTO(TEST_NAME,TEST_PASSWORD,TEST_PASSWORD);
 
-        Session expectedSession = Session.builder()
-                .sessionId(UUID.randomUUID())
-                .user(expectedUser)
-                .build();
-
-
-        when(userService.save(any(UserRegistrationDTO.class))).thenReturn(expectedUser);
-
-        when(sessionRepository.save(any(Session.class))).thenReturn(Optional.of(expectedSession));
-
-        User actualUser = userService.save(new UserRegistrationDTO(TEST_NAME,TEST_PASSWORD,TEST_PASSWORD));
+        User actualUser = userService.save(userRegistrationTest);
 
         Session actualSession = sessionService.create(actualUser);
 
@@ -79,12 +65,6 @@ public class SessionServiceTest {
                             .isNotNull()
                             .isEqualTo(actualUser);
                 });
-
-        verify(userService, times(1)).save(any());
-        verify(sessionRepository, times(1)).save(any(Session.class));
-
     }
-
-
 
 }

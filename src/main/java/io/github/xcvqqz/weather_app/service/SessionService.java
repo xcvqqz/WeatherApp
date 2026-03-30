@@ -10,6 +10,7 @@ import io.github.xcvqqz.weather_app.repository.SessionRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,15 +23,18 @@ import java.util.UUID;
 import static io.github.xcvqqz.weather_app.service.UserService.USER_NOT_FOUND_MESSAGE;
 
 @Slf4j
-@AllArgsConstructor
 @Service
 public class SessionService {
 
     protected static final String DATABASE_ERROR_MESSAGE = "Database error: %s";
     private static final String SESSION_NOT_FOUND_MESSAGE = "Session Not Found";
 
-    private final SessionRepository sessionRepository;
+    private SessionRepository sessionRepository;
 
+    @Autowired
+    public SessionService(SessionRepository sessionRepository) {
+        this.sessionRepository = sessionRepository;
+    }
 
     @Transactional
     public Session create(User user){

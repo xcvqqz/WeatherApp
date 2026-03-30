@@ -13,6 +13,7 @@ import io.github.xcvqqz.weather_app.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,19 +23,24 @@ import org.springframework.stereotype.Service;
 import static io.github.xcvqqz.weather_app.service.SessionService.DATABASE_ERROR_MESSAGE;
 
 @Slf4j
-@AllArgsConstructor
 @NoArgsConstructor(force = true)
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;          //не нужно создавать конструктор потому что есть аннотация @AllArgsConstructor
-    private final UserMapper userMapper;                  //Spring автоматически поставит аннотацию @Autowired на конструктор
-    private final PasswordEncoder passwordEncoder;
+    private  UserRepository userRepository;          //не нужно создавать конструктор потому что есть аннотация @AllArgsConstructor
+    private  UserMapper userMapper;                  //Spring автоматически поставит аннотацию @Autowired на конструктор
+    private  PasswordEncoder passwordEncoder;
 
     private static final String USER_ALREADY_EXIST_MESSAGE = "User Already Exist";
     private static final String PASSWORD_MISMATCH_MESSAGE = "The password confirmation does not match";
     protected static final String USER_NOT_FOUND_MESSAGE = "User Not Found";
 
+    @Autowired
+    public UserService(UserRepository userRepository, UserMapper userMapper, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Transactional
     public User save(UserRegistrationDTO userRegistration) {
