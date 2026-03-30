@@ -28,8 +28,7 @@ import static org.mockito.Mockito.verify;
 @ActiveProfiles("test")
 public class SessionsCleanSchedulerTest {
 
-    private static final String TEST_NAME_ONE = "testName1";
-    private static final String TEST_NAME_TWO = "testName2";
+    private static final String TEST_NAME = "testName";
     private static final String TEST_PASSWORD = "testPassword";
     private static final LocalDateTime SESSION_EXPIRY_TIME = LocalDateTime.now().minusMinutes(30).minusSeconds(5);
 
@@ -52,25 +51,20 @@ public class SessionsCleanSchedulerTest {
     @Test
     void shouldDeleteExpiredSessions() {
 
-        UserRegistrationDTO userRegistrationTestOne = new UserRegistrationDTO(TEST_NAME_ONE,TEST_PASSWORD,TEST_PASSWORD);
-        UserRegistrationDTO userRegistrationTestTwo = new UserRegistrationDTO(TEST_NAME_TWO,TEST_PASSWORD,TEST_PASSWORD);
+        UserRegistrationDTO userRegistrationTest = new UserRegistrationDTO(TEST_NAME,TEST_PASSWORD,TEST_PASSWORD);
 
-        User testUserOne = userService.save(userRegistrationTestOne);
-        Session testSessionOne = sessionService.create(testUserOne);
+        User testUser = userService.save(userRegistrationTest);
+        Session testSession = sessionService.create(testUser);
 
-        User testUserTwo = userService.save(userRegistrationTestTwo);
-        Session testSessionTwo = sessionService.create(testUserTwo);
+        List<Session> beforeCleanUpSessions = sessionService.findAll();
 
-        List<Session> sessions = sessionService.findAll();
-
-        testSessionTwo.setExpiresAt(SESSION_EXPIRY_TIME);
-
+        testSession.setExpiresAt(SESSION_EXPIRY_TIME);
         sessionsCleanScheduler.cleanExpiredSessions();
 
-        List<Session> sessions2 = sessionService.findAll();
+        List<Session> afterCleanUpSessions = sessionService.findAll();
 
-        assertThat(sessions2).hasSize(1);
-
+        assertThat(beforeCleanUpSessions).hasSize(1);
+        assertThat(afterCleanUpSessions).isEmpty();
 
     }
 }
