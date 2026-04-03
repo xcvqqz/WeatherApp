@@ -1,5 +1,6 @@
 package io.github.xcvqqz.weather_app.config;
 
+import io.github.xcvqqz.weather_app.mapper.WeatherMapper;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
@@ -104,4 +105,5 @@ public class AppConfigTest {
     public RestTemplate restTemplate(){
         return new RestTemplate();
     }
+
 }

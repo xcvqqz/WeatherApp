@@ -5,6 +5,10 @@ import io.github.xcvqqz.weather_app.config.AppConfigTest;
 import io.github.xcvqqz.weather_app.controller.RegistrationController;
 import io.github.xcvqqz.weather_app.dto.weather.WeatherRequestDTO;
 import io.github.xcvqqz.weather_app.dto.weather.WeatherResponseDTO;
+
+import io.github.xcvqqz.weather_app.mapper.UserMapper;
+import io.github.xcvqqz.weather_app.mapper.WeatherMapper;
+import io.github.xcvqqz.weather_app.model.WeatherData;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,15 +32,20 @@ public class WeatherServiceTest {
     @Autowired
     WeatherService weatherService;
 
+    @Autowired
+    WeatherMapper weatherMapper;
+
 
     @Test
     void shouldReturnWeatherDataWhenCityExists() {
 
         WeatherRequestDTO locationRequestDTO = new WeatherRequestDTO("Moscow");
 
-        WeatherResponseDTO result = weatherService.getCurrentWeather(locationRequestDTO);
+        WeatherResponseDTO weatherResponseDTO = weatherService.getCurrentWeather(locationRequestDTO);
 
-        assertThat(result).isNotNull();
+        WeatherData weatherData = weatherMapper.toWeatherData(weatherResponseDTO);
+
+        assertThat(weatherResponseDTO).isNotNull();
 
     }
 
