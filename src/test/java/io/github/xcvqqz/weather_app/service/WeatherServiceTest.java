@@ -43,8 +43,6 @@ public class WeatherServiceTest {
 
         WeatherResponseDTO weatherResponseDTO = weatherService.getCurrentWeather(locationRequestDTO);
 
-        WeatherData weatherData = weatherMapper.toWeatherData(weatherResponseDTO);
-
         assertThat(weatherResponseDTO).isNotNull();
 
     }
