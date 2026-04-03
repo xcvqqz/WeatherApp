@@ -19,8 +19,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
 
 
 @SpringJUnitConfig(classes = AppConfigTest.class)
@@ -29,7 +27,8 @@ import static org.mockito.Mockito.verify;
 public class SessionsCleanSchedulerTest {
 
     private static final String TEST_NAME = "testName";
-    private static final String TEST_PASSWORD = "testPassword";
+    private final String TEST_PASSWORD = "testPassword";
+
     private static final LocalDateTime SESSION_EXPIRY_TIME = LocalDateTime.now().minusMinutes(30).minusSeconds(5);
 
     @Autowired
@@ -64,7 +63,6 @@ public class SessionsCleanSchedulerTest {
         assertThat(afterCleanUpSessions).isEmpty();
 
     }
-
 
     @Test
     void shouldNotDeleteValidSessions(){

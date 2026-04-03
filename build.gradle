@@ -70,6 +70,7 @@ dependencies {
     testImplementation 'org.mockito:mockito-junit-jupiter:5.11.0'
     testImplementation 'com.h2database:h2:2.2.224'
     testImplementation 'org.assertj:assertj-core:3.27.7'
+    testImplementation 'jakarta.servlet:jakarta.servlet-api:6.1.0'
 
 
     implementation 'org.mapstruct:mapstruct:1.6.3'

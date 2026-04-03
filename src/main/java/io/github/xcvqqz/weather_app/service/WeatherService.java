@@ -1,35 +1,41 @@
-package io.github.xcvqqz.weather_app.service.weather_api_service;
+package io.github.xcvqqz.weather_app.service;
 
-import io.github.xcvqqz.weather_app.dto.weather.LocationRequestDTO;
-import io.github.xcvqqz.weather_app.dto.weather.LocationResponseDTO;
+import io.github.xcvqqz.weather_app.dto.weather.WeatherRequestDTO;
+import io.github.xcvqqz.weather_app.dto.weather.WeatherResponseDTO;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
-@PropertySource("classpath:application-dev.properties")
-public class WeatherClientImpl{
+//@PropertySource("classpath:application-dev.properties")
+public class WeatherService {
 
     private final RestTemplate restTemplate;
 
-    @Value("${app.key}")
+//    @Value("${app.key}")
+//    private String appKey;
+//
+//    @Value("${base.url}")
+//    private String baseURL;
+
     private String appKey;
 
-    @Value("${base.url}")
     private String baseURL;
+
+
 //    https://api.openweathermap.org/data/2.5/weather
 
 
     @Autowired
-    public WeatherClientImpl(RestTemplate restTemplate){
+    public WeatherService(RestTemplate restTemplate){
         this.restTemplate = restTemplate;
     }
 
 
-    public LocationResponseDTO getCurrentWeather(LocationRequestDTO locationRequestDTO) {
+    public WeatherResponseDTO getCurrentWeather(WeatherRequestDTO locationRequestDTO) {
 
 //        String url = UriComponentsBuilder
 //                .fromUriString(baseURL)
@@ -39,7 +45,11 @@ public class WeatherClientImpl{
 
         String url = "https://api.openweathermap.org/data/2.5/weather?q=Moscow&appid=4f9e811e1990b95dd679058a3dfae99a";
 
-        return restTemplate.getForObject(url, LocationResponseDTO.class);
+        WeatherResponseDTO result = restTemplate.getForObject(url, WeatherResponseDTO.class);
+
+        System.out.println("Успешно!!!");
+
+        return result;
 
     }
 

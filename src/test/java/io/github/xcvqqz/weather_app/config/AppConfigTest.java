@@ -14,6 +14,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -25,6 +26,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan(
         basePackages = {
+                "io.github.xcvqqz.weather_app.controller",
                 "io.github.xcvqqz.weather_app.service",
                 "io.github.xcvqqz.weather_app.repository",
                 "io.github.xcvqqz.weather_app.mapper",
