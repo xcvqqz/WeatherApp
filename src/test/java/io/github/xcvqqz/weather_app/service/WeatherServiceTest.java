@@ -6,6 +6,9 @@ import io.github.xcvqqz.weather_app.controller.RegistrationController;
 import io.github.xcvqqz.weather_app.dto.weather.WeatherRequestDTO;
 import io.github.xcvqqz.weather_app.dto.weather.WeatherResponseDTO;
 
+import io.github.xcvqqz.weather_app.exception.BadRequestException;
+import io.github.xcvqqz.weather_app.exception.CityNotFoundException;
+import io.github.xcvqqz.weather_app.exception.DataBaseException;
 import io.github.xcvqqz.weather_app.mapper.UserMapper;
 import io.github.xcvqqz.weather_app.mapper.WeatherMapper;
 import io.github.xcvqqz.weather_app.model.WeatherData;
@@ -29,6 +32,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @ActiveProfiles("test")
 public class WeatherServiceTest {
 
+    private static final String TEST_PARAM = "test city";
+    private static final String CITY_PARAM = "Moscow";
+    private static final String RUSSIA_COUNTRY_CODE = "RU";
+    private static final String EMPTY_INVALID_PARAM = "";
+
     @Autowired
     WeatherService weatherService;
 
@@ -39,13 +47,34 @@ public class WeatherServiceTest {
     @Test
     void shouldReturnWeatherDataWhenCityExists() {
 
-        WeatherRequestDTO locationRequestDTO = new WeatherRequestDTO("Moscow");
+        WeatherRequestDTO locationRequest = new WeatherRequestDTO(CITY_PARAM);
+        WeatherData weatherData= weatherService.getCurrentWeather(locationRequest);
 
-        WeatherResponseDTO weatherResponseDTO = weatherService.getCurrentWeather(locationRequestDTO);
-
-        assertThat(weatherResponseDTO).isNotNull();
-
+        assertThat(weatherData).isNotNull();
+        assertThat(weatherData.getCountry()).isEqualTo(RUSSIA_COUNTRY_CODE);
     }
+
+    @Test
+    void shouldThrowCityNotFoundExceptionWhenCityDoesNotExist(){
+
+        WeatherRequestDTO locationRequest = new WeatherRequestDTO(TEST_PARAM);
+
+        assertThatThrownBy(() -> weatherService.getCurrentWeather(locationRequest))
+                .isInstanceOf(CityNotFoundException.class);
+    }
+
+    @Test
+    void shouldThrowBadRequestExceptionWhenCityIsInvalid(){
+
+        WeatherRequestDTO locationRequest = new WeatherRequestDTO(EMPTY_INVALID_PARAM);
+
+        assertThatThrownBy(() -> weatherService.getCurrentWeather(locationRequest))
+                .isInstanceOf(BadRequestException.class)
+                .hasNoCause();
+    }
+
+
+
 
 
 
