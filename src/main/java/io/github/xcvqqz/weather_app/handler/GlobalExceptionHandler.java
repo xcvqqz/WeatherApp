@@ -32,7 +32,10 @@ public class GlobalExceptionHandler {
     }
 
 
-    @ExceptionHandler({UserNotFoundException.class, SessionNotFoundException.class})
+    @ExceptionHandler({
+            UserNotFoundException.class,
+            SessionNotFoundException.class,
+            CityNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleNotFoundException(Model model, UserNotFoundException ex) {
 
@@ -44,7 +47,7 @@ public class GlobalExceptionHandler {
     }
 
 
-    @ExceptionHandler(PasswordMismatchException.class)
+    @ExceptionHandler({PasswordMismatchException.class, BadRequestException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handlePasswordMismatchException(Model model, PasswordMismatchException ex) {
 
@@ -64,6 +67,18 @@ public class GlobalExceptionHandler {
         model.addAttribute("error", new ErrorResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage()));
 
         return "error";
+    }
+
+    @ExceptionHandler()
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    public String handleWeatherApiCommunicationException(Model model, WeatherApiCommunicationException ex){
+
+        log.error("{}", ex.getMessage(), ex);
+
+        model.addAttribute("error", new ErrorResponseDTO(HttpStatus.SERVICE_UNAVAILABLE, ex.getMessage()));
+
+        return "error";
+
     }
 
 
