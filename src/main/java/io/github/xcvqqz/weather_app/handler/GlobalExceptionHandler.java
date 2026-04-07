@@ -15,20 +15,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    private static final String LOG_LEVER_WARN = "warn";
+    private static final String LOG_LEVER_ERROR = "error";
+    private static final String LOG_LEVER_INFO = "info";
 
     @ExceptionHandler({UserAlreadyExistsException.class, DataIntegrityViolationException.class})
     @ResponseStatus(HttpStatus.CONFLICT)
     public String handleAlreadyExistsException(Model model, Exception ex) {
-
-        String errorType = ex instanceof UserAlreadyExistsException
-                ? "User already exist"
-                : "Data integrity violation";
-
-        log.warn("{} - {}", errorType, ex.getMessage(), ex);
-
-        model.addAttribute("error", new ErrorResponseDTO(HttpStatus.CONFLICT, ex.getMessage()));
-
-        return "error";
+        return processError(model, ex, HttpStatus.CONFLICT, LOG_LEVER_WARN);
     }
 
 
@@ -38,47 +32,26 @@ public class GlobalExceptionHandler {
             CityNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleNotFoundException(Model model, UserNotFoundException ex) {
-
-        log.info("{}", ex.getMessage(), ex);
-
-        model.addAttribute("error", new ErrorResponseDTO(HttpStatus.NOT_FOUND, ex.getMessage()));
-
-        return "error";
+        return processError(model, ex, HttpStatus.NOT_FOUND, LOG_LEVER_INFO);
     }
 
 
     @ExceptionHandler({PasswordMismatchException.class, BadRequestException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handlePasswordMismatchException(Model model, PasswordMismatchException ex) {
-
-        log.info("{}", ex.getMessage(), ex);
-
-        model.addAttribute("error", new ErrorResponseDTO(HttpStatus.BAD_REQUEST, ex.getMessage()));
-
-        return "error";
+        return processError(model, ex, HttpStatus.BAD_REQUEST, LOG_LEVER_INFO);
     }
 
     @ExceptionHandler(DataBaseException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleDataBaseException(Model model, DataBaseException ex) {
-
-        log.error("{}", ex.getMessage(), ex);
-
-        model.addAttribute("error", new ErrorResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage()));
-
-        return "error";
+        return processError(model, ex, HttpStatus.INTERNAL_SERVER_ERROR, LOG_LEVER_ERROR);
     }
 
     @ExceptionHandler()
     @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
     public String handleWeatherApiCommunicationException(Model model, WeatherApiCommunicationException ex){
-
-        log.error("{}", ex.getMessage(), ex);
-
-        model.addAttribute("error", new ErrorResponseDTO(HttpStatus.SERVICE_UNAVAILABLE, ex.getMessage()));
-
-        return "error";
-
+        return processError(model, ex, HttpStatus.SERVICE_UNAVAILABLE, LOG_LEVER_ERROR);
     }
 
 
@@ -86,11 +59,19 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleUnexpectedException(Model model, Exception ex) {
+       return processError(model, ex, HttpStatus.INTERNAL_SERVER_ERROR, LOG_LEVER_ERROR);
+    }
 
-        log.error("{}", ex.getMessage(), ex);
 
-        model.addAttribute("error", new ErrorResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage()));
+    private String processError(Model model, Exception ex, HttpStatus status, String level){
 
+        switch (level){
+            case "error" -> log.error(ex.getMessage(), ex);
+            case "warn" -> log.warn(ex.getMessage(), ex);
+            case "info" -> log.info(ex.getMessage(), ex);
+        }
+
+        model.addAttribute("error", new ErrorResponseDTO(status, ex.getMessage()));
         return "error";
     }
 

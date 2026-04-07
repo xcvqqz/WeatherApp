@@ -27,8 +27,8 @@ import java.util.UUID;
 @RequestMapping()
 public class AuthController {
 
-    private UserService userService;
-    private SessionService sessionService;
+    private final UserService userService;
+    private final SessionService sessionService;
 
     @GetMapping("/sign-in")
     public String showSignIn(@ModelAttribute("user") UserAuthDTO userAuth) {
@@ -38,7 +38,7 @@ public class AuthController {
 
     @PostMapping("/sign-in")
     public String processSignIn(@Valid @ModelAttribute("user") UserAuthDTO userAuth,
-                                BindingResult result, HttpServletResponse response, Model model) {
+                                BindingResult result, HttpServletResponse response) {
 
         if(result.hasErrors()){
             return "sign-in";

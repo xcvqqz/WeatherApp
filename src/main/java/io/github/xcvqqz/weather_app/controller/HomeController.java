@@ -5,6 +5,7 @@ import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.service.SessionService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
