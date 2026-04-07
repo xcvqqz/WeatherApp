@@ -2,21 +2,15 @@ package io.github.xcvqqz.weather_app.service;
 
 import io.github.xcvqqz.weather_app.config.AppConfigTest;
 import io.github.xcvqqz.weather_app.dto.auth.UserRegistrationDTO;
-import io.github.xcvqqz.weather_app.entity.Session;
-import io.github.xcvqqz.weather_app.entity.User;
-import io.github.xcvqqz.weather_app.repository.SessionRepository;
+import io.github.xcvqqz.weather_app.model.entity.Session;
+import io.github.xcvqqz.weather_app.model.entity.User;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.*;
 

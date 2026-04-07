@@ -1,21 +1,18 @@
 package io.github.xcvqqz.weather_app.service;
 
 
-import io.github.xcvqqz.weather_app.entity.Session;
-import io.github.xcvqqz.weather_app.entity.User;
+import io.github.xcvqqz.weather_app.model.entity.Session;
+import io.github.xcvqqz.weather_app.model.entity.User;
 import io.github.xcvqqz.weather_app.exception.DataBaseException;
 import io.github.xcvqqz.weather_app.exception.SessionNotFoundException;
 import io.github.xcvqqz.weather_app.exception.UserNotFoundException;
 import io.github.xcvqqz.weather_app.repository.SessionRepository;
-import jakarta.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;

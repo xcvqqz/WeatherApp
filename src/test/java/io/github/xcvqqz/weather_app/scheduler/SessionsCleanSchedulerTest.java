@@ -3,8 +3,8 @@ package io.github.xcvqqz.weather_app.scheduler;
 
 import io.github.xcvqqz.weather_app.config.AppConfigTest;
 import io.github.xcvqqz.weather_app.dto.auth.UserRegistrationDTO;
-import io.github.xcvqqz.weather_app.entity.Session;
-import io.github.xcvqqz.weather_app.entity.User;
+import io.github.xcvqqz.weather_app.model.entity.Session;
+import io.github.xcvqqz.weather_app.model.entity.User;
 import io.github.xcvqqz.weather_app.service.SessionService;
 import io.github.xcvqqz.weather_app.service.UserService;
 import org.junit.jupiter.api.BeforeEach;

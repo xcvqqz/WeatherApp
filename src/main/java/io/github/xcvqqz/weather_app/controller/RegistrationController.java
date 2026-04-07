@@ -2,8 +2,8 @@ package io.github.xcvqqz.weather_app.controller;
 
 
 import io.github.xcvqqz.weather_app.dto.auth.UserRegistrationDTO;
-import io.github.xcvqqz.weather_app.entity.Session;
-import io.github.xcvqqz.weather_app.entity.User;
+import io.github.xcvqqz.weather_app.model.entity.Session;
+import io.github.xcvqqz.weather_app.model.entity.User;
 import io.github.xcvqqz.weather_app.service.SessionService;
 import io.github.xcvqqz.weather_app.service.UserService;
 import io.github.xcvqqz.weather_app.util.CookieUtil;
@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;

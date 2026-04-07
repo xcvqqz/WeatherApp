@@ -2,26 +2,17 @@ package io.github.xcvqqz.weather_app.service;
 
 
 import io.github.xcvqqz.weather_app.config.AppConfigTest;
-import io.github.xcvqqz.weather_app.controller.RegistrationController;
 import io.github.xcvqqz.weather_app.dto.weather.WeatherRequestDTO;
-import io.github.xcvqqz.weather_app.dto.weather.WeatherResponseDTO;
 
 import io.github.xcvqqz.weather_app.exception.BadRequestException;
 import io.github.xcvqqz.weather_app.exception.CityNotFoundException;
-import io.github.xcvqqz.weather_app.exception.DataBaseException;
-import io.github.xcvqqz.weather_app.mapper.UserMapper;
 import io.github.xcvqqz.weather_app.mapper.WeatherMapper;
-import io.github.xcvqqz.weather_app.model.WeatherData;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
+import io.github.xcvqqz.weather_app.model.domain_model.WeatherData;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

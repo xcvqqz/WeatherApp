@@ -1,4 +1,4 @@
-package io.github.xcvqqz.weather_app.entity;
+package io.github.xcvqqz.weather_app.model.entity;
 
 
 import jakarta.persistence.*;
@@ -8,7 +8,6 @@ import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 

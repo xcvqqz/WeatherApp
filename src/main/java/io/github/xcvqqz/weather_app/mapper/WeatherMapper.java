@@ -2,7 +2,7 @@ package io.github.xcvqqz.weather_app.mapper;
 
 
 import io.github.xcvqqz.weather_app.dto.weather.WeatherResponseDTO;
-import io.github.xcvqqz.weather_app.model.WeatherData;
+import io.github.xcvqqz.weather_app.model.domain_model.WeatherData;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

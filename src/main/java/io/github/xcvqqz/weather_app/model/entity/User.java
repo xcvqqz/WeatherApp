@@ -1,4 +1,4 @@
-package io.github.xcvqqz.weather_app.entity;
+package io.github.xcvqqz.weather_app.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

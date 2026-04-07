@@ -1,9 +1,6 @@
-package io.github.xcvqqz.weather_app.model;
+package io.github.xcvqqz.weather_app.model.domain_model;
 
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 public class WeatherData {
