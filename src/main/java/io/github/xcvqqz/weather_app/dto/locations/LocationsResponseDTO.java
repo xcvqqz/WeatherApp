@@ -3,8 +3,6 @@ package io.github.xcvqqz.weather_app.dto.locations;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
-
-@JsonIgnoreProperties(ignoreUnknown = true)
 public record LocationsResponseDTO (
 
     String name,

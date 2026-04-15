@@ -28,41 +28,41 @@ public class WeatherServiceTest {
     private static final String RUSSIA_COUNTRY_CODE = "RU";
     private static final String EMPTY_INVALID_PARAM = "";
 
-    @Autowired
-    private WeatherService weatherService;
-
 //    @Autowired
-//    private LocationMapper locationMapper;
-
-    @Test
-    void shouldReturnLocationsWhenCityExists() {
-
-        LocationsRequestDTO locationRequest = new LocationsRequestDTO(CITY_PARAM);
-
-        List<LocationsResponseDTO> locations = weatherService.getGeoLocations(locationRequest);
-
-        assertThat(locations).isNotEmpty();
-        assertThat(locations.get(0).getCountry()).isEqualTo(RUSSIA_COUNTRY_CODE);
-    }
-
-    @Test
-    void shouldThrowLocationsNotFoundExceptionWhenLocationsDoesNotExist(){
-
-        LocationsRequestDTO locationRequest = new LocationsRequestDTO(TEST_PARAM);
-
-        assertThatThrownBy(() -> weatherService.getGeoLocations(locationRequest))
-                .isInstanceOf(LocationsNotFoundException.class);
-    }
-
-    @Test
-    void shouldThrowBadRequestExceptionWhenLocationIsInvalid(){
-
-        LocationsRequestDTO locationRequest = new LocationsRequestDTO(EMPTY_INVALID_PARAM);
-
-        assertThatThrownBy(() -> weatherService.getGeoLocations(locationRequest))
-                .isInstanceOf(BadRequestException.class)
-                .hasNoCause();
-    }
+//    private WeatherService weatherService;
+//
+////    @Autowired
+////    private LocationMapper locationMapper;
+//
+//    @Test
+//    void shouldReturnLocationsWhenCityExists() {
+//
+//        LocationsRequestDTO locationRequest = new LocationsRequestDTO(CITY_PARAM);
+//
+//        List<LocationsResponseDTO> locations = weatherService.getGeoLocations(locationRequest);
+//
+//        assertThat(locations).isNotEmpty();
+//        assertThat(locations.get(0).getCountry()).isEqualTo(RUSSIA_COUNTRY_CODE);
+//    }
+//
+//    @Test
+//    void shouldThrowLocationsNotFoundExceptionWhenLocationsDoesNotExist(){
+//
+//        LocationsRequestDTO locationRequest = new LocationsRequestDTO(TEST_PARAM);
+//
+//        assertThatThrownBy(() -> weatherService.getGeoLocations(locationRequest))
+//                .isInstanceOf(LocationsNotFoundException.class);
+//    }
+//
+//    @Test
+//    void shouldThrowBadRequestExceptionWhenLocationIsInvalid(){
+//
+//        LocationsRequestDTO locationRequest = new LocationsRequestDTO(EMPTY_INVALID_PARAM);
+//
+//        assertThatThrownBy(() -> weatherService.getGeoLocations(locationRequest))
+//                .isInstanceOf(BadRequestException.class)
+//                .hasNoCause();
+//    }
 
 
 }

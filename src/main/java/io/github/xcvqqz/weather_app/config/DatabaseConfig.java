@@ -12,7 +12,6 @@ import org.springframework.context.annotation.PropertySource;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("classpath:application-dev.properties")
 public class DatabaseConfig {
 
     @Value("${db.url}")

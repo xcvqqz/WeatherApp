@@ -16,7 +16,6 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource("classpath:application-dev.properties")
 public class HibernateConfig {
 
     @Value("${hibernate.dialect}")

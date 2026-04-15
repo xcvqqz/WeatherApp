@@ -5,6 +5,7 @@ package io.github.xcvqqz.weather_app.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @EnableScheduling
+@PropertySource("classpath:application-dev.properties")
 @ComponentScan("io.github.xcvqqz.weather_app")
 public class AppConfig {
 

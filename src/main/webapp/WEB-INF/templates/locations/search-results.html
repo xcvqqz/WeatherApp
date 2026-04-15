@@ -6,12 +6,16 @@
 </head>
 <body>
 
-<form th:action="@{/location/search-result}" method="get">
+<form th:action="@{/locations/search-result}" method="get">
     <input name="search" th:value="${search}" placeholder = "Введите локацию">
     <button type="submit">Найти</button>
 </form>
 
 
+<tr th:each = "location : ${locations}">
+    <td th:text="${location.name}"></td>
+    <td th:text="${location.country}"></td>
+</tr>
 
 
 </body>
