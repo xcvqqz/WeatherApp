@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Результаты поиска</title>
 </head>
 <body>
+
+<form th:action="@{/location/search-result}" method="get">
+    <input name="search" th:value="${search}" placeholder = "Введите локацию">
+    <button type="submit">Найти</button>
+</form>
+
+
+
 
 </body>
 </html>

@@ -1,8 +1,6 @@
 package io.github.xcvqqz.weather_app.controller;
 
 
-import io.github.xcvqqz.weather_app.dto.weather.WeatherRequestDTO;
-import io.github.xcvqqz.weather_app.model.domain_model.WeatherData;
 import io.github.xcvqqz.weather_app.service.WeatherService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,10 +19,10 @@ public class WeatherController {
     @GetMapping("/search-result")
     public String search(@RequestParam String location, Model model) {
 
-        WeatherRequestDTO weatherRequestDTO = new WeatherRequestDTO(location);
-        WeatherData weatherData = weatherService.getCurrentWeather(weatherRequestDTO);
-
-        model.addAttribute("weatherLocation", weatherData);
+//        LocationsRequestDTO weatherRequestDTO = new LocationsRequestDTO(location);
+//        List<WeatherData> weatherData = weatherService.getFoundLocations(weatherRequestDTO);
+//
+//        model.addAttribute("weatherLocation", weatherData);
 
         return "locations/search-results";
     }

@@ -57,6 +57,7 @@ dependencies {
     // === UTILITIES ===
     compileOnly 'org.projectlombok:lombok:1.18.34'
     annotationProcessor 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
     implementation 'org.springframework.security:spring-security-crypto:6.4.5'
 
     // === LOGGING ===

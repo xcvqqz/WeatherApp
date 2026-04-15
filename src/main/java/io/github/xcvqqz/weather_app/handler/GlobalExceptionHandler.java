@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler({
             UserNotFoundException.class,
             SessionNotFoundException.class,
-            CityNotFoundException.class})
+            LocationsNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleNotFoundException(Model model, UserNotFoundException ex) {
         return processError(model, ex, HttpStatus.NOT_FOUND, LOG_LEVER_INFO);

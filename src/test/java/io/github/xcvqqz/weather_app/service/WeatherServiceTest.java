@@ -2,21 +2,21 @@ package io.github.xcvqqz.weather_app.service;
 
 
 import io.github.xcvqqz.weather_app.config.AppConfigTest;
-import io.github.xcvqqz.weather_app.dto.weather.WeatherRequestDTO;
+import io.github.xcvqqz.weather_app.dto.locations.LocationsRequestDTO;
 
+import io.github.xcvqqz.weather_app.dto.locations.LocationsResponseDTO;
 import io.github.xcvqqz.weather_app.exception.BadRequestException;
-import io.github.xcvqqz.weather_app.exception.CityNotFoundException;
-import io.github.xcvqqz.weather_app.mapper.WeatherMapper;
-import io.github.xcvqqz.weather_app.model.domain_model.WeatherData;
+import io.github.xcvqqz.weather_app.exception.LocationsNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-
 
 @SpringJUnitConfig(classes = AppConfigTest.class)
 @Transactional
@@ -29,46 +29,40 @@ public class WeatherServiceTest {
     private static final String EMPTY_INVALID_PARAM = "";
 
     @Autowired
-    WeatherService weatherService;
+    private WeatherService weatherService;
 
-    @Autowired
-    WeatherMapper weatherMapper;
-
+//    @Autowired
+//    private LocationMapper locationMapper;
 
     @Test
-    void shouldReturnWeatherDataWhenCityExists() {
+    void shouldReturnLocationsWhenCityExists() {
 
-        WeatherRequestDTO locationRequest = new WeatherRequestDTO(CITY_PARAM);
-        WeatherData weatherData= weatherService.getCurrentWeather(locationRequest);
+        LocationsRequestDTO locationRequest = new LocationsRequestDTO(CITY_PARAM);
 
-        assertThat(weatherData).isNotNull();
-        assertThat(weatherData.getCountry()).isEqualTo(RUSSIA_COUNTRY_CODE);
+        List<LocationsResponseDTO> locations = weatherService.getGeoLocations(locationRequest);
+
+        assertThat(locations).isNotEmpty();
+        assertThat(locations.get(0).getCountry()).isEqualTo(RUSSIA_COUNTRY_CODE);
     }
 
     @Test
-    void shouldThrowCityNotFoundExceptionWhenCityDoesNotExist(){
+    void shouldThrowLocationsNotFoundExceptionWhenLocationsDoesNotExist(){
 
-        WeatherRequestDTO locationRequest = new WeatherRequestDTO(TEST_PARAM);
+        LocationsRequestDTO locationRequest = new LocationsRequestDTO(TEST_PARAM);
 
-        assertThatThrownBy(() -> weatherService.getCurrentWeather(locationRequest))
-                .isInstanceOf(CityNotFoundException.class);
+        assertThatThrownBy(() -> weatherService.getGeoLocations(locationRequest))
+                .isInstanceOf(LocationsNotFoundException.class);
     }
 
     @Test
-    void shouldThrowBadRequestExceptionWhenCityIsInvalid(){
+    void shouldThrowBadRequestExceptionWhenLocationIsInvalid(){
 
-        WeatherRequestDTO locationRequest = new WeatherRequestDTO(EMPTY_INVALID_PARAM);
+        LocationsRequestDTO locationRequest = new LocationsRequestDTO(EMPTY_INVALID_PARAM);
 
-        assertThatThrownBy(() -> weatherService.getCurrentWeather(locationRequest))
+        assertThatThrownBy(() -> weatherService.getGeoLocations(locationRequest))
                 .isInstanceOf(BadRequestException.class)
                 .hasNoCause();
     }
-
-
-
-
-
-
 
 
 }

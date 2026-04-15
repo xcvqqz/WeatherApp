@@ -19,8 +19,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-
-
 @SpringJUnitConfig(classes = AppConfigTest.class)
 @Transactional
 @ActiveProfiles("test")
