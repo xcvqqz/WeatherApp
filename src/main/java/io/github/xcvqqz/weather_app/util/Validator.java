@@ -27,7 +27,7 @@
 //            throw new BadRequestException(LOCATION_REQUEST_CANNOT_BE_NULL_OR_EMPTY);
 //        }
 //
-//        String locationName = locationsRequest.locationName();
+//        String location = locationsRequest.location();
 //
 //        if (name == null || name.isBlank()) {
 //            throw new ValidationException(MISSING_PARAMETER_MESSAGE + "name");
@@ -44,7 +44,7 @@
 //       if (weatherRequestDTO == null){
 //        throw new BadRequestException("Location Request cannot be null or empty");
 //    }
-//    String city = weatherRequestDTO.locationName();
+//    String city = weatherRequestDTO.location();
 //
 //        if((city == null) || city.isEmpty()){
 //        throw new BadRequestException("Location name cannot be null or empty");

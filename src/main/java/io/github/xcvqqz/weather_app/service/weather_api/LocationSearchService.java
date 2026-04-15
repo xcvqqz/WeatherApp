@@ -26,22 +26,20 @@ import java.util.List;
 public class LocationSearchService {
 
     private final RestTemplate restTemplate;
+    private final GeocodingUriBuilder geocodingUriBuilder;
+
 
     public List<LocationsResponseDTO> getFoundLocations(LocationsRequestDTO locationsRequestDTO) {
-
-        String searchLocation = locationsRequestDTO.locationName();
-
+        String searchLocation = locationsRequestDTO.location();
         List<LocationsResponseDTO> locations = fetchLocationsFromApi(searchLocation);
         log.info("Successfully fetched Location, size: {}", locations.size());
-
         return locations;
     }
 
 
-
     private List<LocationsResponseDTO> fetchLocationsFromApi(String location){
 
-        URI uri = buildUri(location);
+        URI uri = geocodingUriBuilder.buildLocationSearchUri(location);
 
         try {
             ResponseEntity<List<LocationsResponseDTO>> response = restTemplate.exchange(
@@ -58,7 +56,4 @@ public class LocationSearchService {
             throw new LocationsNotFoundException(e.getMessage());
         }
     }
-
-
-
 }
