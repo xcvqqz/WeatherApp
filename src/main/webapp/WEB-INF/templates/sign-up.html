@@ -12,7 +12,6 @@
 
 <form th:action="@{/sign-up}" th:method="POST" th:object=${user}>
 
-
         <label for="login">Login</label>
         <input type="text" th:field="*{login}" id="login"/>
         <span th:if="${#fields.hasErrors('login')}"

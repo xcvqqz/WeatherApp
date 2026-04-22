@@ -27,14 +27,7 @@ public class AppConfig {
     @Bean
     public RestTemplate restTemplate() {
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-//        factory.setConnectTimeout(5000);
-//        factory.setReadTimeout(10000);
-
-        // Таймаут на установку соединения (в миллисекундах)
         factory.setConnectTimeout(5000); // 5 секунд
-
-        // Таймаут на ЧТЕНИЕ ответа (в миллисекундах)
-        // Это как раз то, что упало с ошибкой Read timed out
         factory.setReadTimeout(30000); // 30 секунд вместо 10 по умолчанию
 
 

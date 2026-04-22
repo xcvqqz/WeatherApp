@@ -45,7 +45,5 @@ public static void clearSessionCookie(HttpServletResponse response){
         cookie.setPath("/");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-}
-
-
+    }
 }

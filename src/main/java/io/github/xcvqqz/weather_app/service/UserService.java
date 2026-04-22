@@ -18,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import static io.github.xcvqqz.weather_app.service.SessionService.DATABASE_ERROR_MESSAGE;
@@ -27,8 +26,8 @@ import static io.github.xcvqqz.weather_app.service.SessionService.DATABASE_ERROR
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;          //не нужно создавать конструктор потому что есть аннотация @AllArgsConstructor
-    private final UserMapper userMapper;                  //Spring автоматически поставит аннотацию @Autowired на конструктор
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
     private static final String USER_ALREADY_EXIST_MESSAGE = "User Already Exist";
