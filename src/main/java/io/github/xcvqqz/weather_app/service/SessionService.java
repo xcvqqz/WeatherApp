@@ -1,8 +1,8 @@
 package io.github.xcvqqz.weather_app.service;
 
 
-import io.github.xcvqqz.weather_app.model.entity.Session;
-import io.github.xcvqqz.weather_app.model.entity.User;
+import io.github.xcvqqz.weather_app.entity.Session;
+import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.exception.DataBaseException;
 import io.github.xcvqqz.weather_app.exception.SessionNotFoundException;
 import io.github.xcvqqz.weather_app.exception.UserNotFoundException;
@@ -58,15 +58,6 @@ public class SessionService {
                  .save(session)
                  .orElseThrow(() -> new DataBaseException(DATABASE_ERROR_MESSAGE));
 
-    }
-
-
-    @Transactional(readOnly = true)
-    public User getUserBySessionId(UUID sessionId){
-        return sessionRepository
-                .findUserById(getBySessionId(sessionId)
-                .getSessionId())
-                .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND_MESSAGE));
     }
 
 

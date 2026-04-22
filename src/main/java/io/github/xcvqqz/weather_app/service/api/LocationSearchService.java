@@ -1,8 +1,8 @@
-package io.github.xcvqqz.weather_app.service.weather_api;
+package io.github.xcvqqz.weather_app.service.api;
 
 
-import io.github.xcvqqz.weather_app.dto.locations.LocationsRequestDTO;
-import io.github.xcvqqz.weather_app.dto.locations.LocationsResponseDTO;
+import io.github.xcvqqz.weather_app.dto.api.request.ApiLocationsRequestDTO;
+import io.github.xcvqqz.weather_app.dto.api.response.ApiLocationsResponseDTO;
 import io.github.xcvqqz.weather_app.exception.LocationsNotFoundException;
 import io.github.xcvqqz.weather_app.exception.WeatherApiCommunicationException;
 import lombok.AllArgsConstructor;
@@ -26,23 +26,24 @@ public class LocationSearchService {
     private final RestTemplate restTemplate;
     private final GeocodingUriBuilder geocodingUriBuilder;
 
-    public List<LocationsResponseDTO> getFoundLocations(LocationsRequestDTO locationsRequestDTO) {
+    public List<ApiLocationsResponseDTO> getFoundLocations(ApiLocationsRequestDTO locationsRequestDTO) {
         String searchLocation = locationsRequestDTO.location();
-        List<LocationsResponseDTO> locations = fetchLocationsFromApi(searchLocation);
+        List<ApiLocationsResponseDTO> locations = fetchLocationsFromApi(searchLocation);
         log.info("Successfully fetched Location, size: {}", locations.size());
         return locations;
     }
 
-    private List<LocationsResponseDTO> fetchLocationsFromApi(String location){
+    private List<ApiLocationsResponseDTO> fetchLocationsFromApi(String location){
 
         URI uri = geocodingUriBuilder.buildLocationSearchUri(location);
 
         try {
-            ResponseEntity<List<LocationsResponseDTO>> response = restTemplate.exchange(
+            ResponseEntity<List<ApiLocationsResponseDTO>> response = restTemplate.exchange(
                     uri,
                     HttpMethod.GET,
                     null,
-                    new ParameterizedTypeReference<List<LocationsResponseDTO>>(){}
+                    new ParameterizedTypeReference<>() {
+                    }
             );
             return response.getBody();
 

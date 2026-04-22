@@ -1,7 +1,7 @@
 package io.github.xcvqqz.weather_app.repository.impl;
 
-import io.github.xcvqqz.weather_app.model.entity.Session;
-import io.github.xcvqqz.weather_app.model.entity.User;
+import io.github.xcvqqz.weather_app.entity.Session;
+import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.repository.AbstractRepositoryImpl;
 import io.github.xcvqqz.weather_app.repository.SessionRepository;
 import org.hibernate.SessionFactory;
@@ -17,15 +17,6 @@ public class SessionRepositoryImpl extends AbstractRepositoryImpl<Session, UUID>
     @Autowired
     public SessionRepositoryImpl(SessionFactory sessionFactory) {
         super(sessionFactory,  Session.class);
-    }
-
-
-    @Override
-    public Optional<User> findUserById(UUID sessionId) {
-        return Optional.ofNullable(sessionFactory.getCurrentSession()
-                .createQuery("SELECT s.user FROM Session AS s WHERE s.id = :sessionId", User.class)
-                .setParameter("sessionId", sessionId)
-                .getSingleResultOrNull());
     }
 
 }

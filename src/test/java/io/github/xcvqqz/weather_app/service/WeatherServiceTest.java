@@ -2,20 +2,11 @@ package io.github.xcvqqz.weather_app.service;
 
 
 import io.github.xcvqqz.weather_app.config.AppConfigTest;
-import io.github.xcvqqz.weather_app.dto.locations.LocationsRequestDTO;
 
-import io.github.xcvqqz.weather_app.dto.locations.LocationsResponseDTO;
-import io.github.xcvqqz.weather_app.exception.BadRequestException;
-import io.github.xcvqqz.weather_app.exception.LocationsNotFoundException;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @SpringJUnitConfig(classes = AppConfigTest.class)

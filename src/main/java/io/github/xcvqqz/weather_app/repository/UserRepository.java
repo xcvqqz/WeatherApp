@@ -1,11 +1,14 @@
 package io.github.xcvqqz.weather_app.repository;
 
-import io.github.xcvqqz.weather_app.model.entity.User;
+import io.github.xcvqqz.weather_app.entity.User;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public interface UserRepository extends AbstractRepository<User, Long> {
 
-    public Optional<User> findByLogin(String login);
+    Optional<User> findByLogin(String login);
+
+    Optional<User> findBySessionId(UUID id);
 
 }

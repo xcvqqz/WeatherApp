@@ -30,6 +30,41 @@ Welcome
     <button type="submit">Найти</button>
 </form>
 
+<br>
+<br>
+<br>
+
+<p th:if="${weathers.isEmpty()}">No weather data available</p>
+<p th:text="${#lists.size(weathers)}"></p>
+
+
+<table>
+    <thead>
+    <tr>
+        <th>City</th>
+        <th>Lon</th>
+        <th>Lat</th>
+        <th>Description</th>
+        <th>Temp</th>
+        <th>Feels Like</th>
+        <th>Humidity</th>
+        <th>Country</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="weather : ${weathers}">
+        <td th:text="${weather.city()}">City</td>
+        <td th:text="${weather.lon()}">Lon</td>
+        <td th:text="${weather.lat()}">Lat</td>
+        <td th:text="${weather.description()}">Description</td>
+        <td th:text="${weather.temp}">Temp</td>
+        <td th:text="${weather.feelsLike()}">FeelsLike</td>
+        <td th:text="${weather.humidity()}">Humidity</td>
+        <td th:text="${weather.country()}">Country</td>
+    </tr>
+    </tbody>
+</table>
+
 
 </body>
 </html>

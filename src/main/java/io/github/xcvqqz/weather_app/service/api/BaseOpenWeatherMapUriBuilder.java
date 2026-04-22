@@ -1,7 +1,6 @@
-package io.github.xcvqqz.weather_app.service.weather_api;
+package io.github.xcvqqz.weather_app.service.api;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public abstract class BaseOpenWeatherMapUriBuilder {

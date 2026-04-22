@@ -3,7 +3,7 @@ package io.github.xcvqqz.weather_app.service;
 
 import io.github.xcvqqz.weather_app.config.AppConfigTest;
 import io.github.xcvqqz.weather_app.dto.auth.UserRegistrationDTO;
-import io.github.xcvqqz.weather_app.model.entity.User;
+import io.github.xcvqqz.weather_app.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;

@@ -1,3 +1,46 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Результаты поиска</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<form th:action="@{/locations/search-results}" method="get">-->
+<!--    <input name="location" th:value="${location}" placeholder = "Введите локацию">-->
+<!--    <button type="submit">Найти</button>-->
+<!--</form>-->
+
+
+<!--<tr th:each = "location : ${locations}">-->
+<!--    <td th:text="${location.name}"></td>-->
+<!--    <td th:text="${location.lat}"></td>-->
+<!--    <td th:text="${location.lon}"></td>-->
+<!--    <td th:text="${location.country}"></td>-->
+
+<!--    <td>-->
+<!--    <form th:action="@{/locations/add}"  method="post" th:object="${location}">-->
+<!--        <input type="hidden" th:field="*{name}"/>-->
+<!--        <input type="hidden" th:field="*{lat}"/>-->
+<!--        <input type="hidden" th:field="*{lon}"/>-->
+<!--        <input type="hidden" th:field="*{country}"/>-->
+<!--        <button type="submit">Add</button>-->
+<!--    </form>-->
+<!--    </td>-->
+
+
+<!--    <br>-->
+<!--    <br>-->
+<!--    <br>-->
+<!--</tr>-->
+
+
+
+<!--</body>-->
+<!--</html>-->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,17 +49,39 @@
 </head>
 <body>
 
-<form th:action="@{/locations/search-result}" method="get">
-    <input name="search" th:value="${search}" placeholder = "Введите локацию">
+<form th:action="@{/locations/search-results}" method="get">
+    <input name="location" th:value="${location}" placeholder="Введите локацию">
     <button type="submit">Найти</button>
 </form>
 
-
-<tr th:each = "location : ${locations}">
-    <td th:text="${location.name}"></td>
-    <td th:text="${location.country}"></td>
-</tr>
-
+<table>
+    <thead>
+    <tr>
+        <th>Название</th>
+        <th>Широта</th>
+        <th>Долгота</th>
+        <th>Страна</th>
+        <th>Действие</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="location : ${locations}">
+        <td th:text="${location.name}"></td>
+        <td th:text="${location.lat}"></td>
+        <td th:text="${location.lon}"></td>
+        <td th:text="${location.country}"></td>
+        <td>
+            <form th:action="@{/locations/add}" method="post">
+                <input type="hidden" name="name" th:value="${location.name}"/>
+                <input type="hidden" name="lat" th:value="${location.lat}"/>
+                <input type="hidden" name="lon" th:value="${location.lon}"/>
+                <input type="hidden" name="country" th:value="${location.country}"/>
+                <button type="submit">Add</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>

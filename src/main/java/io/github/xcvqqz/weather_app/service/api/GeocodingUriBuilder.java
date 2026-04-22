@@ -1,4 +1,4 @@
-package io.github.xcvqqz.weather_app.service.weather_api;
+package io.github.xcvqqz.weather_app.service.api;
 
 
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +11,7 @@ import java.net.URI;
 public class GeocodingUriBuilder extends BaseOpenWeatherMapUriBuilder {
 
     @Value("${geo.url}")
-    private String locationSearchUrl = "https://api.openweathermap.org/geo/1.0/direct";
+    private String locationSearchUrl;
 
 //    private String locationSearchUrl = "https://api.openweathermap.org/geo/1.0/direct";
 

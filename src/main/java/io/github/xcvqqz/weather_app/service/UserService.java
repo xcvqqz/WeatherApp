@@ -3,7 +3,7 @@ package io.github.xcvqqz.weather_app.service;
 
 import io.github.xcvqqz.weather_app.dto.auth.UserAuthDTO;
 import io.github.xcvqqz.weather_app.dto.auth.UserRegistrationDTO;
-import io.github.xcvqqz.weather_app.model.entity.User;
+import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.exception.DataBaseException;
 import io.github.xcvqqz.weather_app.exception.PasswordMismatchException;
 import io.github.xcvqqz.weather_app.exception.UserAlreadyExistsException;
@@ -17,6 +17,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.UUID;
 
 import static io.github.xcvqqz.weather_app.service.SessionService.DATABASE_ERROR_MESSAGE;
 
@@ -54,16 +57,14 @@ public class UserService {
     }
 
 
-
     @Transactional(readOnly = true)
-    public User findById(Long id) {
+    public User getUserBySessionId(UUID sessionId){
         return userRepository
-                .findById(id)
+                .findBySessionId(sessionId)
                 .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND_MESSAGE));
     }
 
 
-    
     @Transactional
     public void delete(User user) {
         try {
