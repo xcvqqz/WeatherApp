@@ -77,12 +77,12 @@ public class UserService {
     @Transactional(readOnly = true)
     public User findByLogin(UserAuthDTO userAuthDTO) {
 
-        User model = userMapper.authToEntity(userAuthDTO);
+        User entity = userMapper.authToEntity(userAuthDTO);
 
-        User user =  userRepository.findByLogin(model.getLogin())
+        User user =  userRepository.findByLogin(entity.getLogin())
                 .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND_MESSAGE));
 
-        if(passwordEncoder.matches(model.getPassword(), user.getPassword())){
+        if(passwordEncoder.matches(entity.getPassword(), user.getPassword())){
             return user;
         } else {
             throw new PasswordMismatchException(PASSWORD_MISMATCH_MESSAGE);

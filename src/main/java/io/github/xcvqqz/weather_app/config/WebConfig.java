@@ -20,7 +20,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 @Configuration
 @ComponentScan("io.github.xcvqqz.weather_app")
-@EnableWebMvc   //эта аннотация равноценна <mvc:annotation-driven/> из web.xml (включение MVC аннотаций)
+@EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
 

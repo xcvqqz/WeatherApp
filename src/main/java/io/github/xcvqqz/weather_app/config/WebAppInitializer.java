@@ -21,41 +21,4 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     }
 
 
-
-
-
-
-    /* аналогия:
-
-
-Теперь приступим к web.xml (Сервер (Tomcat) считывает содержимое web.xml, мы даёт указания, чтобы сервер делал)
-
-Мы хотим чтобы все запросы от пользователей приходили на DispatcherServlet.
-
-Когда запрос будет попадать сначала на сервер, а потом DispatcherServlet, то тогда запрос будет попадать на наше Spring MVC приложение
-
-    пропишем в web.xml:
-
-    <servlet>
-      <servlet-name>dispatcher</servlet-name>
-      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>   //берём из библиотеки SpringFramework
-      <init-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>/WEB-INF/applicationContextMVC.xml</param-value>   //здесь указан xml конфиг, но потом сделаем Java конфиг
-      </init-param>
-      <load-on-startup>1</load-on-startup> //даёт указание, что DispatcherServlet нужно первым загружать
-    </servlet>
-
-    <servlet-mapping>
-      <servlet-name>dispatcher</servlet-name>
-      <url-pattern>/</url-pattern>  //указывает, что любой url к которому обращается пользователь попадает
-    </servlet-mapping>		 	//в DispatcherServlet, а он уже потом сам направит в праивльный контроллер
-  </web-app>
-
-
-    с помощью тега servlet создаём DispatcherServlet
-*/
-
-
-
 }

@@ -90,7 +90,7 @@ public class SessionService {
         return expiredSessions;
     }
 
-    public boolean isExpired(Session session){
+    private boolean isExpired(Session session){
         if(session == null || session.getExpiresAt() == null) {
             return true;
         }

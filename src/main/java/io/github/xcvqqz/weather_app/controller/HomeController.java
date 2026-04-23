@@ -24,8 +24,6 @@ import java.util.UUID;
 @RequestMapping()
 public class HomeController {
 
-    private final UserService userService;
-
     private final LocationService locationService;
 
     private final CurrentWeatherService currentWeatherService;
@@ -34,9 +32,7 @@ public class HomeController {
     @GetMapping("/home")
     public String home(Model model, HttpServletRequest request) {
 
-        UUID userSessionId = (UUID) request.getAttribute("userSessionId");
-
-        User user = userService.getUserBySessionId(userSessionId);
+        User user = (User) request.getAttribute("user");
 
         log.info("The user received is - {}", user.getLogin());
 
@@ -44,15 +40,12 @@ public class HomeController {
 
         List<CurrentWeatherDTO> weathers = currentWeatherService.getLocationsWeather(locations);
 
-
         log.info("Retrieved weather for {} locations", weathers.size());
-
 
         model.addAttribute("user", user);
         model.addAttribute("weathers", weathers);
 
         return "home";
     }
-
 
 }
