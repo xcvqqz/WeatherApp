@@ -28,11 +28,15 @@ public class HomeController {
 
     private final CurrentWeatherService currentWeatherService;
 
+    private final UserService userService;
+
 
     @GetMapping("/home")
     public String home(Model model, HttpServletRequest request) {
 
-        User user = (User) request.getAttribute("user");
+        UUID userSessionId = (UUID) request.getAttribute("userSessionId");
+
+        User user = userService.getUserBySessionId(userSessionId);
 
         log.info("The user received is - {}", user.getLogin());
 

@@ -34,16 +34,14 @@ public class SessionInterceptor implements HandlerInterceptor {
         UUID userSessionId = cookieService.getSessionId(request);
 
         if(userSessionId == null){
+            log.warn("UserSessionId is null, redirect to sign-in is needed to establish a session.");
             response.sendRedirect("/sign-in");
             return false;
         }
 
+        log.info("Session successfully created with UUID: {} ", userSessionId);
         request.setAttribute("userSessionId", userSessionId);
 
         return true;
     }
 }
-
-
-User user = userService.getUserBySessionId(userSessionId);
-        log.info("The user received is - {}", user.getLogin());
