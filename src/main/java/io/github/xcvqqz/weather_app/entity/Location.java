@@ -30,10 +30,10 @@ public class Location {
     private String name;
 
     @Column()
-    private BigDecimal longitude; //долгота
+    private BigDecimal longitude;
 
     @Column()
-    private BigDecimal latitude; //широта
+    private BigDecimal latitude;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

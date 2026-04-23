@@ -35,7 +35,6 @@ public class ApiWeatherResponseDTO {
    private String main;
    }
 
-
     @Data
     public static class Main {
     private BigDecimal temp;

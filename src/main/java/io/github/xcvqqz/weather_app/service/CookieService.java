@@ -1,25 +1,22 @@
-package io.github.xcvqqz.weather_app.util;
+package io.github.xcvqqz.weather_app.service;
 
 
 import io.github.xcvqqz.weather_app.exception.SessionNotFoundException;
-import io.github.xcvqqz.weather_app.exception.UserNotFoundException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.UUID;
 
-
-@NoArgsConstructor
-public class CookieUtil {
+@Service
+public class CookieService {
 
     private static final int COOKIE_MAX_AGE = 30 * 60;
     private static final String SESSION_COOKIE = "sessionId";
 
-    public static void setSessionCookie(HttpServletResponse response, UUID sessionId) {
+    public  void setSessionCookie(HttpServletResponse response, UUID sessionId) {
         Cookie cookie = new Cookie(SESSION_COOKIE, sessionId.toString());
         cookie.setHttpOnly(true);   // Защита от XSS
         cookie.setSecure(false);    // true для HTTPS
@@ -28,7 +25,7 @@ public class CookieUtil {
         response.addCookie(cookie);
     }
 
-    public static UUID getSessionId(HttpServletRequest request) {
+    public UUID getSessionId(HttpServletRequest request) {
 
         return Arrays.stream(request.getCookies())
                 .filter(c -> SESSION_COOKIE.equals(c.getName()))
@@ -36,10 +33,9 @@ public class CookieUtil {
                 .map(UUID::fromString)
                 .findFirst()
                 .orElseThrow(() -> new SessionNotFoundException("Session Not Found"));
-
     }
 
-public static void clearSessionCookie(HttpServletResponse response){
+    public void clearSessionCookie(HttpServletResponse response){
         Cookie cookie = new Cookie(SESSION_COOKIE, "");
         cookie.setHttpOnly(true);
         cookie.setPath("/");

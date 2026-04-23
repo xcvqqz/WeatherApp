@@ -6,6 +6,7 @@ import io.github.xcvqqz.weather_app.dto.api.request.ApiLocationsRequestDTO;
 import io.github.xcvqqz.weather_app.dto.api.response.ApiLocationsResponseDTO;
 import io.github.xcvqqz.weather_app.entity.Location;
 import io.github.xcvqqz.weather_app.entity.User;
+import io.github.xcvqqz.weather_app.service.CookieService;
 import io.github.xcvqqz.weather_app.service.LocationService;
 import io.github.xcvqqz.weather_app.service.UserService;
 import io.github.xcvqqz.weather_app.service.api.LocationSearchService;
@@ -31,10 +32,9 @@ import java.util.UUID;
 public class LocationsController {
 
     private final LocationSearchService locationSearchService;
-
     private final LocationService locationService;
-
     private final UserService userService;
+    private final CookieService cookieService;
 
     //ЭТОТ МЕТОД НАХОДИТ ВСЕ ЛОКАЦИИ
     @GetMapping("/search-results")
@@ -55,7 +55,7 @@ public class LocationsController {
     public String add(@Valid @ModelAttribute("location") ApiLocationsResponseDTO locationsResponseDTO,
                       HttpServletRequest request){
 
-        UUID userSessionId = CookieUtil.getSessionId(request);
+        UUID userSessionId = cookieService.getSessionId(request);
 
         User user = userService.getUserBySessionId(userSessionId);
 

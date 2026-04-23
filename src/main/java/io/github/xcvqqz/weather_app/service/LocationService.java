@@ -8,6 +8,7 @@ import io.github.xcvqqz.weather_app.exception.DataBaseException;
 import io.github.xcvqqz.weather_app.mapper.LocationMapper;
 import io.github.xcvqqz.weather_app.repository.LocationRepository;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,15 +29,8 @@ public class LocationService {
     @Transactional
     public Location create(ApiLocationsResponseDTO locationsResponseDTO, User user){
 
-//        Location entity = locationMapper.ToEntity(locationsResponseDTO);
-//        entity.setUser(user);
-
-        Location entity = Location.builder()
-                .name(locationsResponseDTO.name())
-                .longitude(locationsResponseDTO.lon())
-                .latitude(locationsResponseDTO.lat())
-                .user(user)
-                .build();
+        Location entity = locationMapper.ApiResponseToEntity(locationsResponseDTO);
+        entity.setUser(user);
 
         return locationRepository.save(entity).orElseThrow(
                 () -> new DataBaseException(DATABASE_ERROR_MESSAGE));
@@ -47,6 +41,5 @@ public class LocationService {
     public List<Location> getLocationsByUser(User user) {
         return locationRepository.findAllByUser(user);
     }
-
 
 }

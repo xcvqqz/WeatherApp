@@ -4,6 +4,7 @@ package io.github.xcvqqz.weather_app.controller;
 import io.github.xcvqqz.weather_app.dto.auth.UserRegistrationDTO;
 import io.github.xcvqqz.weather_app.entity.Session;
 import io.github.xcvqqz.weather_app.entity.User;
+import io.github.xcvqqz.weather_app.service.CookieService;
 import io.github.xcvqqz.weather_app.service.SessionService;
 import io.github.xcvqqz.weather_app.service.UserService;
 import io.github.xcvqqz.weather_app.util.CookieUtil;
@@ -26,6 +27,7 @@ public class RegistrationController {
 
     private final SessionService sessionService;
     private final UserService userService;
+    private final CookieService cookieService;
 
     @GetMapping("/sign-up")
     public String showSignUp(@ModelAttribute("user") UserRegistrationDTO userRegistration) {
@@ -52,7 +54,7 @@ public class RegistrationController {
         Session session = sessionService.create(user);
         log.info("A new session has been created for user: {}", user.getLogin());
 
-        CookieUtil.setSessionCookie(response, session.getSessionId());
+        cookieService.setSessionCookie(response, session.getSessionId());
         log.info("A cookie has been created, Cookie: {}", session.getSessionId());
 
         return "redirect:/home";

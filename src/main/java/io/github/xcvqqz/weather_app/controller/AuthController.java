@@ -4,6 +4,7 @@ package io.github.xcvqqz.weather_app.controller;
 import io.github.xcvqqz.weather_app.dto.auth.UserAuthDTO;
 import io.github.xcvqqz.weather_app.entity.Session;
 import io.github.xcvqqz.weather_app.entity.User;
+import io.github.xcvqqz.weather_app.service.CookieService;
 import io.github.xcvqqz.weather_app.service.SessionService;
 import io.github.xcvqqz.weather_app.service.UserService;
 import io.github.xcvqqz.weather_app.util.CookieUtil;
@@ -28,6 +29,7 @@ public class AuthController {
 
     private final UserService userService;
     private final SessionService sessionService;
+    private final CookieService cookieService;
 
     @GetMapping("/sign-in")
     public String showSignIn(@ModelAttribute("user") UserAuthDTO userAuth) {
@@ -45,7 +47,7 @@ public class AuthController {
 
         User user = userService.findByLogin(userAuth);
         Session session = sessionService.create(user);
-        CookieUtil.setSessionCookie(response, session.getSessionId());
+        cookieService.setSessionCookie(response, session.getSessionId());
 
         return "redirect:/home";
     }
@@ -55,9 +57,9 @@ public class AuthController {
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response){
 
-        UUID userSessionId = CookieUtil.getSessionId(request);
+        UUID userSessionId = cookieService.getSessionId(request);
         sessionService.deleteSessionById(userSessionId);
-        CookieUtil.clearSessionCookie(response);
+        cookieService.clearSessionCookie(response);
 
         return "redirect:/sign-in";
     }
