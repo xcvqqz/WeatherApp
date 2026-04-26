@@ -36,7 +36,7 @@ public class HomeController {
 
         UUID userSessionId = (UUID) request.getAttribute("userSessionId");
 
-        User user = userService.getUserBySessionId(userSessionId);
+        User user = userService.getBySessionId(userSessionId);
 
         log.info("The user received is - {}", user.getLogin());
 

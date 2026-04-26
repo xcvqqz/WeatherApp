@@ -13,7 +13,13 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "locations")
+@Table(name = "locations",
+uniqueConstraints = {
+        @UniqueConstraint(
+                name = "unique_location_user_coordinates",
+                columnNames = {"user_id", "longitude", "latitude"}
+        )
+})
 public class Location {
 
     @Id

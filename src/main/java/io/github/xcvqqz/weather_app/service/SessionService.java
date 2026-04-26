@@ -62,7 +62,7 @@ public class SessionService {
 
 
     @Transactional()
-    public void deleteSessionById(UUID sessionId){
+    public void deleteById(UUID sessionId){
         if(sessionId != null) {
             try{
                 sessionRepository.deleteById(sessionId);

@@ -62,7 +62,7 @@ public class LocationsController {
 
         UUID userSessionId = cookieService.getSessionId(request);
 
-        User user = userService.getUserBySessionId(userSessionId);
+        User user = userService.getBySessionId(userSessionId);
 
         Location location = locationService.create(locationsResponseDTO, user);
 

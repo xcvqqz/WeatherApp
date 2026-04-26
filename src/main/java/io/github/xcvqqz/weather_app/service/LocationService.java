@@ -10,6 +10,7 @@ import io.github.xcvqqz.weather_app.repository.LocationRepository;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,11 +30,15 @@ public class LocationService {
     @Transactional
     public Location create(ApiLocationsResponseDTO locationsResponseDTO, User user){
 
-        Location entity = locationMapper.ApiResponseToEntity(locationsResponseDTO);
-        entity.setUser(user);
+        try {
+            Location entity = locationMapper.ApiResponseToEntity(locationsResponseDTO);
+            entity.setUser(user);
 
-        return locationRepository.save(entity).orElseThrow(
-                () -> new DataBaseException(DATABASE_ERROR_MESSAGE));
+            return locationRepository.save(entity).orElseThrow(
+                    () -> new DataBaseException(DATABASE_ERROR_MESSAGE));
+        } catch (DataAccessException e){
+            throw new DataBaseException(String.format(DATABASE_ERROR_MESSAGE, e.getMessage()));
+        }
     }
 
 

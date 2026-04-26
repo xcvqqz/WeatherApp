@@ -51,13 +51,15 @@ public class UserService {
             userRepository.save(entity);
         } catch (DataIntegrityViolationException e) {
             throw new UserAlreadyExistsException(USER_ALREADY_EXIST_MESSAGE);
+        } catch (DataAccessException e){
+            throw new DataBaseException(String.format(DATABASE_ERROR_MESSAGE, e.getMessage()));
         }
         return entity;
     }
 
 
     @Transactional(readOnly = true)
-    public User getUserBySessionId(UUID sessionId){
+    public User getBySessionId(UUID sessionId){
         return userRepository
                 .findBySessionId(sessionId)
                 .orElseThrow(() -> new UserNotFoundException(USER_NOT_FOUND_MESSAGE));

@@ -57,7 +57,7 @@ public class AuthController {
     public String logout(HttpServletRequest request, HttpServletResponse response){
 
         UUID userSessionId = cookieService.getSessionId(request);
-        sessionService.deleteSessionById(userSessionId);
+        sessionService.deleteById(userSessionId);
         cookieService.clearSessionCookie(response);
 
         return "redirect:/sign-in";
