@@ -99,12 +99,4 @@ public class SessionService {
                 .isAfter(session.getExpiresAt());
     }
 
-
-
-    private Session getBySessionId(UUID sessionId){
-        return  sessionRepository
-                .findById(sessionId)
-                .orElseThrow(() -> new SessionNotFoundException(SESSION_NOT_FOUND_MESSAGE));
-    }
-
 }

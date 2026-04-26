@@ -10,13 +10,13 @@ import io.github.xcvqqz.weather_app.service.CookieService;
 import io.github.xcvqqz.weather_app.service.LocationService;
 import io.github.xcvqqz.weather_app.service.UserService;
 import io.github.xcvqqz.weather_app.service.api.LocationSearchService;
-import io.github.xcvqqz.weather_app.util.CookieUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,11 +36,16 @@ public class LocationsController {
     private final UserService userService;
     private final CookieService cookieService;
 
-    //ЭТОТ МЕТОД НАХОДИТ ВСЕ ЛОКАЦИИ
-    @GetMapping("/search-results")
-    public String search(@Valid @ModelAttribute("location") ApiLocationsRequestDTO locationsRequestDTO, Model model) {
 
-        //добавить обработку ошибок
+
+    @GetMapping("/search-results")
+    public String search(@Valid @ModelAttribute("location") ApiLocationsRequestDTO locationsRequestDTO,
+                         BindingResult bindingResult, Model model) {
+
+
+        if(bindingResult.hasErrors()){          //ПРОВЕРИТЬ ЭТОТ BindingResult
+            return "home";
+        }
 
         List<ApiLocationsResponseDTO> locations = locationSearchService.getFoundLocations(locationsRequestDTO);
         model.addAttribute("locations", locations);

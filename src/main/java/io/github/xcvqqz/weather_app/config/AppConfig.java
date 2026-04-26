@@ -1,7 +1,6 @@
 package io.github.xcvqqz.weather_app.config;
 
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -27,11 +26,8 @@ public class AppConfig {
     @Bean
     public RestTemplate restTemplate() {
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
-        factory.setConnectTimeout(5000); // 5 секунд
-        factory.setReadTimeout(30000); // 30 секунд вместо 10 по умолчанию
-
-
-
+        factory.setConnectTimeout(5000);
+        factory.setReadTimeout(30000);
         return new RestTemplate(factory);
     }
 }

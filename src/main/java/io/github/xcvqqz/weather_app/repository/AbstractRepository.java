@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 
-//Т - тип сущности, К - тип ключа
 public interface AbstractRepository<T, K> {
 
     public Optional<T> save(T entity);
@@ -19,6 +18,5 @@ public interface AbstractRepository<T, K> {
     public void deleteById(K id);
 
    public void deleteAll();
-
 
 }

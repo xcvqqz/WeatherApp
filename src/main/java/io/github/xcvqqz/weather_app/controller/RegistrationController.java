@@ -7,7 +7,6 @@ import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.service.CookieService;
 import io.github.xcvqqz.weather_app.service.SessionService;
 import io.github.xcvqqz.weather_app.service.UserService;
-import io.github.xcvqqz.weather_app.util.CookieUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
