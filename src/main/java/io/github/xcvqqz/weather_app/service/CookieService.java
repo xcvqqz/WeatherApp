@@ -15,12 +15,13 @@ public class CookieService {
 
     private static final int COOKIE_MAX_AGE = 30 * 60;
     private static final String SESSION_COOKIE = "sessionId";
+    private static final String CLEAR_SESSION_COOKIE_VALUE = "";
 
     public  void setSessionCookie(HttpServletResponse response, UUID sessionId) {
         Cookie cookie = new Cookie(SESSION_COOKIE, sessionId.toString());
-        cookie.setHttpOnly(true);   // Защита от XSS
-        cookie.setSecure(false);    // true для HTTPS
-        cookie.setPath("/");        // Доступна на всём сайте
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+        cookie.setPath("/");
         cookie.setMaxAge(COOKIE_MAX_AGE);
         response.addCookie(cookie);
     }
@@ -36,7 +37,7 @@ public class CookieService {
     }
 
     public void clearSessionCookie(HttpServletResponse response){
-        Cookie cookie = new Cookie(SESSION_COOKIE, "");
+        Cookie cookie = new Cookie(SESSION_COOKIE, CLEAR_SESSION_COOKIE_VALUE);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         cookie.setMaxAge(0);
