@@ -48,6 +48,7 @@ public class HomeController {
 
         model.addAttribute("user", user);
         model.addAttribute("weathers", weathers);
+//        model.addAttributeIfAbsent
 
         return "home";
     }

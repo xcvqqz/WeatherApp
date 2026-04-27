@@ -43,12 +43,12 @@ public class RegistrationControllerTest {
     @BeforeEach
     void setup() {
 
-        RegistrationController registrationController = new RegistrationController(sessionService, userService);
-
-        mockMvc = MockMvcBuilders
-                .standaloneSetup(registrationController)
-                .alwaysDo(print())
-                .build();
+//        RegistrationController registrationController = new RegistrationController(sessionService, userService);
+//
+//        mockMvc = MockMvcBuilders
+//                .standaloneSetup(registrationController)
+//                .alwaysDo(print())
+//                .build();
 
 //        mockMvc = MockMvcBuilders
 //                .webAppContextSetup(wac)

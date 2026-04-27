@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
+@AllArgsConstructor
 @Entity
 @Table(name = "locations",
 uniqueConstraints = {

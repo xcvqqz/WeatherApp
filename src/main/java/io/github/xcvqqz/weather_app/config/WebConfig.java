@@ -22,8 +22,9 @@ import org.thymeleaf.templatemode.TemplateMode;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
-
     private final ApplicationContext applicationContext;
+
+    private final SessionInterceptor sessionInterceptor;
 
     @Value("${thymeleaf.prefix}")
     private String prefix;
@@ -33,8 +34,9 @@ public class WebConfig implements WebMvcConfigurer {
 
 
     @Autowired
-    public WebConfig(ApplicationContext applicationContext) {
+    public WebConfig(ApplicationContext applicationContext, SessionInterceptor sessionInterceptor) {
         this.applicationContext = applicationContext;
+        this.sessionInterceptor = sessionInterceptor;
     }
 
 
@@ -42,7 +44,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
 
         registry
-                .addInterceptor(new SessionInterceptor())
+                .addInterceptor(sessionInterceptor)
                 .addPathPatterns(
                         "/home/**")
 

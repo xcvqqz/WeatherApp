@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.UUID;
@@ -40,12 +41,14 @@ public class LocationsController {
 
     @GetMapping("/search-results")
     public String search(@Valid @ModelAttribute("location") ApiLocationsRequestDTO locationsRequestDTO,
-                         BindingResult bindingResult, Model model) {
+                         BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 
 
         if(bindingResult.hasErrors()){          //ПРОВЕРИТЬ ЭТОТ BindingResult
-            return "home";
+            redirectAttributes.addFlashAttribute("error", bindingResult);
+            return "redirect:/home";
         }
+
 
         List<ApiLocationsResponseDTO> locations = locationSearchService.getFoundLocations(locationsRequestDTO);
         model.addAttribute("locations", locations);
