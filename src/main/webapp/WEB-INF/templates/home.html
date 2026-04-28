@@ -27,6 +27,14 @@ Welcome
            name="location"
            th:placeholder="'Введите название локации'"
            required>
+
+<!--    <div th:if="${#fields.hasAnyErrors()}">-->
+<!--        <ul>-->
+<!--            <li th:each="err : ${#fields.allErrors()}"-->
+<!--                th:text="${err}"></li>-->
+<!--        </ul>-->
+<!--    </div>-->
+
     <button type="submit">Найти</button>
 </form>
 

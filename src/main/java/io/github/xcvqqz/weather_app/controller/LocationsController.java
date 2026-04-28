@@ -45,7 +45,8 @@ public class LocationsController {
 
 
         if(bindingResult.hasErrors()){          //ПРОВЕРИТЬ ЭТОТ BindingResult
-            redirectAttributes.addFlashAttribute("error", bindingResult);
+            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+//            redirectAttributes.addFlashAttribute("location");
             return "redirect:/home";
         }
 

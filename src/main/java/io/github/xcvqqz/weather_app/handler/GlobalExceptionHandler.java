@@ -31,14 +31,14 @@ public class GlobalExceptionHandler {
             SessionNotFoundException.class,
             LocationsNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handleNotFoundException(Model model, UserNotFoundException ex) {
+    public String handleNotFoundException(Model model, Exception ex) {
         return processError(model, ex, HttpStatus.NOT_FOUND, LOG_LEVER_INFO);
     }
 
 
     @ExceptionHandler({PasswordMismatchException.class, BadRequestException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handlePasswordMismatchException(Model model, PasswordMismatchException ex) {
+    public String handlePasswordMismatchException(Model model, Exception ex) {
         return processError(model, ex, HttpStatus.BAD_REQUEST, LOG_LEVER_INFO);
     }
 
