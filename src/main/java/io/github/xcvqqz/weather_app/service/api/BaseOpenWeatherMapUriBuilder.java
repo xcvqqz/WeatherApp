@@ -8,8 +8,6 @@ public abstract class BaseOpenWeatherMapUriBuilder {
     @Value("${app.key}")
     protected String appKey;
 
-//  protected String appKey = "4f9e811e1990b95dd679058a3dfae99a";
-
     protected static final String APP_ID_PARAM = "appid";
     protected static final String UNITS_PARAM = "units";
     protected static final String METRIC_VALUE_FOR_UNITS_PARAM = "metric";

@@ -38,7 +38,6 @@ public class LocationsController {
     private final CookieService cookieService;
 
 
-
     @GetMapping("/search-results")
     public String search(@Valid @ModelAttribute("location") ApiLocationsRequestDTO locationsRequestDTO,
                          BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {

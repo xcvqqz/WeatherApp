@@ -66,9 +66,9 @@ public class GlobalExceptionHandler {
     private String processError(Model model, Exception ex, HttpStatus status, String level){
 
         switch (level){
-            case "error" -> log.error(ex.getMessage(), ex);
-            case "warn" -> log.warn(ex.getMessage(), ex);
-            case "info" -> log.info(ex.getMessage(), ex);
+            case LOG_LEVER_ERROR -> log.error(ex.getMessage(), ex);
+            case LOG_LEVER_WARN  -> log.warn(ex.getMessage(), ex);
+            case LOG_LEVER_INFO -> log.info(ex.getMessage(), ex);
         }
 
         model.addAttribute("error", new ErrorResponseDTO(status, ex.getMessage()));

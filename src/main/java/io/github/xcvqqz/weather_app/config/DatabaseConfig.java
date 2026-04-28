@@ -62,6 +62,5 @@ public class DatabaseConfig {
                 .locations(location)
                 .baselineOnMigrate(true)
                 .load();
-
     }
 }

@@ -26,9 +26,7 @@ import java.util.UUID;
 public class HomeController {
 
     private final LocationService locationService;
-
     private final CurrentWeatherService currentWeatherService;
-
     private final UserService userService;
 
 

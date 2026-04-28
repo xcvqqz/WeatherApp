@@ -13,8 +13,6 @@ public class GeocodingUriBuilder extends BaseOpenWeatherMapUriBuilder {
     @Value("${geo.url}")
     private String locationSearchUrl;
 
-//    private String locationSearchUrl = "https://api.openweathermap.org/geo/1.0/direct";
-
     private final String LOCATION_PARAM = "q";
     private final String LOCATION_LIMIT_PARAM = "limit";
     private final Integer MAX_LIMIT = 5;
