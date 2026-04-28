@@ -35,10 +35,10 @@ public class Location {
     @Column(length = 30)
     private String name;
 
-    @Column()
+    @Column(columnDefinition = "DECIMAL(9,6)")
     private BigDecimal longitude;
 
-    @Column()
+    @Column(columnDefinition = "DECIMAL(9,6)")
     private BigDecimal latitude;
 
     @ManyToOne(fetch = FetchType.LAZY)
