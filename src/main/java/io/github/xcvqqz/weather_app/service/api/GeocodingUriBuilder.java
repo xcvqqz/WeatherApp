@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 
 @Component
 public class GeocodingUriBuilder extends BaseOpenWeatherMapUriBuilder {
@@ -22,7 +23,8 @@ public class GeocodingUriBuilder extends BaseOpenWeatherMapUriBuilder {
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromUriString(locationSearchUrl)
                 .queryParam(LOCATION_PARAM, locationName)
-                .queryParam(LOCATION_LIMIT_PARAM, MAX_LIMIT);
+                .queryParam(LOCATION_LIMIT_PARAM, MAX_LIMIT)
+                .encode(StandardCharsets.UTF_8);
 
         return addCommonsParam(builder).build().toUri();
     }
