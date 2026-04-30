@@ -21,7 +21,10 @@ import java.util.List;
 @Slf4j
 @Service
 @AllArgsConstructor
-public class LocationSearchService {
+public class LocationsSearchService {
+
+    private static final String LOCATION_NOT_FOUND = "No location named %s was found for your request. " +
+            "Such a location does not exist. Please check the location name and enter it again";
 
     private final RestTemplate restTemplate;
     private final GeocodingUriBuilder geocodingUriBuilder;
@@ -29,6 +32,11 @@ public class LocationSearchService {
     public List<ApiLocationsResponseDTO> getFoundLocations(ApiLocationsRequestDTO locationsRequestDTO) {
         String searchLocation = locationsRequestDTO.location();
         List<ApiLocationsResponseDTO> locations = fetchLocationsFromApi(searchLocation);
+
+        if(locations.isEmpty()){
+            throw new LocationsNotFoundException(String.format(LOCATION_NOT_FOUND, searchLocation));
+        }
+
         log.info("Successfully fetched Location, size: {}", locations.size());
         return locations;
     }

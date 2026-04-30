@@ -9,7 +9,7 @@ import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.service.CookieService;
 import io.github.xcvqqz.weather_app.service.LocationService;
 import io.github.xcvqqz.weather_app.service.UserService;
-import io.github.xcvqqz.weather_app.service.api.LocationSearchService;
+import io.github.xcvqqz.weather_app.service.api.LocationsSearchService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ import java.util.UUID;
 @RequestMapping("/locations")
 public class LocationsController {
 
-    private final LocationSearchService locationSearchService;
+    private final LocationsSearchService locationSearchService;
     private final LocationService locationService;
     private final UserService userService;
     private final CookieService cookieService;
