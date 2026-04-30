@@ -66,16 +66,6 @@ public class UserService {
     }
 
 
-    @Transactional
-    public void delete(User user) {
-        try {
-            userRepository.delete(user);
-        } catch (DataAccessException e){
-            throw new DataBaseException(String.format(DATABASE_ERROR_MESSAGE, e.getMessage()));
-        }
-    }
-
-
     @Transactional(readOnly = true)
     public User findByLogin(UserAuthDTO userAuthDTO) {
 

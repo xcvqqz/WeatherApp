@@ -41,5 +41,4 @@ public class CurrentWeatherService {
         ApiWeatherResponseDTO result =  restTemplate.getForObject(uri, ApiWeatherResponseDTO.class);
         return result;
     }
-
 }

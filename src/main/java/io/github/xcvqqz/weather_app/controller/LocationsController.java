@@ -42,13 +42,10 @@ public class LocationsController {
     public String search(@Valid @ModelAttribute("location") ApiLocationsRequestDTO locationsRequestDTO,
                          BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 
-
-        if(bindingResult.hasErrors()){          //ПРОВЕРИТЬ ЭТОТ BindingResult
+        if(bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
-//            redirectAttributes.addFlashAttribute("location");
             return "redirect:/home";
         }
-
 
         List<ApiLocationsResponseDTO> locations = locationSearchService.getFoundLocations(locationsRequestDTO);
         model.addAttribute("locations", locations);
