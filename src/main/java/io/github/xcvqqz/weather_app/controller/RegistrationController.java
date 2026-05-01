@@ -24,6 +24,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping()
 public class RegistrationController {
 
+    private static final String FIELD_CONFIRM_PASSWORD = "confirmPassword";
+    private static final String ERROR_PASSWORD_MISMATCH = "passwordMismatch";
+    private static final String MESSAGE_PASSWORDS_DONT_MATCH = "Passwords do not match";
+
     private final SessionService sessionService;
     private final UserService userService;
     private final CookieService cookieService;
@@ -39,7 +43,7 @@ public class RegistrationController {
                                 BindingResult result, HttpServletResponse response)  {
 
         if(!(userRegistration.password().equals(userRegistration.confirmPassword()))) {
-            result.rejectValue("confirmPassword", "passwordMismatch", "Passwords don't match");
+            result.rejectValue(FIELD_CONFIRM_PASSWORD, ERROR_PASSWORD_MISMATCH, MESSAGE_PASSWORDS_DONT_MATCH);
         }
 
         if (result.hasErrors()) {

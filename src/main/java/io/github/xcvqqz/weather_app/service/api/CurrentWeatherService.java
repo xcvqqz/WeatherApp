@@ -29,7 +29,7 @@ public class CurrentWeatherService {
         List<CurrentWeatherDTO> result = new ArrayList<>();
 
         for(Location location : locations) {
-            result.add(weatherMapper.toCurrentWeather(getCurrentWeather(location)));
+            result.add(weatherMapper.toCurrentWeather(getCurrentWeather(location), location));
         }
 
         return result;

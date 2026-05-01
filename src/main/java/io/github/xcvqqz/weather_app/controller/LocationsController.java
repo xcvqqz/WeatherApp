@@ -17,10 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -54,8 +51,6 @@ public class LocationsController {
     }
 
 
-
-
     @PostMapping("/add")
     public String add(@Valid @ModelAttribute("location") ApiLocationsResponseDTO locationsResponseDTO,
                       HttpServletRequest request){
@@ -68,6 +63,16 @@ public class LocationsController {
 
         log.info("A location has been created: {}, {}, {}, {},",
                 location.getName(), location.getLongitude(), location.getLatitude(), location.getUser());
+
+        return "redirect:/home";
+    }
+
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id){
+
+        locationService.delete(id);
+        log.info("The location id {} has been successfully deleted", id);
 
         return "redirect:/home";
     }

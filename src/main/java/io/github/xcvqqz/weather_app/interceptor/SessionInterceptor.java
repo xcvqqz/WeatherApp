@@ -27,7 +27,7 @@ public class SessionInterceptor implements HandlerInterceptor {
         UUID userSessionId = cookieService.getSessionId(request);
 
         if(userSessionId == null){
-            log.warn("UserSessionId is null, redirect to sign-in is needed to establish a session.");
+            log.warn("User session Id is null, redirect to sign-in is needed to establish a session.");
             response.sendRedirect("/sign-in");
             return false;
         }

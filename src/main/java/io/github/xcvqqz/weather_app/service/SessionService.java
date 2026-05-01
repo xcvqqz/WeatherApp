@@ -24,7 +24,6 @@ import static io.github.xcvqqz.weather_app.service.UserService.USER_NOT_FOUND_ME
 public class SessionService {
 
     protected static final String DATABASE_ERROR_MESSAGE = "Database error: %s";
-    private static final String SESSION_NOT_FOUND_MESSAGE = "Session Not Found";
 
     private final SessionRepository sessionRepository;
 

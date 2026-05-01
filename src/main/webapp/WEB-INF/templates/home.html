@@ -9,11 +9,11 @@
 <body>
 
 
-Welcome
+
 <div th:if="${user != null}">
     Welcome <span th:text="${user.login}">Имя пользователя</span>
 </div>
-!
+
 
 <br>
 <br>
@@ -47,6 +47,7 @@ Welcome
 <table>
     <thead>
     <tr>
+        <th>ID</th>
         <th>City</th>
         <th>Lon</th>
         <th>Lat</th>
@@ -59,6 +60,7 @@ Welcome
     </thead>
     <tbody>
     <tr th:each="weather : ${weathers}">
+        <td th:text="${weather.id}">ID</td>
         <td th:text="${weather.city()}">City</td>
         <td th:text="${weather.lon()}">Lon</td>
         <td th:text="${weather.lat()}">Lat</td>
@@ -67,7 +69,15 @@ Welcome
         <td th:text="${weather.feelsLike()}">FeelsLike</td>
         <td th:text="${weather.humidity()}">Humidity</td>
         <td th:text="${weather.country()}">Country</td>
+        <form th:action="@{/locations/delete/{id}(id=${weather.id})}" method="post">
+            <button type="submit"
+                    onclick="return confirm('Вы уверены, что хотите удалить запись о погоде для города ' +
+                this.closest('tr').querySelector('td').textContent + '?')">
+                Удалить
+            </button>
+        </form>
     </tr>
+
     </tbody>
 </table>
 

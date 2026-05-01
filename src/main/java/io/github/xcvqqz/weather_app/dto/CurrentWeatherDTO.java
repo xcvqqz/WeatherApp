@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 
 
 public record CurrentWeatherDTO(
+    Long id,
     String city,
     BigDecimal lon,
     BigDecimal lat,

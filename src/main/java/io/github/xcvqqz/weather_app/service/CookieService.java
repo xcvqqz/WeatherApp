@@ -13,6 +13,8 @@ import java.util.UUID;
 @Service
 public class CookieService {
 
+
+    private static final String SESSION_NOT_FOUND_MESSAGE = "Session Not Found";
     private static final int COOKIE_MAX_AGE = 30 * 60;
     private static final String SESSION_COOKIE = "sessionId";
     private static final String CLEAR_SESSION_COOKIE_VALUE = "";
@@ -33,7 +35,7 @@ public class CookieService {
                 .map(Cookie::getValue)
                 .map(UUID::fromString)
                 .findFirst()
-                .orElseThrow(() -> new SessionNotFoundException("Session Not Found"));
+                .orElseThrow(() -> new SessionNotFoundException(SESSION_NOT_FOUND_MESSAGE));
     }
 
     public void clearSessionCookie(HttpServletResponse response){
