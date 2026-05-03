@@ -29,8 +29,13 @@ public class CookieService {
     }
 
     public UUID getSessionId(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
 
-        return Arrays.stream(request.getCookies())
+        if (cookies == null) {
+            throw new SessionNotFoundException(SESSION_NOT_FOUND_MESSAGE);
+        }
+
+        return Arrays.stream(cookies)
                 .filter(c -> SESSION_COOKIE.equals(c.getName()))
                 .map(Cookie::getValue)
                 .map(UUID::fromString)
