@@ -41,6 +41,7 @@ public class HomeController {
 
         List<Location> locations = locationService.getLocationsByUser(user);
 
+
         List<CurrentWeatherDTO> weathers = currentWeatherService.getLocationsWeather(locations);
 
         log.info("Retrieved weather for {} locations", weathers.size());

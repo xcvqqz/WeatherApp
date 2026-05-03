@@ -27,20 +27,20 @@ public class CurrentWeatherService {
 
     public List<CurrentWeatherDTO> getLocationsWeather(List<Location> locations) {
 
-        ApiWeatherRequestDTO weatherRequestDTO = new ApiWeatherRequestDTO(locations.)
-
         List<CurrentWeatherDTO> result = new ArrayList<>();
 
         for(Location location : locations) {
-            result.add(weatherMapper.toCurrentWeather(getCurrentWeather(location), location));
+            ApiWeatherRequestDTO request = weatherMapper.toWeatherRequest(location);
+            ApiWeatherResponseDTO response = getCurrentWeather(request);
+            result.add(weatherMapper.toCurrentWeather(response, location));
         }
 
         return result;
     }
 
 
-    private ApiWeatherResponseDTO getCurrentWeather(ApiWeatherRequestDTO apiWeatherRequestDTO) {
-        URI uri = weatherDataUriBuilder.buildCurrentWeatherUri(apiWeatherRequestDTO.lon(), apiWeatherRequestDTO.lat());
+    private ApiWeatherResponseDTO getCurrentWeather(ApiWeatherRequestDTO weatherRequest) {
+        URI uri = weatherDataUriBuilder.buildCurrentWeatherUri(weatherRequest);
         ApiWeatherResponseDTO result =  restTemplate.getForObject(uri, ApiWeatherResponseDTO.class);
         return result;
     }

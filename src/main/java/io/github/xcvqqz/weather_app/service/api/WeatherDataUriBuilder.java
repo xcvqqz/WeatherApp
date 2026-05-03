@@ -1,6 +1,7 @@
 package io.github.xcvqqz.weather_app.service.api;
 
 
+import io.github.xcvqqz.weather_app.dto.api.request.ApiWeatherRequestDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -19,10 +20,10 @@ public class WeatherDataUriBuilder extends BaseOpenWeatherMapUriBuilder {
     private final String LAT_PARAM = "lat";
     private final String LON_PARAM = "lon";
 
-    protected URI buildCurrentWeatherUri(BigDecimal lon, BigDecimal lat) {
+    protected URI buildCurrentWeatherUri(ApiWeatherRequestDTO apiWeatherRequest) {
          UriComponentsBuilder builder = fromUriString(weatherDataUrl)
-                .queryParam(LON_PARAM, lon)
-                .queryParam(LAT_PARAM, lat);
+                .queryParam(LON_PARAM, apiWeatherRequest.lon())
+                .queryParam(LAT_PARAM, apiWeatherRequest.lat());
 
          return addCommonsParam(builder).build().toUri();
     }

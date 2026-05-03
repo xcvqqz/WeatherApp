@@ -2,6 +2,7 @@ package io.github.xcvqqz.weather_app.mapper;
 
 
 import io.github.xcvqqz.weather_app.dto.CurrentWeatherDTO;
+import io.github.xcvqqz.weather_app.dto.api.request.ApiWeatherRequestDTO;
 import io.github.xcvqqz.weather_app.dto.api.response.ApiWeatherResponseDTO;
 import io.github.xcvqqz.weather_app.entity.Location;
 import org.mapstruct.Mapper;
@@ -14,6 +15,10 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface WeatherMapper {
 
+
+    @Mapping(source = "longitude", target = "lon")
+    @Mapping(source = "latitude", target = "lat")
+    ApiWeatherRequestDTO toWeatherRequest(Location location);
 
     @Mapping(source = "apiWeatherResponse.coord.lon", target = "lon")
     @Mapping(source = "apiWeatherResponse.coord.lat", target = "lat")
