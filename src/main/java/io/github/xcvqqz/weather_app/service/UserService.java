@@ -10,6 +10,7 @@ import io.github.xcvqqz.weather_app.exception.UserAlreadyExistsException;
 import io.github.xcvqqz.weather_app.exception.UserNotFoundException;
 import io.github.xcvqqz.weather_app.mapper.UserMapper;
 import io.github.xcvqqz.weather_app.repository.UserRepository;
+import org.hibernate.exception.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -30,7 +31,7 @@ public class UserService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
-    private static final String USER_ALREADY_EXIST_MESSAGE = "User Already Exist";
+    private static final String USER_ALREADY_EXIST_MESSAGE = "User with this username was not found";
     private static final String PASSWORD_MISMATCH_MESSAGE = "The password confirmation does not match";
     protected static final String USER_NOT_FOUND_MESSAGE = "User Not Found";
 
@@ -49,7 +50,7 @@ public class UserService {
 
         try {
             userRepository.save(entity);
-        } catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException | ConstraintViolationException e) {
             throw new UserAlreadyExistsException(USER_ALREADY_EXIST_MESSAGE);
         } catch (DataAccessException e){
             throw new DataBaseException(String.format(DATABASE_ERROR_MESSAGE, e.getMessage()));

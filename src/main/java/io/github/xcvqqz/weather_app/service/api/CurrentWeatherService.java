@@ -2,6 +2,7 @@ package io.github.xcvqqz.weather_app.service.api;
 
 
 import io.github.xcvqqz.weather_app.dto.CurrentWeatherDTO;
+import io.github.xcvqqz.weather_app.dto.api.request.ApiWeatherRequestDTO;
 import io.github.xcvqqz.weather_app.dto.api.response.ApiWeatherResponseDTO;
 import io.github.xcvqqz.weather_app.entity.Location;
 import io.github.xcvqqz.weather_app.mapper.WeatherMapper;
@@ -26,6 +27,8 @@ public class CurrentWeatherService {
 
     public List<CurrentWeatherDTO> getLocationsWeather(List<Location> locations) {
 
+        ApiWeatherRequestDTO weatherRequestDTO = new ApiWeatherRequestDTO(locations.)
+
         List<CurrentWeatherDTO> result = new ArrayList<>();
 
         for(Location location : locations) {
@@ -36,8 +39,8 @@ public class CurrentWeatherService {
     }
 
 
-    private ApiWeatherResponseDTO getCurrentWeather(Location location) {
-        URI uri = weatherDataUriBuilder.buildCurrentWeatherUri(location.getLongitude(),location.getLatitude(), location.getName());
+    private ApiWeatherResponseDTO getCurrentWeather(ApiWeatherRequestDTO apiWeatherRequestDTO) {
+        URI uri = weatherDataUriBuilder.buildCurrentWeatherUri(apiWeatherRequestDTO.lon(), apiWeatherRequestDTO.lat());
         ApiWeatherResponseDTO result =  restTemplate.getForObject(uri, ApiWeatherResponseDTO.class);
         return result;
     }

@@ -11,7 +11,6 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,10 +25,12 @@ public class LocationsSearchService {
     private static final String LOCATION_NOT_FOUND = "No location named %s was found for your request. " +
             "Such a location does not exist. Please check the location name and enter it again";
 
+    private static final String WEATHER_API_CONNECTION_ERROR = "Failed to receive a response from the API, probably due to connection loss";
+
     private final RestTemplate restTemplate;
     private final GeocodingUriBuilder geocodingUriBuilder;
 
-    public List<ApiLocationsResponseDTO> getFoundLocations(ApiLocationsRequestDTO locationsRequestDTO) {
+    public List<ApiLocationsResponseDTO> findAll(ApiLocationsRequestDTO locationsRequestDTO) {
         String searchLocation = locationsRequestDTO.location();
         List<ApiLocationsResponseDTO> locations = fetchLocationsFromApi(searchLocation);
 
@@ -54,11 +55,9 @@ public class LocationsSearchService {
                     }
             );
             return response.getBody();
-
         } catch (ResourceAccessException e){
-            throw new WeatherApiCommunicationException(e.getMessage());
-        } catch (HttpClientErrorException.NotFound e){
-            throw new LocationsNotFoundException(e.getMessage());
+            log.error("No response from the API. Connection lost: {}", e.getMessage());
+            throw new WeatherApiCommunicationException(WEATHER_API_CONNECTION_ERROR);
         }
     }
 }

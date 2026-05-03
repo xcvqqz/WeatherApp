@@ -32,6 +32,9 @@
             <span th:each="error : ${errors}"
                   th:text="${error.defaultMessage}"></span>
     </div>
+    <div th:if="${global_error}" class="alert alert-danger">
+        Ошибка: <span th:text="${global_error}"></span>
+    </div>
 
     <button type="submit">Найти</button>
 </form>
@@ -47,7 +50,6 @@
 <table>
     <thead>
     <tr>
-        <th>ID</th>
         <th>City</th>
         <th>Lon</th>
         <th>Lat</th>

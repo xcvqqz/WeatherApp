@@ -30,8 +30,10 @@
 
         <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"
               style="color: red;"></span>
-
         <br/>
+        <div th:if="${global_error}" class="alert alert-danger">
+                Ошибка: <span th:text="${global_error}"></span>
+        </div>
 
         <input type="submit" value="Add new User"/>
 </form>

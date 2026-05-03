@@ -44,7 +44,7 @@ public class LocationsController {
             return "redirect:/home";
         }
 
-        List<ApiLocationsResponseDTO> locations = locationSearchService.getFoundLocations(locationsRequestDTO);
+        List<ApiLocationsResponseDTO> locations = locationSearchService.findAll(locationsRequestDTO);
         model.addAttribute("locations", locations);
 
         return "locations/search-results";

@@ -22,6 +22,19 @@
           style="color: red;"></span>
 <br>
     <input type="submit" value="Войти в аккаунт"/>
+
+    <div th:if="${password_mismatch_error != null && !password_mismatch_error.isEmpty()}"
+         class="invalid-feedback">
+            <span th:each="error : ${password_mismatch_error}"
+                  th:text="${error.defaultMessage}"></span>
+    </div>
+
+    <div th:if="${global_error}" class="alert alert-danger">
+        Ошибка: <span th:text="${global_error}"></span>
+    </div>
+
+
+
 </form>
 
 

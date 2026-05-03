@@ -18,15 +18,12 @@ public class WeatherDataUriBuilder extends BaseOpenWeatherMapUriBuilder {
 
     private final String LAT_PARAM = "lat";
     private final String LON_PARAM = "lon";
-    private final String NAME_PARAM = "name";
 
-    protected URI buildCurrentWeatherUri(BigDecimal lon, BigDecimal lat, String name) {
+    protected URI buildCurrentWeatherUri(BigDecimal lon, BigDecimal lat) {
          UriComponentsBuilder builder = fromUriString(weatherDataUrl)
                 .queryParam(LON_PARAM, lon)
-                .queryParam(LAT_PARAM, lat)
-                .queryParam(NAME_PARAM, name);
+                .queryParam(LAT_PARAM, lat);
 
          return addCommonsParam(builder).build().toUri();
     }
-
 }
