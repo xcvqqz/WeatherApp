@@ -2,7 +2,7 @@ package io.github.xcvqqz.weather_app.controller;
 
 
 import io.github.xcvqqz.weather_app.entity.Location;
-import io.github.xcvqqz.weather_app.dto.api.response.CurrentWeatherDTO;
+import io.github.xcvqqz.weather_app.dto.model.CurrentWeatherDTO;
 import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.service.LocationService;
 import io.github.xcvqqz.weather_app.service.UserService;

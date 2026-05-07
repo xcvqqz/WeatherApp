@@ -157,7 +157,6 @@ public class LocationsSearchServiceTest {
     }
 
 
-
     private ArrayList<ApiLocationsResponseDTO> convertApiResponse(){
 
         try {

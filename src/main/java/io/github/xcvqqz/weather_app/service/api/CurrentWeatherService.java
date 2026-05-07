@@ -1,7 +1,7 @@
 package io.github.xcvqqz.weather_app.service.api;
 
 
-import io.github.xcvqqz.weather_app.dto.api.response.CurrentWeatherDTO;
+import io.github.xcvqqz.weather_app.dto.model.CurrentWeatherDTO;
 import io.github.xcvqqz.weather_app.dto.api.request.ApiWeatherRequestDTO;
 import io.github.xcvqqz.weather_app.dto.api.response.ApiWeatherResponseDTO;
 import io.github.xcvqqz.weather_app.entity.Location;

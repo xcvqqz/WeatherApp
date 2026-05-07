@@ -103,67 +103,24 @@ public class RegistrationControllerTest {
     }
 
 
-//    @Test
-//    public void shouldReturn409ConflictWhenUserAlreadyExists() throws Exception {
-//
-//        mockMvc.perform(post("/sign-up")
-//                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-//                        .param("login", TEST_NAME)
-//                        .param("password", TEST_PASSWORD)
-//                        .param("confirmPassword", CONFIRM_TEST_PASSWORD))
-//                        .andExpect(status().is3xxRedirection());
-//
-//
-//        mockMvc.perform(post("/sign-up")
-//                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-//                .param("login", TEST_NAME)
-//                .param("password", TEST_PASSWORD)
-//                .param("confirmPassword", CONFIRM_TEST_PASSWORD))
-//                .andExpect();
-//
-//    }
-
-
-
-
     @Test
     public void shouldFailValidationWhenPasswordsDoNotMatch() throws Exception {
-
         mockMvc.perform(post("/sign-up")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                         .param("login", TEST_NAME)
                         .param("password", TEST_PASSWORD)
                         .param("confirmPassword", MISMATCH_TEST_PASSWORD))
+                .andExpect(status().isOk())                    // не редирект, а 200
+                .andExpect(view().name("registration"))        // возврат формы
+                .andExpect(model().attributeHasFieldErrors(
+                        "userRegistrationDTO", "confirmPassword"));
 
-                .andExpect(model().hasErrors());
-//                .andExpect(model().attribute("user", "confirmPassword"));
-
+        // Пользователь НЕ должен быть создан
+        UserAuthDTO userAuth = new UserAuthDTO(TEST_NAME, TEST_PASSWORD);
+        Assertions.assertThrows(Exception.class,
+                () -> userService.findByLogin(userAuth));
     }
 
-
-
-
-
-
-//    @Test
-//    public void shouldReturn2xxWhenUserSuccessfullyCreated() throws Exception {
-//
-//        mockMvc.perform(post("/sign-up")
-//                        .contentType(MediaType.valueOf("application/x-www-form-urlencoded"))
-//
-//                        .param("login", TEST_NAME)
-//                        .param("password", TEST_PASSWORD)
-//                        .param("confirmPassword", CONFIRM_TEST_PASSWORD))
-//
-////                .andExpect(status().is3xxRedirection())
-////                .andExpect(redirectedUrl("/home"));
-//                .andExpect(status().is2xxSuccessful())
-//                .andExpect(model().attributeExists("user"))
-//                .andExpect(view().name("sign-up"));
-////                .andExpect(model().hasErrors());
-//
-//
-//    }
 
 
 
