@@ -38,7 +38,6 @@ public class SessionsCleanSchedulerTest {
     @Autowired
     private SessionsCleanScheduler sessionsCleanScheduler;
 
-
     @BeforeEach
     void setUp() {
         sessionService.deleteAll();

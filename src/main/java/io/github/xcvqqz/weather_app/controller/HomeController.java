@@ -2,7 +2,7 @@ package io.github.xcvqqz.weather_app.controller;
 
 
 import io.github.xcvqqz.weather_app.entity.Location;
-import io.github.xcvqqz.weather_app.dto.CurrentWeatherDTO;
+import io.github.xcvqqz.weather_app.dto.api.response.CurrentWeatherDTO;
 import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.service.LocationService;
 import io.github.xcvqqz.weather_app.service.UserService;
@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -40,7 +39,6 @@ public class HomeController {
         log.info("The user received is - {}", user.getLogin());
 
         List<Location> locations = locationService.getLocationsByUser(user);
-
 
         List<CurrentWeatherDTO> weathers = currentWeatherService.getLocationsWeather(locations);
 

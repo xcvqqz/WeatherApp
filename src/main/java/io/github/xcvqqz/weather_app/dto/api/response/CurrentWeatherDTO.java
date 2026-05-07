@@ -1,4 +1,4 @@
-package io.github.xcvqqz.weather_app.dto;
+package io.github.xcvqqz.weather_app.dto.api.response;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

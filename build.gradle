@@ -1,29 +1,30 @@
 plugins {
     id 'java'
     id 'war'
-    id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'io.github.xcvqqz'
 version = '0.0.1-SNAPSHOT'
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 repositories {
     mavenCentral()
 }
 
-dependencyManagement {
-    imports {
-        mavenBom 'org.springframework:spring-framework-bom:6.2.1'
-    }
-}
+//dependencyManagement {
+//    imports {
+//        mavenBom 'org.springframework:spring-framework-bom:6.2.1'
+//    }
+//}
 
 dependencies {
+
+    implementation platform('org.springframework:spring-framework-bom:6.2.1')
+
     // === CORE SPRING ===
     implementation 'org.springframework:spring-webmvc'
     implementation 'org.springframework:spring-web'

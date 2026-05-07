@@ -31,7 +31,7 @@ public class UserService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
-    private static final String USER_ALREADY_EXIST_MESSAGE = "User with this username was not found";
+    private static final String USER_ALREADY_EXIST_MESSAGE = "A user with this name is already exist";
     private static final String PASSWORD_MISMATCH_MESSAGE = "The password confirmation does not match";
     protected static final String USER_NOT_FOUND_MESSAGE = "User Not Found";
 

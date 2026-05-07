@@ -39,6 +39,5 @@ public class UserServiceTest {
         assertThat(actualUser.getId())
                 .isNotNull()
                 .isPositive();
-
     }
 }

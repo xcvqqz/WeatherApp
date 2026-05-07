@@ -31,6 +31,7 @@ public class LocationsSearchService {
     private final GeocodingUriBuilder geocodingUriBuilder;
 
     public List<ApiLocationsResponseDTO> findAll(ApiLocationsRequestDTO locationsRequestDTO) {
+
         String searchLocation = locationsRequestDTO.location();
         List<ApiLocationsResponseDTO> locations = fetchLocationsFromApi(searchLocation);
 

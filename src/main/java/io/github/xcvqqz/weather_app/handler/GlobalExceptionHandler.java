@@ -43,6 +43,7 @@ public class GlobalExceptionHandler {
             UserAlreadyExistsException.class,
             LocationAlreadyExistsException.class
     })
+    @ResponseStatus(HttpStatus.CONFLICT)
     public String handleConflict(
             Exception ex,
             RedirectAttributes ra,
@@ -62,6 +63,7 @@ public class GlobalExceptionHandler {
             SessionNotFoundException.class,
             LocationsNotFoundException.class
     })
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleNotFound(
             Exception ex,
             RedirectAttributes ra,
@@ -79,6 +81,7 @@ public class GlobalExceptionHandler {
             PasswordMismatchException.class,
             BadRequestException.class
     })
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleClientInputError(
             Exception ex,
             RedirectAttributes ra,

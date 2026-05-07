@@ -10,6 +10,7 @@ import io.github.xcvqqz.weather_app.service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Controller
 @RequestMapping()
 public class RegistrationController {

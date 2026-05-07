@@ -21,7 +21,6 @@ import java.util.Properties;
 
 
 @Configuration
-@Profile("test")
 @PropertySource("classpath:application-test.properties")
 @EnableTransactionManagement
 @ComponentScan(

@@ -27,7 +27,7 @@ import static io.github.xcvqqz.weather_app.service.SessionService.DATABASE_ERROR
 public class LocationService {
 
     private static final String LOCATION_ALREADY_EXIST
-            = "The location %s has already been created. Please return to the home page and check your profile.";
+            = "The location %s has already been created. Check your profile";
 
     private final LocationRepository locationRepository;
     private final LocationMapper locationMapper;

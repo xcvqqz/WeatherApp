@@ -52,7 +52,6 @@ public class AuthController {
     }
 
 
-
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response){
 
