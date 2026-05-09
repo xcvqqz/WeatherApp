@@ -3,7 +3,6 @@ package io.github.xcvqqz.weather_app.dto.auth;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-
 public record UserRegistrationDTO(
 
         @NotBlank(message = "login shouldn't empty or null")
@@ -14,6 +13,5 @@ public record UserRegistrationDTO(
         @Size(min = 3, max = 30, message = "Password should be min 3 and less 30 symbol")
         String password,
 
-        String confirmPassword
-) {
-}
+        String confirmPassword)
+{}

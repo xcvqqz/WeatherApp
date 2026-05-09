@@ -1,6 +1,5 @@
 package io.github.xcvqqz.weather_app.config;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @EnableScheduling
-@PropertySource("classpath:application-dev.properties")
+@PropertySource(value = "classpath:application-${spring.profiles.active}.properties")
 @ComponentScan("io.github.xcvqqz.weather_app")
 public class AppConfig {
 

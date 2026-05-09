@@ -11,12 +11,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -28,7 +26,6 @@ import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@ActiveProfiles("test")
 public class LocationsSearchServiceTest {
 
     private static final String LOCATIONS_RESPONSE_FROM_EXTERNAL_API =  """
@@ -109,7 +106,6 @@ public class LocationsSearchServiceTest {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-
     @Test
     public void shouldSuccessfullyFetchLocationsFromExternalApi(){
 
@@ -155,7 +151,6 @@ public class LocationsSearchServiceTest {
                 () -> locationsSearchService.findAll(unknownLocationRequestTest));
 
     }
-
 
     private ArrayList<ApiLocationsResponseDTO> convertApiResponse(){
 

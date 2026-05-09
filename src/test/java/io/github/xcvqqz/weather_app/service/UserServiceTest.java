@@ -7,18 +7,14 @@ import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.exception.UserAlreadyExistsException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.Assert.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-
 
 @SpringJUnitConfig(classes = AppConfigTest.class)
 @Transactional
-@ActiveProfiles("test")
 public class UserServiceTest {
 
     private static final String TEST_NAME = "testName";
@@ -53,7 +49,4 @@ public class UserServiceTest {
                 () -> userService.save(userRegistrationTest));
 
     }
-
-
-
 }

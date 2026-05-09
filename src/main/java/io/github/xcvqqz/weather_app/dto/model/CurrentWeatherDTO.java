@@ -1,10 +1,8 @@
 package io.github.xcvqqz.weather_app.dto.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
-
 
 public record CurrentWeatherDTO(
     Long id,
@@ -17,5 +15,4 @@ public record CurrentWeatherDTO(
     int humidity,
     String country,
     String description)
-
 {}

@@ -1,13 +1,11 @@
 package io.github.xcvqqz.weather_app.repository.impl;
 
 import io.github.xcvqqz.weather_app.repository.AbstractRepository;
-import lombok.AllArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
 import java.util.Optional;
-
 
 public abstract class AbstractRepositoryImpl <T, K> implements AbstractRepository<T, K> {
 
@@ -25,7 +23,6 @@ public abstract class AbstractRepositoryImpl <T, K> implements AbstractRepositor
         this.entityName = entity.getSimpleName();
     }
 
-
     @Override
     public Optional<T> save(T entity) {
         getCurrentSession().persist(entity);
@@ -41,16 +38,10 @@ public abstract class AbstractRepositoryImpl <T, K> implements AbstractRepositor
                 .executeUpdate();
     }
 
-
     @Override
     public List<T> findAll(){
         return   getCurrentSession()
                 .createQuery(String.format(FIND_ALL_QUERY, entityName)).list();
-    }
-
-    @Override
-    public Optional<T> findById(K id){
-        return Optional.ofNullable(getCurrentSession().find(entity, id));
     }
 
     @Override
@@ -63,9 +54,7 @@ public abstract class AbstractRepositoryImpl <T, K> implements AbstractRepositor
         getCurrentSession().remove(entity);
     }
 
-
     protected Session getCurrentSession(){
         return sessionFactory.getCurrentSession();
     }
-
 }

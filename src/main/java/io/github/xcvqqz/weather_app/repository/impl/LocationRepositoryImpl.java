@@ -26,7 +26,6 @@ public class LocationRepositoryImpl extends AbstractRepositoryImpl<Location, Lon
         super(sessionFactory, Location.class);
     }
 
-
     @Override
     @Transactional(readOnly = true)
     public List<Location> findAllByUser(User user) {
@@ -35,5 +34,4 @@ public class LocationRepositoryImpl extends AbstractRepositoryImpl<Location, Lon
                 .setParameter("userId", user.getId())
                 .getResultList();
     }
-
 }

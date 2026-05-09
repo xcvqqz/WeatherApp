@@ -38,7 +38,6 @@ public class CurrentWeatherService {
         return result;
     }
 
-
     private ApiWeatherResponseDTO getCurrentWeather(ApiWeatherRequestDTO weatherRequest) {
         URI uri = weatherDataUriBuilder.buildCurrentWeatherUri(weatherRequest);
         ApiWeatherResponseDTO result =  restTemplate.getForObject(uri, ApiWeatherResponseDTO.class);

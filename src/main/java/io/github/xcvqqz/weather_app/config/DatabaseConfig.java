@@ -7,7 +7,6 @@ import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 import javax.sql.DataSource;
 
@@ -38,7 +37,8 @@ public class DatabaseConfig {
     @Value("${hikari.idleTimeout}")
     private long idleTimeout;
 
-
+    @Value("${hikari.connectionTimeout}")
+    private long connectionTimeout;
 
     @Bean
     public DataSource dataSource() {
@@ -50,6 +50,7 @@ public class DatabaseConfig {
         config.setMaximumPoolSize(maximumPoolSize);
         config.setMinimumIdle(minimumIdle);
         config.setIdleTimeout(idleTimeout);
+        config.setConnectionTimeout(connectionTimeout);
 
         return new HikariDataSource(config);
     }
@@ -61,6 +62,7 @@ public class DatabaseConfig {
                 .dataSource(dataSource)
                 .locations(location)
                 .baselineOnMigrate(true)
+                .validateOnMigrate(true)
                 .load();
     }
 }

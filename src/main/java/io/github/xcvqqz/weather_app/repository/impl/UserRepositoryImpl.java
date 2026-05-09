@@ -38,6 +38,4 @@ public class UserRepositoryImpl extends AbstractRepositoryImpl<User, Long> imple
                 .setParameter("sessionId", sessionId)
                 .getSingleResultOrNull());
     }
-
-
 }

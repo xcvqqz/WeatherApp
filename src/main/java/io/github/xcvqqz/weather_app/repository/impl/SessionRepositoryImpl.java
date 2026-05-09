@@ -15,5 +15,4 @@ public class SessionRepositoryImpl extends AbstractRepositoryImpl<Session, UUID>
     public SessionRepositoryImpl(SessionFactory sessionFactory) {
         super(sessionFactory,  Session.class);
     }
-
 }

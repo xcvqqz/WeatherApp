@@ -1,6 +1,5 @@
 package io.github.xcvqqz.weather_app.service.api;
 
-
 import io.github.xcvqqz.weather_app.dto.api.request.ApiLocationsRequestDTO;
 import io.github.xcvqqz.weather_app.dto.api.response.ApiLocationsResponseDTO;
 import io.github.xcvqqz.weather_app.exception.LocationsNotFoundException;

@@ -11,10 +11,8 @@ import org.mapstruct.Named;
 
 import java.util.List;
 
-
 @Mapper(componentModel = "spring")
 public interface WeatherMapper {
-
 
     @Mapping(source = "longitude", target = "lon")
     @Mapping(source = "latitude", target = "lat")
@@ -31,10 +29,8 @@ public interface WeatherMapper {
     @Mapping(source = "location.id", target = "id")
     CurrentWeatherDTO toCurrentWeather(ApiWeatherResponseDTO apiWeatherResponse, Location location);
 
-
     @Named("toWeatherDescription")
     default String convertToWeatherDescription(List<ApiWeatherResponseDTO.Weather> weather) {
         return weather != null && !weather.isEmpty() ? weather.get(0).getDescription() : "Not found";
     }
-
 }

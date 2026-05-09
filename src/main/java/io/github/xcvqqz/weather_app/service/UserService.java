@@ -82,10 +82,8 @@ public class UserService {
         }
     }
 
-
     @Transactional
     public void deleteAll() {
         userRepository.deleteAll();
     }
-
 }

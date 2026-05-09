@@ -8,7 +8,5 @@ import java.util.UUID;
 public interface UserRepository extends AbstractRepository<User, Long> {
 
     Optional<User> findByLogin(String login);
-
     Optional<User> findBySessionId(UUID id);
-
 }

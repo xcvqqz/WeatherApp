@@ -1,12 +1,10 @@
 package io.github.xcvqqz.weather_app.dto.api.request;
 
-
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
-
 
 public record ApiWeatherRequestDTO(
 
@@ -18,5 +16,5 @@ public record ApiWeatherRequestDTO(
         @NotNull(message = "Longitude cannot be null")
         @DecimalMin(value = "-180.0",  message = "Longitude must be >= -180")
         @DecimalMax(value = "180.0",  message = "Longitude must be <= 180")
-        BigDecimal lon
-) {}
+        BigDecimal lon)
+{}

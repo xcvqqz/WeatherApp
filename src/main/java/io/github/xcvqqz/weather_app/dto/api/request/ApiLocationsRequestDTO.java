@@ -1,6 +1,5 @@
 package io.github.xcvqqz.weather_app.dto.api.request;
 
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 

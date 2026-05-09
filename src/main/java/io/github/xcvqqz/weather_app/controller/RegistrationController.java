@@ -23,19 +23,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping()
-public class RegistrationController {
+public class RegistrationController extends BasicController {
 
     private static final String FIELD_CONFIRM_PASSWORD = "confirmPassword";
     private static final String ERROR_PASSWORD_MISMATCH = "passwordMismatch";
     private static final String MESSAGE_PASSWORDS_DONT_MATCH = "Passwords do not match";
 
     private final SessionService sessionService;
-    private final UserService userService;
-    private final CookieService cookieService;
 
     @GetMapping("/sign-up")
     public String showSignUp(@ModelAttribute("user") UserRegistrationDTO userRegistration) {
-        return "sign-up";
+        return SIGN_UP_VIEW;
     }
 
 
@@ -48,7 +46,7 @@ public class RegistrationController {
         }
 
         if (result.hasErrors()) {
-            return "sign-up";
+            return SIGN_UP_VIEW;
         }
 
 
@@ -61,7 +59,7 @@ public class RegistrationController {
         cookieService.setSessionCookie(response, session.getSessionId());
         log.info("A cookie has been created, Cookie: {}", session.getSessionId());
 
-        return "redirect:/home";
+        return REDIRECT_HOME;
     }
 
 

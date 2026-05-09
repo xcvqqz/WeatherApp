@@ -21,7 +21,6 @@ import static org.assertj.core.api.Assertions.*;
 
 @SpringJUnitConfig(classes = AppConfigTest.class)
 @Transactional
-@ActiveProfiles("test")
 public class SessionsCleanSchedulerTest {
 
     private static final String TEST_NAME = "testName";

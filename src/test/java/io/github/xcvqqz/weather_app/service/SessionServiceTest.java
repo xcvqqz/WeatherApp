@@ -6,7 +6,6 @@ import io.github.xcvqqz.weather_app.entity.Session;
 import io.github.xcvqqz.weather_app.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,10 +13,8 @@ import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.*;
 
-
 @SpringJUnitConfig(classes = AppConfigTest.class)
 @Transactional
-@ActiveProfiles("test")
 public class SessionServiceTest {
 
     private static final String TEST_NAME = "testName";
@@ -60,5 +57,4 @@ public class SessionServiceTest {
                             .isEqualTo(actualUser);
                 });
     }
-
 }

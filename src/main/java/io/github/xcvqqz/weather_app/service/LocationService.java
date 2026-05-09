@@ -14,7 +14,6 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -54,11 +53,8 @@ public class LocationService {
         return locationRepository.findAllByUser(user);
     }
 
-
-
     @Transactional
     public void delete(Long id){
        locationRepository.deleteById(id);
     }
-
 }

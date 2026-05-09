@@ -4,8 +4,6 @@ package io.github.xcvqqz.weather_app.service;
 import io.github.xcvqqz.weather_app.entity.Session;
 import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.exception.DataBaseException;
-import io.github.xcvqqz.weather_app.exception.SessionNotFoundException;
-import io.github.xcvqqz.weather_app.exception.UserNotFoundException;
 import io.github.xcvqqz.weather_app.repository.SessionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
-
-import static io.github.xcvqqz.weather_app.service.UserService.USER_NOT_FOUND_MESSAGE;
 
 @Slf4j
 @Service
@@ -97,5 +93,4 @@ public class SessionService {
                 .now()
                 .isAfter(session.getExpiresAt());
     }
-
 }

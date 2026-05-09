@@ -11,6 +11,5 @@ public record UserAuthDTO(
 
         @NotBlank(message = "password shouldn't empty or null")
         @Size(min = 3, max = 30, message = "Password should be min 3 and less 30 symbol")
-        String password
-
-){}
+        String password)
+{}

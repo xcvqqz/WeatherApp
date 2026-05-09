@@ -1,6 +1,5 @@
 package io.github.xcvqqz.weather_app.handler;
 
-
 import io.github.xcvqqz.weather_app.dto.auth.ErrorResponseDTO;
 import io.github.xcvqqz.weather_app.exception.*;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
-
 
 @Slf4j
 @ControllerAdvice
@@ -56,7 +54,6 @@ public class GlobalExceptionHandler {
         return doRedirect(ex,
                ex instanceof UserAlreadyExistsException ? SIGN_UP_REDIRECT : HOME_REDIRECT);
     }
-
 
     @ExceptionHandler({
             UserNotFoundException.class,

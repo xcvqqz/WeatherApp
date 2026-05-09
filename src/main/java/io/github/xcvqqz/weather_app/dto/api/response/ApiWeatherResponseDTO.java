@@ -1,6 +1,5 @@
 package io.github.xcvqqz.weather_app.dto.api.response;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -48,5 +47,4 @@ public class ApiWeatherResponseDTO {
     public static class Sys {
     private String country;
     }
-
 }
