@@ -4,7 +4,9 @@ import io.github.xcvqqz.weather_app.dto.api.request.ApiLocationsRequestDTO;
 import io.github.xcvqqz.weather_app.dto.api.response.ApiLocationsResponseDTO;
 import io.github.xcvqqz.weather_app.entity.Location;
 import io.github.xcvqqz.weather_app.entity.User;
+import io.github.xcvqqz.weather_app.service.CookieService;
 import io.github.xcvqqz.weather_app.service.LocationService;
+import io.github.xcvqqz.weather_app.service.UserService;
 import io.github.xcvqqz.weather_app.service.api.LocationsSearchService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -27,6 +29,8 @@ public class LocationsController extends BasicController {
 
     private final LocationsSearchService locationSearchService;
     private final LocationService locationService;
+    private final UserService userService;
+    private final CookieService cookieService;
 
     @GetMapping("/search-results")
     public String search(@Valid @ModelAttribute("location") ApiLocationsRequestDTO locationsRequestDTO,

@@ -2,12 +2,15 @@ package io.github.xcvqqz.weather_app.service;
 
 
 import io.github.xcvqqz.weather_app.config.AppConfigTest;
+import io.github.xcvqqz.weather_app.dto.auth.UserAuthDTO;
 import io.github.xcvqqz.weather_app.dto.auth.UserRegistrationDTO;
 import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.exception.UserAlreadyExistsException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -25,10 +28,21 @@ public class UserServiceTest {
     @Autowired
     private UserService userService;
 
+
+    @BeforeEach
+    void setup() {
+        userService.deleteAll();
+        userService.save(userRegistrationTest);
+    }
+
     @Test
     public void shouldSaveNewUser() {
 
-        User actualUser = userService.save(userRegistrationTest);
+//        User actualUser = userService.save(userRegistrationTest);
+
+        UserAuthDTO userAuth = new UserAuthDTO(userRegistrationTest.login(), userRegistrationTest.password());
+
+        User actualUser = userService.findByLogin(userAuth);
 
         assertThat(actualUser.getLogin())
                 .isNotNull()
@@ -49,4 +63,11 @@ public class UserServiceTest {
                 () -> userService.save(userRegistrationTest));
 
     }
+
+    @Test
+    public void shouldThrowExceptionWhenAuthPasswordsMismatch(){
+
+    }
+
+
 }

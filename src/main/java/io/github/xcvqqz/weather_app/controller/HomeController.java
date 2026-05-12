@@ -5,6 +5,7 @@ import io.github.xcvqqz.weather_app.entity.Location;
 import io.github.xcvqqz.weather_app.dto.model.CurrentWeatherDTO;
 import io.github.xcvqqz.weather_app.entity.User;
 import io.github.xcvqqz.weather_app.service.LocationService;
+import io.github.xcvqqz.weather_app.service.UserService;
 import io.github.xcvqqz.weather_app.service.api.CurrentWeatherService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ public class HomeController extends BasicController {
 
     private final LocationService locationService;
     private final CurrentWeatherService currentWeatherService;
+    private final UserService userService;
 
     @GetMapping("/home")
     public String home(Model model, HttpServletRequest request) {

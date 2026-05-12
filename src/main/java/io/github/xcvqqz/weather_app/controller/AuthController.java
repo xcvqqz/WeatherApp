@@ -3,7 +3,9 @@ package io.github.xcvqqz.weather_app.controller;
 import io.github.xcvqqz.weather_app.dto.auth.UserAuthDTO;
 import io.github.xcvqqz.weather_app.entity.Session;
 import io.github.xcvqqz.weather_app.entity.User;
+import io.github.xcvqqz.weather_app.service.CookieService;
 import io.github.xcvqqz.weather_app.service.SessionService;
+import io.github.xcvqqz.weather_app.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -23,10 +25,11 @@ import java.util.UUID;
 public class AuthController extends BasicController {
 
     private final SessionService sessionService;
+    private final UserService userService;
+    private final CookieService cookieService;
 
     @GetMapping("/sign-in")
     public String showSignIn(@ModelAttribute("user") UserAuthDTO userAuth) {
-
         return SIGN_IN_VIEW;
     }
 

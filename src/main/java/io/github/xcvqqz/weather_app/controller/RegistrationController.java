@@ -30,6 +30,8 @@ public class RegistrationController extends BasicController {
     private static final String MESSAGE_PASSWORDS_DONT_MATCH = "Passwords do not match";
 
     private final SessionService sessionService;
+    private final UserService userService;
+    private final CookieService cookieService;
 
     @GetMapping("/sign-up")
     public String showSignUp(@ModelAttribute("user") UserRegistrationDTO userRegistration) {
