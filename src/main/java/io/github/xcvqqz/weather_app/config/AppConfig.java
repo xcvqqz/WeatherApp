@@ -13,8 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @EnableScheduling
-//@PropertySource(value = "classpath:application-${spring.profiles.active}.properties")
-@PropertySource("classpath:application-dev.properties")
+@PropertySource(value = "classpath:application-${spring.profiles.active}.properties")
 @ComponentScan("io.github.xcvqqz.weather_app")
 public class AppConfig {
 
