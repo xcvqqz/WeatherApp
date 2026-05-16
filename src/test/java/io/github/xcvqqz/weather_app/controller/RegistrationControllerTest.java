@@ -1,12 +1,10 @@
 package io.github.xcvqqz.weather_app.controller;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.xcvqqz.weather_app.config.AppConfigTest;
 
 import io.github.xcvqqz.weather_app.dto.auth.UserAuthDTO;
 import io.github.xcvqqz.weather_app.entity.User;
-import io.github.xcvqqz.weather_app.service.SessionService;
 import io.github.xcvqqz.weather_app.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +26,6 @@ public class RegistrationControllerTest {
     private static final String TEST_NAME = "testName";
     private static final String TEST_PASSWORD = "testPassword";
     private static final String CONFIRM_TEST_PASSWORD = "testPassword";
-    private static final String MISMATCH_TEST_PASSWORD = "mismatchPassword";
 
     @Autowired
     private WebApplicationContext webApplicationContext;

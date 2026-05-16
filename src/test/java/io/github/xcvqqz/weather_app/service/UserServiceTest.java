@@ -5,12 +5,12 @@ import io.github.xcvqqz.weather_app.config.AppConfigTest;
 import io.github.xcvqqz.weather_app.dto.auth.UserAuthDTO;
 import io.github.xcvqqz.weather_app.dto.auth.UserRegistrationDTO;
 import io.github.xcvqqz.weather_app.entity.User;
+import io.github.xcvqqz.weather_app.exception.PasswordMismatchException;
 import io.github.xcvqqz.weather_app.exception.UserAlreadyExistsException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -22,12 +22,12 @@ public class UserServiceTest {
 
     private static final String TEST_NAME = "testName";
     private static final String TEST_PASSWORD = "testPassword";
+    private static final String WRONG_TEST_PASSWORD = "wrongPassword";
 
     private final UserRegistrationDTO userRegistrationTest = new UserRegistrationDTO(TEST_NAME,TEST_PASSWORD,TEST_PASSWORD);
 
     @Autowired
     private UserService userService;
-
 
     @BeforeEach
     void setup() {
@@ -37,8 +37,6 @@ public class UserServiceTest {
 
     @Test
     public void shouldSaveNewUser() {
-
-//        User actualUser = userService.save(userRegistrationTest);
 
         UserAuthDTO userAuth = new UserAuthDTO(userRegistrationTest.login(), userRegistrationTest.password());
 
@@ -53,21 +51,16 @@ public class UserServiceTest {
                 .isPositive();
     }
 
-
     @Test
     public void shouldThrowExceptionWhenUserAlreadyExists(){
-
-        userService.save(userRegistrationTest);
-
         assertThrows(UserAlreadyExistsException.class,
                 () -> userService.save(userRegistrationTest));
-
     }
 
     @Test
     public void shouldThrowExceptionWhenAuthPasswordsMismatch(){
-
+        UserAuthDTO userAuth = new UserAuthDTO(userRegistrationTest.login(), WRONG_TEST_PASSWORD);
+        assertThrows(PasswordMismatchException.class,
+                () -> userService.findByLogin(userAuth));
     }
-
-
 }

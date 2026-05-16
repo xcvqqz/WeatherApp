@@ -10,5 +10,6 @@ public interface LocationMapper {
 
     @Mapping(source = "lon", target = "longitude")
     @Mapping(source = "lat", target = "latitude")
-    Location ApiResponseToEntity(ApiLocationsResponseDTO locationsResponseDTO);
+    Location apiResponseToEntity(ApiLocationsResponseDTO locationsResponseDTO);
+
 }

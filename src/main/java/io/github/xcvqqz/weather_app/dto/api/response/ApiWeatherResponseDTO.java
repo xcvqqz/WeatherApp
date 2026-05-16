@@ -32,6 +32,7 @@ public class ApiWeatherResponseDTO {
    public static class Weather {
    private String description;
    private String main;
+   private String icon;
    }
 
     @Data

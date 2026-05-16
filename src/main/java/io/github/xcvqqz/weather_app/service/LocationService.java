@@ -35,7 +35,7 @@ public class LocationService {
     public Location create(ApiLocationsResponseDTO locationsResponseDTO, User user){
 
         try {
-            Location entity = locationMapper.ApiResponseToEntity(locationsResponseDTO);
+            Location entity = locationMapper.apiResponseToEntity(locationsResponseDTO);
             entity.setUser(user);
 
             return locationRepository.save(entity).orElseThrow(

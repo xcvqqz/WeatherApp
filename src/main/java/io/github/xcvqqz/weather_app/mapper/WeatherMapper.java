@@ -18,19 +18,25 @@ public interface WeatherMapper {
     @Mapping(source = "latitude", target = "lat")
     ApiWeatherRequestDTO toWeatherRequest(Location location);
 
-    @Mapping(source = "apiWeatherResponse.coord.lon", target = "lon")
-    @Mapping(source = "apiWeatherResponse.coord.lat", target = "lat")
-    @Mapping(source = "apiWeatherResponse.name", target = "city")
-    @Mapping(source = "apiWeatherResponse.main.temp", target = "temp")
-    @Mapping(source = "apiWeatherResponse.main.feelsLike", target = "feelsLike")
-    @Mapping(source = "apiWeatherResponse.main.humidity", target = "humidity")
-    @Mapping(source = "apiWeatherResponse.sys.country", target = "country")
-    @Mapping(source = "apiWeatherResponse.weather", target = "description", qualifiedByName = "toWeatherDescription")
+    @Mapping(source = "resp.coord.lon", target = "lon")
+    @Mapping(source = "resp.coord.lat", target = "lat")
+    @Mapping(source = "resp.name", target = "city")
+    @Mapping(source = "resp.main.temp", target = "temp")
+    @Mapping(source = "resp.main.feelsLike", target = "feelsLike")
+    @Mapping(source = "resp.main.humidity", target = "humidity")
+    @Mapping(source = "resp.sys.country", target = "country")
+    @Mapping(source = "resp.weather", target = "description", qualifiedByName = "toWeatherDescription")
+    @Mapping(source = "resp.weather", target = "icon", qualifiedByName = "toWeatherIcon")
     @Mapping(source = "location.id", target = "id")
-    CurrentWeatherDTO toCurrentWeather(ApiWeatherResponseDTO apiWeatherResponse, Location location);
+    CurrentWeatherDTO toCurrentWeather(ApiWeatherResponseDTO resp, Location location);
 
     @Named("toWeatherDescription")
-    default String convertToWeatherDescription(List<ApiWeatherResponseDTO.Weather> weather) {
+    default String toWeatherDescription(List<ApiWeatherResponseDTO.Weather> weather) {
         return weather != null && !weather.isEmpty() ? weather.get(0).getDescription() : "Not found";
+    }
+
+    @Named("toWeatherIcon")
+    default String toWeatherIcon(List<ApiWeatherResponseDTO.Weather> weather) {
+        return weather != null && !weather.isEmpty() ? weather.get(0).getIcon() : "Not found";
     }
 }

@@ -1,12 +1,10 @@
 package io.github.xcvqqz.weather_app.handler;
 
-import io.github.xcvqqz.weather_app.dto.auth.ErrorResponseDTO;
 import io.github.xcvqqz.weather_app.exception.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,7 +22,6 @@ public class GlobalExceptionHandler {
     private static final String HOME_REDIRECT = "redirect:/home";
     private static final String SIGN_UP_REDIRECT = "redirect:/sign-up";
     private static final String SIGN_IN_REDIRECT = "redirect:/sign-in";
-
     private static final String GLOBAL_ERROR_ATTR = "global_error";
 
     private static final Map<Class<?>, String> REDIRECT_ROUTES = Map.of(
@@ -41,7 +38,6 @@ public class GlobalExceptionHandler {
             UserAlreadyExistsException.class,
             LocationAlreadyExistsException.class
     })
-    @ResponseStatus(HttpStatus.CONFLICT)
     public String handleConflict(
             Exception ex,
             RedirectAttributes ra,
@@ -60,7 +56,6 @@ public class GlobalExceptionHandler {
             SessionNotFoundException.class,
             LocationsNotFoundException.class
     })
-    @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleNotFound(
             Exception ex,
             RedirectAttributes ra,
@@ -78,7 +73,6 @@ public class GlobalExceptionHandler {
             PasswordMismatchException.class,
             BadRequestException.class
     })
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleClientInputError(
             Exception ex,
             RedirectAttributes ra,
@@ -96,59 +90,41 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public String handleMethodNotSupported(
             HttpRequestMethodNotSupportedException ex,
-            HttpServletRequest request,
-            Model model) {
+            HttpServletRequest request) {
 
         log.warn("Method not allowed: {} {}", ex.getMethod(), request.getRequestURI());
 
-        model.addAttribute("error", new ErrorResponseDTO(
-                HttpStatus.METHOD_NOT_ALLOWED,
-                "HTTP метод '" + ex.getMethod() + "' не поддерживается"
-        ));
         return ERROR_VIEW;
     }
 
     @ExceptionHandler(DataBaseException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleDataBaseException(
             DataBaseException ex,
-            HttpServletRequest request,
-            Model model) {
+            HttpServletRequest request) {
 
         log.error("Database error: URI={}, msg={}", request.getRequestURI(), ex.getMessage(), ex);
 
-        model.addAttribute("error",
-                new ErrorResponseDTO(HttpStatus.SERVICE_UNAVAILABLE, ex.getMessage()));
         return ERROR_VIEW;
     }
 
     @ExceptionHandler(WeatherApiCommunicationException.class)
-    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
     public String handleWeatherApiException(
             WeatherApiCommunicationException ex,
-            HttpServletRequest request,
-            Model model) {
+            HttpServletRequest request) {
 
         log.warn("Weather API unavailable: URI={}, msg={}", request.getRequestURI(), ex.getMessage(), ex);
 
-        model.addAttribute("error",
-                new ErrorResponseDTO(HttpStatus.SERVICE_UNAVAILABLE, ex.getMessage()));
         return ERROR_VIEW;
     }
 
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleUnexpected(
             Exception ex,
-            HttpServletRequest request,
-            Model model) {
+            HttpServletRequest request) {
 
         log.error("Unexpected error: URI={}, type={}, msg={}",
                 request.getRequestURI(), ex.getClass().getName(), ex.getMessage(), ex);
 
-        model.addAttribute("error",
-                new ErrorResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR,
-                        "Произошла непредвиденная ошибка"));
         return ERROR_VIEW;
     }
 

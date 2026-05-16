@@ -1,6 +1,5 @@
 package io.github.xcvqqz.weather_app.service.api;
 
-
 import io.github.xcvqqz.weather_app.dto.api.request.ApiWeatherRequestDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

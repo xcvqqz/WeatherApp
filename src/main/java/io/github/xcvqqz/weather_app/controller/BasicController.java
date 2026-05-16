@@ -10,6 +10,6 @@ public class BasicController {
     protected static final String SIGN_IN_VIEW = "sign-in";
     protected static final String SIGN_UP_VIEW = "sign-up";
     protected static final String HOME_VIEW = "home";
-    protected static final String SEARCH_RESULT_VIEW = "locations/search-results";
+    protected static final String SEARCH_RESULT_VIEW = "search-results";
 
 }

@@ -1,6 +1,5 @@
 package io.github.xcvqqz.weather_app.service.api;
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.xcvqqz.weather_app.dto.api.request.ApiLocationsRequestDTO;
@@ -89,8 +88,8 @@ public class LocationsSearchServiceTest {
             ]
         """;
 
-    private static final String GEO_URL = "https://api.openweathermap.org/geo/1.0/direct?q=Klin&limit=5&appid=4f9e811e1990b95dd679058a3dfae99a";
-    private static final String GEO_URL_UNKNOWN = "https://api.openweathermap.org/geo/1.0/direct?q=xyzxyzxyzxyzxyxyz&limit=5&appid=4f9e811e1990b95dd679058a3dfae99a";
+    private static final String GEO_URL = "https://api.openweathermap.org/geo/1.0/direct?q=Klin&limit=5&appid=testKey";
+    private static final String GEO_URL_UNKNOWN = "https://api.openweathermap.org/geo/1.0/direct?q=xyzxyzxyzxyzxyxyz&limit=5&appid=testKey";
 
     private final ApiLocationsRequestDTO locationsRequestTest = new ApiLocationsRequestDTO("Klin");
     private final ApiLocationsRequestDTO unknownLocationRequestTest = new ApiLocationsRequestDTO("xyzxyzxyzxyzxyxyz");
@@ -149,7 +148,6 @@ public class LocationsSearchServiceTest {
 
         assertThrows(LocationsNotFoundException.class,
                 () -> locationsSearchService.findAll(unknownLocationRequestTest));
-
     }
 
     private ArrayList<ApiLocationsResponseDTO> convertApiResponse(){

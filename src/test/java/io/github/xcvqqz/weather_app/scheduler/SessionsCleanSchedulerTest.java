@@ -10,7 +10,6 @@ import io.github.xcvqqz.weather_app.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -80,8 +79,4 @@ public class SessionsCleanSchedulerTest {
         User testUser = userService.save(userRegistrationTest);
         return sessionService.create(testUser);
     }
-
-
-
 }
-

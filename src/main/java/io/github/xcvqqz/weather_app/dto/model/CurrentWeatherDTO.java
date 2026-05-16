@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 
 public record CurrentWeatherDTO(
+
+    String icon,
     Long id,
     String city,
     BigDecimal lon,

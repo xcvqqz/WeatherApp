@@ -14,7 +14,7 @@ import java.util.UUID;
 public class CookieService {
 
 
-    private static final String SESSION_NOT_FOUND_MESSAGE = "Session Not Found";
+    private static final String SESSION_NOT_FOUND_MESSAGE = "Session not found. Please log in to access your home page";
     private static final int COOKIE_MAX_AGE = 30 * 60;
     private static final String SESSION_COOKIE = "sessionId";
     private static final String CLEAR_SESSION_COOKIE_VALUE = "";

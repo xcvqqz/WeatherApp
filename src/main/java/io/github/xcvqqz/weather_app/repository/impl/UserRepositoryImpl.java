@@ -10,8 +10,6 @@ import java.util.Optional;
 
 import java.util.UUID;
 
-
-
 @Repository
 public class UserRepositoryImpl extends AbstractRepositoryImpl<User, Long> implements UserRepository {
 

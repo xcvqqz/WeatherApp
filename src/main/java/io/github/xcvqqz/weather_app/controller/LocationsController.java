@@ -24,7 +24,7 @@ import java.util.UUID;
 @Slf4j
 @AllArgsConstructor
 @Controller
-@RequestMapping("/locations")
+@RequestMapping()
 public class LocationsController extends BasicController {
 
     private final LocationsSearchService locationSearchService;
