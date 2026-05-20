@@ -1,0 +1,9 @@
+FROM tomcat:10.1-jdk17
+
+ENV DB_HOST=db
+ENV DB_PORT=5432
+ENV DB_NAME=mydb
+ENV DB_USER=postgres
+ENV DB_PASS=111
+
+RUN rm -rf /usr/
