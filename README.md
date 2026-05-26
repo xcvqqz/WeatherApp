@@ -53,9 +53,16 @@
 - **HTML/CSS** - вёрстка интерфейса
 - **Блочная вёрстка** - современный подход к CSS
 
-## 🐳 Docker
-### Сборка образа
-```bash
-docker build -t myapp
+## 🐳 Запуск с помощью Docker
+### Предварительные требования
+Убедитесь, что у вас установлены Docker и Docker Compose.
+### Быстрый старт
 
+1.  **Клонируйте репозиторий:**
+    ```bash
+    git clone https://github.com/xcvqqz/WeatherApp.git
+    cd [путь_к_директории]
+Запустите контейнеры:
 
+bash
+docker compose up --build
