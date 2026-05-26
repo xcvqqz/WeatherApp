@@ -1,9 +1,9 @@
-FROM tomcat:10.1-jdk17
+FROM tomcat:10.1-jdk17-temurin
 
-ENV DB_HOST=db
-ENV DB_PORT=5432
-ENV DB_NAME=mydb
-ENV DB_USER=postgres
-ENV DB_PASS=111
+RUN rm -rf /usr/local/tomcat/webapps/*
 
-RUN rm -rf /usr/
+COPY build/libs/weather-app.war /usr/local/tomcat/webapps/weather-app.war
+
+EXPOSE 8080
+
+CMD ["catalina.sh", "run"]
