@@ -42,7 +42,11 @@ public class WebConfig implements WebMvcConfigurer {
         registry
                 .addInterceptor(sessionInterceptor)
                 .addPathPatterns(
-                        "/home/**")
+                        "/home/**",
+                        "/delete/{id}",
+                        "/add",
+                        "/search-results"
+                )
 
                 .excludePathPatterns(
                         "/sign-in/**",
